@@ -51,6 +51,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Gritty_Elk_Hunt__Trent_Fisher.png",
+            "zoom": 115,
+            "pos_x": 2,
+            "pos_y": 0,
             "name": "Trent Fisher",
             "specialty": "Elk",
             "instagram_url": "",
@@ -61,6 +64,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Elk_Hunt_in_Snowy_Mountains.png",
+            "zoom": 115,
+            "pos_x": 35,
+            "pos_y": 13,
             "name": "Casey LaVere Butler",
             "specialty": "Elk",
             "instagram_url": "",
@@ -71,6 +77,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Blacktail_Hunter__Tom_Ryle.png",
+            "zoom": 105,
+            "pos_x": 50,
+            "pos_y": 16,
             "name": "Tom Ryle",
             "specialty": "Blacktail Deer",
             "instagram_url": "",
@@ -81,6 +90,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Blacktail_Night__Dave_Riley_Hunting_Poster.png",
+            "zoom": 110,
+            "pos_x": 50,
+            "pos_y": 4,
             "name": "Dave Riley",
             "specialty": "Blacktail Deer",
             "instagram_url": "",
@@ -91,6 +103,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Bear_Hunt__Heather_Aldrich.png",
+            "zoom": 100,
+            "pos_x": 29,
+            "pos_y": 50,
             "name": "Heather Aldrich",
             "specialty": "Bear",
             "instagram_url": "",
@@ -101,6 +116,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Turkey_Hunt__Alex_Chaney.png",
+            "zoom": 100,
+            "pos_x": 50,
+            "pos_y": 50,
             "name": "Alex Chaney",
             "specialty": "Turkey",
             "instagram_url": "",
@@ -111,6 +129,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Cougar_in_the_Forest__Jim_Myers.png",
+            "zoom": 100,
+            "pos_x": 50,
+            "pos_y": 50,
             "name": "Jim Myers",
             "specialty": "Mountain Lion",
             "instagram_url": "",
@@ -120,6 +141,9 @@
         "instructor_8": {
           "type": "instructor",
           "settings": {
+            "zoom": 100,
+            "pos_x": 50,
+            "pos_y": 50,
             "name": "Cody Sanchez",
             "specialty": "Predators",
             "instagram_url": "",
@@ -144,6 +168,7 @@
         "bio_page_url": "",
         "button_label": "Read Full Bios",
         "phone_carousel": true,
+        "photo_shape": "square",
         "background_color": "#daa520",
         "text_color": "#111111",
         "ring_color": "#e2761c",
