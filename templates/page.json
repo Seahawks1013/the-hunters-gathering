@@ -52,9 +52,9 @@
         "instructor_tV7VHg": {
           "type": "instructor",
           "settings": {
-            "name": "Instructor name",
+            "name": "Casey Lavere Butler",
             "specialty": "",
-            "bio": "<p>Add this instructor's bio.</p>",
+            "bio": "<p>&nbsp;Casey LaVere is one of the founders of Hushin and has spent more than a decade inspiring hunters through authentic storytelling, relentless pursuit, and a passion for the outdoors. Growing up in Idaho, Casey developed a love for hunting at an early age, learning alongside his father, a foundation that continues to shape his approach to hunting and life today.</p><p>Known for his bowhunting success on elk, mule deer, and other western big game, Casey has built a reputation as a skilled hunter who values preparation, perseverance, and respect for the resource above all else. Through Hushin, he has helped redefine outdoor media by sharing both the triumphs and the setbacks of the hunt, giving hunters an honest look at what it truly takes to succeed in the field.</p><p>At The Hunter's Gathering, Casey brings years of real-world experience, practical western hunting knowledge, and a passion for mentoring others. Whether discussing strategy, mindset, or lessons learned from countless days in the mountains, his sessions are packed with insights that will challenge hunters to become more intentional, more prepared, and ultimately more successful.</p>",
             "instagram_url": "",
             "youtube_url": "",
             "facebook_url": "",
@@ -65,9 +65,61 @@
         "instructor_Ckr3X9": {
           "type": "instructor",
           "settings": {
-            "name": "Instructor name",
+            "name": "Tom Ryle",
             "specialty": "",
-            "bio": "<p>Add this instructor's bio.</p>",
+            "bio": "<p>Tom Ryle is one of the Pacific Northwest's most respected authorities on blacktail deer hunting. With decades of experience pursuing blacktails in the dense forests of Washington and Oregon, Tom has earned a reputation for developing highly effective calling and rattling techniques that consistently bring mature bucks into range. His ability to understand rut behavior and communicate with blacktails has helped countless hunters experience success on one of North America's most challenging deer species.&nbsp;</p><p>A lifelong hunter, educator, and conservation advocate, Tom has shared his knowledge through seminars, podcasts, articles, and his work with the Washington Department of Fish and Wildlife. His practical, science-based approach to deer behavior has made him a trusted voice among serious blacktail hunters throughout the Pacific Northwest.&nbsp;</p><p>At The Hunter's Gathering, Tom will reveal the proven calling and rattling strategies he uses to trigger responses from mature blacktail bucks during the rut. Whether you're new to deer calling or looking to refine your approach, you'll leave with practical techniques you can confidently apply in the field this season.</p>",
+            "instagram_url": "",
+            "youtube_url": "",
+            "facebook_url": "",
+            "podcast_url": "",
+            "website_url": ""
+          }
+        },
+        "instructor_xTp9tG": {
+          "type": "instructor",
+          "settings": {
+            "name": "Dave Riley",
+            "specialty": "",
+            "bio": "<p>Few hunters understand the grind and glory of chasing mature blacktail bucks like Dave Riley. As the founder of <a href=\"https://theblacktailcoach.com/\" target=\"_blank\">The Blacktail Coach</a>, Dave has spent decades studying the habits of one of North America’s most elusive deer, and helping other hunters turn time in the woods into consistent success.&nbsp;</p><p>His “Success is No Accident” philosophy combines field-tested tactics with real-world lessons on discipline, mindset, and perseverance. Dave’s approach is built on intentional scouting, patterning, and preparation, the same principles he’s employed to harvest record-class blacktails across the Pacific Northwest.&nbsp;</p><p>Through The Blacktail Coach courses and The Hunter’s Gathering, Dave’s mission is clear: to provide hunting mentorship that helps hunters become more skilled, more intentional, and more successful in the field and beyond it</p>",
+            "instagram_url": "",
+            "youtube_url": "",
+            "facebook_url": "",
+            "podcast_url": "",
+            "website_url": ""
+          }
+        },
+        "instructor_rPn9DX": {
+          "type": "instructor",
+          "settings": {
+            "name": "Heather Aldrich",
+            "specialty": "",
+            "bio": "<p>Heather Aldrich, Co- Owner of Bravo!MFG.INC (Home of the Super Grade Wall Tent) is a seasoned hunter, particularly passionate about pursuing bear. What began as tagging along on her husband’s hunts quickly evolved into a full-blown obsession.</p><p>Known for her methodical, science-driven approach, Heather employs field-tested tactics to study every detail of bear behavior. She is a life member of the American Bear Foundation, and an active hunting mentor taking new bear hunters into the woods. Bravo! Is a sponsor of Ladies Hunting Camp, and Heather volunteers her time as an instructor there.&nbsp;</p><p>She firmly belives in supporting families getting into the Outdoors and loves seeing them Encouraged in their outdoor pursuits. She is an active member of many conservation organizations and is a staunch defender of sound predator management, presenting both predator hunting and bear hunting seminars for multiple organizations. She is the mother of two and resides in SW Washington with her husband John.</p>",
+            "instagram_url": "",
+            "youtube_url": "",
+            "facebook_url": "",
+            "podcast_url": "",
+            "website_url": ""
+          }
+        },
+        "instructor_amfEVD": {
+          "type": "instructor",
+          "settings": {
+            "name": "Alex Chaney",
+            "specialty": "",
+            "bio": "<p>With over fourteen years of turkey hunting experience, Alex Chaney has transformed chasing gobblers into both a craft and a calling. He has completed the Washington Slam ten times and the Grand Slam once, demonstrating his skill, persistence, and deep understanding of the birds he hunts.&nbsp;</p><p>Alex is recognized for his straightforward, field-tested tactics that resonate with both novice and seasoned hunters. He’s not about gimmicks, just solid strategies built on scouting, calling, and mastering turkey behavior. From setting up the perfect setup at first light to interpreting the subtle language of a gobbler, Alex provides invaluable hunter training that helps hunters stack the odds in their favor.</p>",
+            "instagram_url": "",
+            "youtube_url": "",
+            "facebook_url": "",
+            "podcast_url": "",
+            "website_url": ""
+          }
+        },
+        "instructor_ny8bcC": {
+          "type": "instructor",
+          "settings": {
+            "name": "Jim Myers",
+            "specialty": "",
+            "bio": "<p>Raised in Michigan, Jim developed his passion for hunting at an early age before eventually making his way west to pursue big game across the Rocky Mountains and Pacific Northwest.</p><p>Now based in Oregon, he has dedicated himself to mountain lion hunting, taking full advantage of the year-round season while mastering the pursuit of one of North America's most elusive predators. Years spent hunting lions throughout the rugged terrain of the Pacific Northwest have given him a deep understanding of predator behavior, tracking, and the unique challenges of consistently finding success.</p><p>An accomplished outdoorsman who has hunted across five continents and more than 20 countries, he brings a wealth of real-world experience to every hunt. At The Hunter's Gathering, he'll share the practical tactics, lessons, and hard-earned knowledge that have made mountain lion hunting his greatest passion.</p>",
             "instagram_url": "",
             "youtube_url": "",
             "facebook_url": "",
@@ -79,7 +131,11 @@
       "block_order": [
         "instructor_B6yDAk",
         "instructor_tV7VHg",
-        "instructor_Ckr3X9"
+        "instructor_Ckr3X9",
+        "instructor_xTp9tG",
+        "instructor_rPn9DX",
+        "instructor_amfEVD",
+        "instructor_ny8bcC"
       ],
       "name": "Instructors",
       "settings": {
