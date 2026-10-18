@@ -518,7 +518,7 @@
           "type": "social",
           "settings": {
             "platform": "facebook",
-            "url": "",
+            "url": "https://www.facebook.com/people/The-Hunters-Gathering/61587359323268/",
             "label": "",
             "handle": ""
           }
@@ -544,28 +544,31 @@
         "podcast_5": {
           "type": "podcast",
           "settings": {
+            "image": "shopify://shop_images/podcast.webp",
             "host": "Dave Riley",
             "title": "Success Is No Accident",
             "description": "<p>Dave Riley, the Blacktail Coach, shares field-tested tactics for hunters on this weekly podcast. Whether you're a seasoned hunter or just getting started, we'll help you turn preparation into achievement and passion into results.</p>",
-            "url": ""
+            "url": "https://open.spotify.com/episode/3qA8pmvkPxAsYJ7p3kuHAI?si=zbPjkUqsROGVblICW8rJSA"
           }
         },
         "podcast_6": {
           "type": "podcast",
           "settings": {
+            "image": "shopify://shop_images/podcast_58aec832-0f56-4389-ae52-a86d770c53fa.webp",
             "host": "Heather Aldrich",
             "title": "Bear Hunting with Heather Aldrich",
             "description": "<p>Join us for an exciting adventure where we explore field-tested tactics that enhance the skills of both novice and experienced hunters, with hunter training and mentorship from Heather.</p>",
-            "url": ""
+            "url": "https://open.spotify.com/episode/5QwpYRiUWcvpuKAZNwvkNe?si=XDVLBE55T8GtT4UbzdExiA&nd=1&dlsi=8a75526fc25c4e0a"
           }
         },
         "podcast_7": {
           "type": "podcast",
           "settings": {
+            "image": "shopify://shop_images/podcast_7530929f-681a-491d-a0cb-e8328c309acd.webp",
             "host": "Alex Chaney",
             "title": "Talking Turkey with Alex Chaney",
             "description": "<p>We dig into field-tested turkey tactics every hunter should know, and why mentorship helps new hunters refine their skills.</p>",
-            "url": ""
+            "url": "https://open.spotify.com/episode/4PdAQB01WxdcvgRHVNxq0x?si=d8033c26196f45ba&nd=1&dlsi=cb6833e50fc44a99"
           }
         }
       },
