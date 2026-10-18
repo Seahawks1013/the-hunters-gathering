@@ -39,8 +39,9 @@
         "instructor_B6yDAk": {
           "type": "instructor",
           "settings": {
+            "image": "shopify://shop_images/THG_SPEAKERS_4_x_4_in.png",
             "name": "Trent Fisher",
-            "specialty": "",
+            "specialty": "Elk",
             "bio": "<p>&nbsp;For as long as I can remember, the outdoors has been my home. I’ve spent &nbsp;a lifetime chasing elk across the mountains, learning through trial, &nbsp;error, and a deep passion for the hunt. That passion led to building a &nbsp;call company dedicated to helping others experience the same excitement &nbsp;and connection that calling elk brings.<br/></p><p>Our hunting camp was born &nbsp;from that same drive, to share what I’ve learned, the mistakes I’ve &nbsp;made, and the lessons that only time in the woods can teach. Over the &nbsp;years, my family, my faith, and my brothers in the outdoors have been &nbsp;the foundation of everything we do. Together, we’ve filmed hundreds of &nbsp;hunts for our YouTube channel, giving people an honest look at the highs &nbsp;and lows that come with a life spent in pursuit of elk.<br/></p><p>This &nbsp;spring, I want to bring that same authenticity to camp. My goal is &nbsp;simple: to help hunters narrow the learning curve, gain confidence in &nbsp;the woods, and experience the kind of hunts that change you, not just &nbsp;as a hunter, but as a person.&nbsp;</p>",
             "instagram_url": "",
             "youtube_url": "",
