@@ -368,7 +368,7 @@
       "settings": {
         "tag": "Limited to 100 hunters",
         "heading": "Reserve Your Seat",
-        "text": "<p>Lock in your spot with a $350 deposit today. The rest is split into automatic payments before the event.</p>",
+        "text": "<p>Lock in your spot with a $350 deposit today. The remaining balance is charged automatically on March 15, 2027.</p>",
         "included": "<ul><li>Expert instruction from 8 pros</li><li>Field training sessions</li><li>Lodging in heated log cabins</li><li>Family-style meals included</li><li>Hunter Essentials field kit</li></ul>",
         "policy_text": "Plans change. Your seat is transferable to another hunter.",
         "policy_link": "",
@@ -378,8 +378,8 @@
         "price_sub": "Over $5,000 in value",
         "today_label": "Due today",
         "deposit": "$350",
-        "plan_title": "Payment plan",
-        "plan_text": "Remaining $1,445 in 3 automatic payments of $481.67. Final payment due March 15, 2027.",
+        "plan_title": "Deposit",
+        "plan_text": "Pay the remaining $1,445 later. It's charged automatically to your saved card on March 15, 2027.",
         "full_title": "Pay in full",
         "full_text": "Pay $1,795 today and you're all set.",
         "discount_text": "Veterans, active-duty military and family groups save $100 with a code at checkout.",
@@ -405,7 +405,7 @@
           "type": "question",
           "settings": {
             "question": "How does the payment plan work, and when is the balance due?",
-            "answer": "<p>Reserve with a $350 deposit today. The remaining $1,445 is split into 3 automatic payments of $481.67, with the final payment due March 15, 2027. You can also pay the full $1,795 at checkout.</p>"
+            "answer": "<p>Reserve with a $350 deposit today. The remaining $1,445 is charged automatically to your saved card on March 15, 2027, and you'll get a reminder before it's charged. Prefer to pay once? Choose Pay in full ($1,795) when you register. You can also pay your balance early anytime from your account.</p>"
           }
         },
         "question_3": {
