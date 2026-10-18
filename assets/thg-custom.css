@@ -1,0 +1,41 @@
+/* The Hunter's Gathering: custom overrides on top of Horizon */
+
+/* Header menu: matches the original site's spaced, all-caps nav */
+.menu-list .menu-list__link,
+.menu-list .menu-list__link--active {
+  color: var(--menu-top-level-font-color) !important;
+  font-weight: 400;
+}
+
+.menu-list .menu-list__link-title {
+  position: relative;
+  padding-inline: 18px;
+  padding-block: 6px;
+  letter-spacing: 0.18em;
+}
+
+/* Thin underline: always on the current page, slides in on hover */
+.menu-list .menu-list__link-title::after {
+  content: '';
+  position: absolute;
+  left: 18px;
+  right: calc(18px + 0.18em);
+  bottom: 0;
+  height: 2px;
+  background: #c4c4c4;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.menu-list .menu-list__link--active .menu-list__link-title::after,
+.menu-list .menu-list__link:hover .menu-list__link-title::after,
+.menu-list .menu-list__link:focus-visible .menu-list__link-title::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-list .menu-list__link-title::after {
+    transition: none;
+  }
+}
