@@ -321,8 +321,8 @@
         "testimonial_1": {
           "type": "testimonial",
           "settings": {
-            "quote": "<p>Short quote from a past attendee goes here. Ask for 2–3 sentences about what they learned or harvested.</p>",
-            "name": "Attendee name",
+            "quote": "<p>Being a beginner, this has been a great introduction and I hope to build experience and success from it. I hope to attend this event or others annually.</p>",
+            "name": "Sammie K.",
             "detail": "2026 attendee",
             "video_url": ""
           }
@@ -330,8 +330,8 @@
         "testimonial_2": {
           "type": "testimonial",
           "settings": {
-            "quote": "<p>Short quote from a past attendee goes here. Ask for 2–3 sentences about what they learned or harvested.</p>",
-            "name": "Attendee name",
+            "quote": "<p>Had a great time with lots of great people. Learned way more than I expected. Great line up of extremely qualified coaching. It was great to have the field work to see exactly what we were taught in the classroom.&nbsp;</p>",
+            "name": "Ryan L.",
             "detail": "2026 attendee",
             "video_url": ""
           }
@@ -339,8 +339,8 @@
         "testimonial_3": {
           "type": "testimonial",
           "settings": {
-            "quote": "<p>Short quote from a past attendee goes here. Ask for 2–3 sentences about what they learned or harvested.</p>",
-            "name": "Attendee name",
+            "quote": "<p>I had an absolute blast being a part of this event and going from strangers to brothers with everyone. It was a great experience full of knowledge, laughs, jokes, and just the coolest dynamic and group of people. Thank you guys for putting this on and letting me be a part of it!</p>",
+            "name": "Chris M.",
             "detail": "2026 attendee",
             "video_url": ""
           }
