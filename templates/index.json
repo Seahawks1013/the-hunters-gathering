@@ -1,8 +1,19 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "thg-hero",
       "settings": {
+        "desktop_height": "natural",
+        "mobile_image_height": 40,
         "date_text": "April 8–11, 2027",
         "headline": "Success Is No Accident",
         "location": "Yelm, WA",
@@ -10,14 +21,12 @@
         "venue": "Cabins, meals & field kit included",
         "price": "$1,795",
         "price_note": "Reserve today with a $350 deposit",
-        "desktop_height": "natural",
-        "mobile_image_height": 40,
         "show_guide_link": true,
         "guide_link_text": "Not ready yet? Get the free 2027 Event Guide",
         "sticky_mobile": true,
         "sticky_note": "$350 deposit · payment plan",
         "bar_background": "#111111",
-        "bar_text": "#FFFFFF"
+        "bar_text": "#ffffff"
       }
     },
     "video": {
@@ -26,89 +35,94 @@
         "tag": "Watch",
         "heading": "Four Days That Will Change the Way You Hunt Forever",
         "text": "<p>We host this event only once each year. Come for the hunting. Leave with your hunting community.</p>",
+        "video_url": "https://www.youtube.com/watch?v=2hcqSAqL2ic&t=3s",
         "show_reserve": true,
-        "background_color": "#0B4A2A",
-        "text_color": "#FFFFFF",
+        "background_color": "#0b4a2a",
+        "text_color": "#ffffff",
         "padding_top": 88,
         "padding_bottom": 88
       }
     },
     "instructors": {
       "type": "thg-instructor-grid",
-      "settings": {
-        "tag": "Learn from the pros",
-        "heading": "Meet Your 8 Instructors",
-        "text": "<p>Proven hunters. Proven tactics. Proven results. Spend four days learning directly from the people behind the hunts you watch.</p>",
-        "button_label": "Read Full Bios",
-        "background_color": "#DAA520",
-        "text_color": "#111111",
-        "ring_color": "#E2761C",
-        "padding_top": 88,
-        "padding_bottom": 88,
-        "phone_carousel": true
-      },
       "blocks": {
         "instructor_1": {
           "type": "instructor",
           "settings": {
+            "image": "shopify://shop_images/Gritty_Elk_Hunt__Trent_Fisher.png",
             "name": "Trent Fisher",
             "specialty": "Elk",
-            "image": "shopify://shop_images/Gritty_Elk_Hunt__Trent_Fisher.png"
+            "instagram_url": "",
+            "youtube_url": ""
           }
         },
         "instructor_2": {
           "type": "instructor",
           "settings": {
+            "image": "shopify://shop_images/Elk_Hunt_in_Snowy_Mountains.png",
             "name": "Casey LaVere Butler",
             "specialty": "Elk",
-            "image": "shopify://shop_images/Elk_Hunt_in_Snowy_Mountains.png"
+            "instagram_url": "",
+            "youtube_url": ""
           }
         },
         "instructor_3": {
           "type": "instructor",
           "settings": {
+            "image": "shopify://shop_images/Blacktail_Hunter__Tom_Ryle.png",
             "name": "Tom Ryle",
             "specialty": "Blacktail Deer",
-            "image": "shopify://shop_images/Blacktail_Hunter__Tom_Ryle.png"
+            "instagram_url": "",
+            "youtube_url": ""
           }
         },
         "instructor_4": {
           "type": "instructor",
           "settings": {
+            "image": "shopify://shop_images/Blacktail_Night__Dave_Riley_Hunting_Poster.png",
             "name": "Dave Riley",
             "specialty": "Blacktail Deer",
-            "image": "shopify://shop_images/Blacktail_Night__Dave_Riley_Hunting_Poster.png"
+            "instagram_url": "",
+            "youtube_url": ""
           }
         },
         "instructor_5": {
           "type": "instructor",
           "settings": {
+            "image": "shopify://shop_images/Bear_Hunt__Heather_Aldrich.png",
             "name": "Heather Aldrich",
             "specialty": "Bear",
-            "image": "shopify://shop_images/Bear_Hunt__Heather_Aldrich.png"
+            "instagram_url": "",
+            "youtube_url": ""
           }
         },
         "instructor_6": {
           "type": "instructor",
           "settings": {
+            "image": "shopify://shop_images/Turkey_Hunt__Alex_Chaney.png",
             "name": "Alex Chaney",
             "specialty": "Turkey",
-            "image": "shopify://shop_images/Turkey_Hunt__Alex_Chaney.png"
+            "instagram_url": "",
+            "youtube_url": ""
           }
         },
         "instructor_7": {
           "type": "instructor",
           "settings": {
+            "image": "shopify://shop_images/Cougar_in_the_Forest__Jim_Myers.png",
             "name": "Jim Myers",
             "specialty": "Mountain Lion",
-            "image": "shopify://shop_images/Cougar_in_the_Forest__Jim_Myers.png"
+            "instagram_url": "",
+            "youtube_url": ""
           }
         },
         "instructor_8": {
           "type": "instructor",
           "settings": {
             "name": "Cody Sanchez",
-            "specialty": "Predators"
+            "specialty": "Predators",
+            "instagram_url": "",
+            "youtube_url": ""
           }
         }
       },
@@ -121,27 +135,23 @@
         "instructor_6",
         "instructor_7",
         "instructor_8"
-      ]
+      ],
+      "settings": {
+        "tag": "Learn from the pros",
+        "heading": "Meet Your 8 Instructors",
+        "text": "<p>Proven hunters. Proven tactics. Proven results. Spend four days learning directly from the people behind the hunts you watch.</p>",
+        "bio_page_url": "",
+        "button_label": "Read Full Bios",
+        "phone_carousel": true,
+        "background_color": "#daa520",
+        "text_color": "#111111",
+        "ring_color": "#e2761c",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
     },
     "included": {
       "type": "thg-value",
-      "settings": {
-        "tag": "All inclusive",
-        "heading": "What's Included",
-        "text": "<p>Instruction, lodging, meals and gear. Here's exactly where the value comes from.</p>",
-        "receipt_title": "Your four days, itemized",
-        "total_label": "Total value",
-        "total_value": "$5,000+",
-        "price_label": "Your price",
-        "price_value": "$1,795",
-        "kit_title": "The Hunter's Gathering Field Kit",
-        "kit_value": "Over $400 value",
-        "kit_items": "<ul><li>Field-tested products</li><li>Gear the pros trust</li><li>Practical tools to support success</li><li>Products you'll use, not just another swag bag</li></ul>",
-        "background_color": "#FBF6EA",
-        "text_color": "#111111",
-        "padding_top": 88,
-        "padding_bottom": 96
-      },
       "blocks": {
         "line_item_1": {
           "type": "line_item",
@@ -199,21 +209,28 @@
         "line_item_4",
         "line_item_5",
         "line_item_6"
-      ]
+      ],
+      "settings": {
+        "tag": "All inclusive",
+        "heading": "What's Included",
+        "text": "<p>Instruction, lodging, meals and gear. Here's exactly where the value comes from.</p>",
+        "receipt_title": "Your four days, itemized",
+        "total_label": "Total value",
+        "total_value": "$5,000+",
+        "price_label": "Your price",
+        "price_value": "$1,795",
+        "footnote": "",
+        "kit_title": "The Hunter's Gathering Field Kit",
+        "kit_value": "Over $400 value",
+        "kit_items": "<ul><li>Field-tested products</li><li>Gear the pros trust</li><li>Practical tools to support success</li><li>Products you'll use, not just another swag bag</li></ul>",
+        "background_color": "#fbf6ea",
+        "text_color": "#111111",
+        "padding_top": 88,
+        "padding_bottom": 96
+      }
     },
     "schedule": {
       "type": "thg-schedule",
-      "settings": {
-        "tag": "April 8–11, 2027",
-        "heading": "A Day at The Gathering",
-        "text": "<p>Mornings and afternoons split into Option A and Option B sessions, so you build your own four days around the game you hunt.</p>",
-        "note": "...and more to be announced",
-        "button_label": "See the Full Four-Day Experience",
-        "background_color": "#0B4A2A",
-        "text_color": "#FFFFFF",
-        "padding_top": 88,
-        "padding_bottom": 88
-      },
       "blocks": {
         "day_1": {
           "type": "day",
@@ -229,6 +246,7 @@
           "settings": {
             "date_number": "9",
             "weekday": "Friday",
+            "theme": "",
             "sessions": "<p><strong>AM Option A</strong>Turkey tactics</p><p><strong>AM Option B</strong>Coyote & bobcat tactics</p><p><strong>PM Option A</strong>Blacktail master class & field session</p><p><strong>PM Option B</strong>Bear master class & field session</p>"
           }
         },
@@ -237,6 +255,7 @@
           "settings": {
             "date_number": "10",
             "weekday": "Saturday",
+            "theme": "",
             "sessions": "<p><strong>AM Option A</strong>Elk calling & deer rattling</p><p><strong>AM Option B</strong>Predator calling</p><p><strong>PM Option A</strong>Cougar master class & field session</p><p><strong>PM Option B</strong>Elk master class & field session</p>"
           }
         },
@@ -255,27 +274,30 @@
         "day_2",
         "day_3",
         "day_4"
-      ]
+      ],
+      "settings": {
+        "tag": "April 8–11, 2027",
+        "heading": "A Day at The Gathering",
+        "text": "<p>Mornings and afternoons split into Option A and Option B sessions, so you build your own four days around the game you hunt.</p>",
+        "note": "...and more to be announced",
+        "button_label": "See the Full Four-Day Experience",
+        "button_link": "",
+        "background_color": "#0b4a2a",
+        "text_color": "#ffffff",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
     },
     "testimonials": {
       "type": "thg-testimonials",
-      "settings": {
-        "tag": "From past attendees",
-        "heading": "Success Is No Accident",
-        "show_stars": true,
-        "show_reserve": true,
-        "background_color": "#DAA520",
-        "text_color": "#111111",
-        "padding_top": 88,
-        "padding_bottom": 88
-      },
       "blocks": {
         "testimonial_1": {
           "type": "testimonial",
           "settings": {
             "quote": "<p>Short quote from a past attendee goes here. Ask for 2–3 sentences about what they learned or harvested.</p>",
             "name": "Attendee name",
-            "detail": "2026 attendee"
+            "detail": "2026 attendee",
+            "video_url": ""
           }
         },
         "testimonial_2": {
@@ -283,7 +305,8 @@
           "settings": {
             "quote": "<p>Short quote from a past attendee goes here. Ask for 2–3 sentences about what they learned or harvested.</p>",
             "name": "Attendee name",
-            "detail": "2026 attendee"
+            "detail": "2026 attendee",
+            "video_url": ""
           }
         },
         "testimonial_3": {
@@ -291,7 +314,8 @@
           "settings": {
             "quote": "<p>Short quote from a past attendee goes here. Ask for 2–3 sentences about what they learned or harvested.</p>",
             "name": "Attendee name",
-            "detail": "2026 attendee"
+            "detail": "2026 attendee",
+            "video_url": ""
           }
         }
       },
@@ -299,7 +323,18 @@
         "testimonial_1",
         "testimonial_2",
         "testimonial_3"
-      ]
+      ],
+      "settings": {
+        "tag": "From past attendees",
+        "heading": "Success Is No Accident",
+        "text": "",
+        "show_stars": true,
+        "show_reserve": true,
+        "background_color": "#daa520",
+        "text_color": "#111111",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
     },
     "pricing": {
       "type": "thg-pricing",
@@ -309,6 +344,7 @@
         "text": "<p>Lock in your spot with a $350 deposit today. The rest is split into automatic payments before the event.</p>",
         "included": "<ul><li>Expert instruction from 8 pros</li><li>Field training sessions</li><li>Lodging in heated log cabins</li><li>Family-style meals included</li><li>Hunter Essentials field kit</li></ul>",
         "policy_text": "Plans change. Your seat is transferable to another hunter.",
+        "policy_link": "",
         "policy_link_label": "Read the policy",
         "price_label": "Full registration",
         "price": "$1,795",
@@ -323,27 +359,13 @@
         "show_payment_icons": true,
         "secure_text": "Secure checkout · Card, Apple Pay or Google Pay",
         "background_color": "#111111",
-        "text_color": "#FFFFFF",
+        "text_color": "#ffffff",
         "padding_top": 96,
         "padding_bottom": 96
       }
     },
     "faq": {
       "type": "thg-faq",
-      "settings": {
-        "tag": "Good to know",
-        "heading": "Questions & Policies",
-        "text": "<p>Everything you need to know before you reserve.</p>",
-        "open_first": true,
-        "show_policies": true,
-        "policies_title": "Our policies",
-        "contact_text": "Still have a question?",
-        "contact_link_label": "Send us a message",
-        "background_color": "#F1EBDD",
-        "text_color": "#111111",
-        "padding_top": 96,
-        "padding_bottom": 96
-      },
       "blocks": {
         "question_1": {
           "type": "question",
@@ -419,7 +441,22 @@
         "question_7",
         "question_8",
         "question_9"
-      ]
+      ],
+      "settings": {
+        "tag": "Good to know",
+        "heading": "Questions & Policies",
+        "text": "<p>Everything you need to know before you reserve.</p>",
+        "open_first": true,
+        "show_policies": true,
+        "policies_title": "Our policies",
+        "contact_text": "Still have a question?",
+        "contact_link_label": "Send us a message",
+        "contact_link": "",
+        "background_color": "#f1ebdd",
+        "text_color": "#111111",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
     },
     "guide_contact": {
       "type": "thg-guide-contact",
@@ -432,7 +469,7 @@
         "contact_text": "<p>Questions about lodging, travel or which sessions fit you? We'll get back to you quickly.</p>",
         "submit_label": "Send Message",
         "success_message": "Thanks! We got your message and will be in touch soon.",
-        "background_color": "#DAA520",
+        "background_color": "#daa520",
         "text_color": "#111111",
         "padding_top": 88,
         "padding_bottom": 88
@@ -440,39 +477,41 @@
     },
     "social": {
       "type": "thg-social",
-      "settings": {
-        "tag": "Stay in the hunt",
-        "heading": "Follow The Hunter's Gathering",
-        "podcast_heading": "Voices of The Hunter's Gathering",
-        "partners_heading": "Our Partners",
-        "background_color": "#111111",
-        "text_color": "#FFFFFF",
-        "padding_top": 88,
-        "padding_bottom": 88
-      },
       "blocks": {
         "social_1": {
           "type": "social",
           "settings": {
-            "platform": "instagram"
+            "platform": "instagram",
+            "url": "",
+            "label": "",
+            "handle": ""
           }
         },
         "social_2": {
           "type": "social",
           "settings": {
-            "platform": "facebook"
+            "platform": "facebook",
+            "url": "",
+            "label": "",
+            "handle": ""
           }
         },
         "social_3": {
           "type": "social",
           "settings": {
-            "platform": "youtube"
+            "platform": "youtube",
+            "url": "",
+            "label": "",
+            "handle": ""
           }
         },
         "social_4": {
           "type": "social",
           "settings": {
-            "platform": "podcast"
+            "platform": "podcast",
+            "url": "",
+            "label": "",
+            "handle": ""
           }
         },
         "podcast_5": {
@@ -480,7 +519,8 @@
           "settings": {
             "host": "Dave Riley",
             "title": "Success Is No Accident",
-            "description": "<p>Dave Riley, the Blacktail Coach, shares field-tested tactics for hunters on this weekly podcast. Whether you're a seasoned hunter or just getting started, we'll help you turn preparation into achievement and passion into results.</p>"
+            "description": "<p>Dave Riley, the Blacktail Coach, shares field-tested tactics for hunters on this weekly podcast. Whether you're a seasoned hunter or just getting started, we'll help you turn preparation into achievement and passion into results.</p>",
+            "url": ""
           }
         },
         "podcast_6": {
@@ -488,7 +528,8 @@
           "settings": {
             "host": "Heather Aldrich",
             "title": "Bear Hunting with Heather Aldrich",
-            "description": "<p>Join us for an exciting adventure where we explore field-tested tactics that enhance the skills of both novice and experienced hunters, with hunter training and mentorship from Heather.</p>"
+            "description": "<p>Join us for an exciting adventure where we explore field-tested tactics that enhance the skills of both novice and experienced hunters, with hunter training and mentorship from Heather.</p>",
+            "url": ""
           }
         },
         "podcast_7": {
@@ -496,7 +537,8 @@
           "settings": {
             "host": "Alex Chaney",
             "title": "Talking Turkey with Alex Chaney",
-            "description": "<p>We dig into field-tested turkey tactics every hunter should know, and why mentorship helps new hunters refine their skills.</p>"
+            "description": "<p>We dig into field-tested turkey tactics every hunter should know, and why mentorship helps new hunters refine their skills.</p>",
+            "url": ""
           }
         }
       },
@@ -508,7 +550,18 @@
         "podcast_5",
         "podcast_6",
         "podcast_7"
-      ]
+      ],
+      "settings": {
+        "tag": "Stay in the hunt",
+        "heading": "Follow The Hunter's Gathering",
+        "text": "",
+        "podcast_heading": "Voices of The Hunter's Gathering",
+        "partners_heading": "Our Partners",
+        "background_color": "#111111",
+        "text_color": "#ffffff",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
     },
     "partners": {
       "type": "thg-partners",
@@ -517,6 +570,7 @@
           "type": "partner",
           "settings": {
             "name": "Bonded Outdoors",
+            "url": "",
             "builtin_logo": "thg-partner-bonded-outdoors.png"
           }
         },
@@ -524,6 +578,7 @@
           "type": "partner",
           "settings": {
             "name": "Born and Raised Outdoors",
+            "url": "",
             "builtin_logo": "thg-partner-born-and-raised-outdoors.png"
           }
         },
@@ -531,6 +586,7 @@
           "type": "partner",
           "settings": {
             "name": "Bravo! Manufacturing",
+            "url": "",
             "builtin_logo": "thg-partner-bravo-manufacturing.png"
           }
         },
@@ -538,6 +594,7 @@
           "type": "partner",
           "settings": {
             "name": "Nilch'i",
+            "url": "",
             "builtin_logo": "thg-partner-nilchi.png"
           }
         },
@@ -545,6 +602,7 @@
           "type": "partner",
           "settings": {
             "name": "Phelps Game Calls",
+            "url": "",
             "builtin_logo": "thg-partner-phelps-game-calls.png"
           }
         }
@@ -560,7 +618,7 @@
         "heading": "Our Partners",
         "logo_height": 72,
         "speed": 30,
-        "background_color": "#FFFFFF",
+        "background_color": "#ffffff",
         "text_color": "#111111",
         "padding_top": 64,
         "padding_bottom": 64
