@@ -498,36 +498,6 @@
             "title": "Talking Turkey with Alex Chaney",
             "description": "<p>We dig into field-tested turkey tactics every hunter should know, and why mentorship helps new hunters refine their skills.</p>"
           }
-        },
-        "partner_8": {
-          "type": "partner",
-          "settings": {
-            "name": "Bravo! MFG"
-          }
-        },
-        "partner_9": {
-          "type": "partner",
-          "settings": {
-            "name": "Bonded Outdoors"
-          }
-        },
-        "partner_10": {
-          "type": "partner",
-          "settings": {
-            "name": "Partner"
-          }
-        },
-        "partner_11": {
-          "type": "partner",
-          "settings": {
-            "name": "Phelps"
-          }
-        },
-        "partner_12": {
-          "type": "partner",
-          "settings": {
-            "name": "Born Out"
-          }
         }
       },
       "block_order": [
@@ -537,13 +507,64 @@
         "social_4",
         "podcast_5",
         "podcast_6",
-        "podcast_7",
-        "partner_8",
-        "partner_9",
-        "partner_10",
-        "partner_11",
-        "partner_12"
+        "podcast_7"
       ]
+    },
+    "partners": {
+      "type": "thg-partners",
+      "blocks": {
+        "partner_1": {
+          "type": "partner",
+          "settings": {
+            "name": "Bonded Outdoors",
+            "builtin_logo": "thg-partner-bonded-outdoors.png"
+          }
+        },
+        "partner_2": {
+          "type": "partner",
+          "settings": {
+            "name": "Born and Raised Outdoors",
+            "builtin_logo": "thg-partner-born-and-raised-outdoors.png"
+          }
+        },
+        "partner_3": {
+          "type": "partner",
+          "settings": {
+            "name": "Bravo! Manufacturing",
+            "builtin_logo": "thg-partner-bravo-manufacturing.png"
+          }
+        },
+        "partner_4": {
+          "type": "partner",
+          "settings": {
+            "name": "Nilch'i",
+            "builtin_logo": "thg-partner-nilchi.png"
+          }
+        },
+        "partner_5": {
+          "type": "partner",
+          "settings": {
+            "name": "Phelps Game Calls",
+            "builtin_logo": "thg-partner-phelps-game-calls.png"
+          }
+        }
+      },
+      "block_order": [
+        "partner_1",
+        "partner_2",
+        "partner_3",
+        "partner_4",
+        "partner_5"
+      ],
+      "settings": {
+        "heading": "Our Partners",
+        "logo_height": 72,
+        "speed": 30,
+        "background_color": "#FFFFFF",
+        "text_color": "#111111",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [
@@ -556,6 +577,7 @@
     "pricing",
     "faq",
     "guide_contact",
-    "social"
+    "social",
+    "partners"
   ]
 }

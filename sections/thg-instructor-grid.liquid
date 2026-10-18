@@ -58,14 +58,12 @@
     </ul>
     {%- if section.settings.phone_carousel and section.blocks.size > 1 -%}
       <div class="thg-ig__nav">
-        <button type="button" class="thg-ig__arrow" data-dir="-1" aria-label="Previous instructor">
+        <button type="button" class="thg-ig__arrow" data-dir="-1" aria-label="Previous instructors">
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></svg>
         </button>
-        <div class="thg-ig__dots" aria-hidden="true">
-          {%- for block in section.blocks -%}<span{% if forloop.first %} class="is-active"{% endif %}></span>{%- endfor -%}
-        </div>
-        <p class="thg-ig__count" aria-live="polite"><span class="thg-ig__current">1</span> / {{ section.blocks.size }}</p>
-        <button type="button" class="thg-ig__arrow" data-dir="1" aria-label="Next instructor">
+        <div class="thg-ig__dots" aria-hidden="true"></div>
+        <p class="thg-ig__count" aria-live="polite">Page <span class="thg-ig__current">1</span> of <span class="thg-ig__total">1</span></p>
+        <button type="button" class="thg-ig__arrow" data-dir="1" aria-label="Next instructors">
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </button>
       </div>
@@ -190,92 +188,110 @@
     justify-content: center;
     margin-top: 52px;
   }
-  /* Phones: one instructor at a time, swipe or tap the arrows */
+  /* Slider: 4 across on desktop, 1 at a time on phones */
   .thg-ig__carousel { display: block; }
   .thg-ig__nav { display: none; }
+
+  .thg-ig__carousel--on .thg-ig__grid {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .thg-ig__carousel--on .thg-ig__grid::-webkit-scrollbar { display: none; }
+
+  .thg-ig__carousel--on .thg-ig__card {
+    flex: 0 0 25%;
+    padding: 8px 14px 4px;
+    scroll-snap-align: start;
+  }
+
+  .thg-ig__carousel--on .thg-ig__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+    padding-inline: 16px;
+  }
+
+  .thg-ig__nav[data-single] { display: none !important; }
+
+  .thg-ig__arrow {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 2px solid var(--thg-ink);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--thg-ink);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .thg-ig__arrow:hover:not([disabled]) {
+    background: var(--thg-ink);
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  .thg-ig__arrow[disabled] {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .thg-ig__dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .thg-ig__dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 99px;
+    background: rgb(0 0 0 / 0.25);
+    transition: width 0.3s ease, background-color 0.3s ease;
+  }
+
+  .thg-ig__dots span.is-active {
+    width: 22px;
+    background: var(--thg-ink);
+  }
+
+  .thg-ig__count {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
 
   @media screen and (max-width: 749px) {
     .thg-ig { padding-inline: 0; }
     .thg-ig .thg-head,
     .thg-ig__cta { padding-inline: 16px; }
 
-    .thg-ig__carousel--on .thg-ig__grid {
-      display: flex;
-      gap: 0;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      overscroll-behavior-x: contain;
-      scrollbar-width: none;
-    }
-
-    .thg-ig__carousel--on .thg-ig__grid::-webkit-scrollbar { display: none; }
-
     .thg-ig__carousel--on .thg-ig__card {
-      flex: 0 0 100%;
+      flex-basis: 100%;
       padding: 8px 24px 4px;
       scroll-snap-align: center;
       scroll-snap-stop: always;
     }
 
-    .thg-ig__carousel--on .thg-ig__photo {
-      width: min(68vw, 270px);
-    }
-
+    .thg-ig__carousel--on .thg-ig__photo { width: min(68vw, 270px); }
     .thg-ig__carousel--on .thg-ig__name { font-size: 26px; }
     .thg-ig__carousel--on .thg-ig__specialty { font-size: 13px; }
+    .thg-ig__carousel--on .thg-ig__nav { margin-top: 26px; }
+  }
 
-    .thg-ig__carousel--on .thg-ig__nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 26px;
-      padding-inline: 16px;
-    }
-
-    .thg-ig__arrow {
-      display: grid;
-      place-items: center;
-      width: 48px;
-      height: 48px;
-      padding: 0;
-      border: 2px solid var(--thg-ink);
-      border-radius: 50%;
-      background: transparent;
-      color: var(--thg-ink);
-      cursor: pointer;
-      transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
-    }
-
-    .thg-ig__arrow:active { background: var(--thg-ink); color: #fff; }
-    .thg-ig__arrow[disabled] { opacity: 0.3; }
-
-    .thg-ig__dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .thg-ig__dots span {
-      width: 7px;
-      height: 7px;
-      border-radius: 99px;
-      background: rgb(0 0 0 / 0.25);
-      transition: width 0.3s ease, background-color 0.3s ease;
-    }
-
-    .thg-ig__dots span.is-active {
-      width: 22px;
-      background: var(--thg-ink);
-    }
-
-    .thg-ig__count {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-    }
+  @media (prefers-reduced-motion: reduce) {
+    .thg-ig__carousel--on .thg-ig__grid { scroll-behavior: auto; }
   }
 {% endstylesheet %}
 
@@ -287,46 +303,62 @@
         connectedCallback() {
           this.track = this.querySelector('.thg-ig__grid');
           this.cards = Array.from(this.querySelectorAll('.thg-ig__card'));
-          this.dots = Array.from(this.querySelectorAll('.thg-ig__dots span'));
+          this.dotsWrap = this.querySelector('.thg-ig__dots');
+          this.nav = this.querySelector('.thg-ig__nav');
           this.current = this.querySelector('.thg-ig__current');
+          this.total = this.querySelector('.thg-ig__total');
           this.arrows = Array.from(this.querySelectorAll('.thg-ig__arrow'));
-          if (!this.track || !this.arrows.length) return;
+          if (!this.track || !this.arrows.length || !this.cards.length) return;
 
-          this.pos = 0;
+          this.page = 0;
           this.arrows.forEach((btn) =>
-            btn.addEventListener('click', () => this.go(this.pos + Number(btn.dataset.dir)))
+            btn.addEventListener('click', () => this.go(this.page + Number(btn.dataset.dir)))
           );
 
-          // Sync position after the visitor swipes (once scrolling settles)
+          // Sync after a swipe once scrolling settles
           let settle = null;
           this.track.addEventListener('scroll', () => {
             clearTimeout(settle);
             settle = setTimeout(() => {
-              this.pos = this.index();
+              this.page = Math.round(this.track.scrollLeft / (this.track.clientWidth || 1));
               this.update();
             }, 120);
           }, { passive: true });
+
+          this.resizeObserver = new ResizeObserver(() => this.layout());
+          this.resizeObserver.observe(this.track);
+          this.layout();
+        }
+
+        disconnectedCallback() {
+          if (this.resizeObserver) this.resizeObserver.disconnect();
+        }
+
+        layout() {
+          const per = Math.max(1, Math.round(this.track.clientWidth / (this.cards[0].offsetWidth || 1)));
+          this.pages = Math.ceil(this.cards.length / per);
+          this.dotsWrap.innerHTML = '';
+          for (let i = 0; i < this.pages; i++) this.dotsWrap.appendChild(document.createElement('span'));
+          this.dots = Array.from(this.dotsWrap.children);
+          if (this.total) this.total.textContent = this.pages;
+          this.nav.toggleAttribute('data-single', this.pages < 2);
+          this.page = Math.min(this.page, this.pages - 1);
+          this.track.scrollTo({ left: this.page * this.track.clientWidth, behavior: 'instant' });
           this.update();
         }
 
-        index() {
-          const w = this.track.clientWidth || 1;
-          return Math.round(this.track.scrollLeft / w);
-        }
-
-        go(i) {
-          const max = this.cards.length - 1;
-          this.pos = Math.max(0, Math.min(max, i));
-          this.track.scrollTo({ left: this.pos * this.track.clientWidth });
+        go(p) {
+          this.page = Math.max(0, Math.min(this.pages - 1, p));
+          this.track.scrollTo({ left: this.page * this.track.clientWidth });
           this.update();
         }
 
         update() {
-          const i = this.pos;
-          this.dots.forEach((d, n) => d.classList.toggle('is-active', n === i));
-          if (this.current) this.current.textContent = i + 1;
-          this.arrows[0].disabled = i <= 0;
-          this.arrows[this.arrows.length - 1].disabled = i >= this.cards.length - 1;
+          const p = this.page;
+          (this.dots || []).forEach((d, n) => d.classList.toggle('is-active', n === p));
+          if (this.current) this.current.textContent = p + 1;
+          this.arrows[0].disabled = p <= 0;
+          this.arrows[this.arrows.length - 1].disabled = p >= this.pages - 1;
         }
       }
     );
@@ -345,7 +377,7 @@
     { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Proven hunters. Proven tactics. Proven results. Spend four days with the people behind the hunts you watch.</p>" },
     { "type": "url", "id": "bio_page_url", "label": "Bio page", "info": "Each photo links to that instructor on this page. Leave empty for the Learn from the Pros page." },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Read Full Bios" },
-    { "type": "checkbox", "id": "phone_carousel", "label": "Show one instructor at a time on phones", "default": true, "info": "Visitors swipe or tap the arrows to see the next instructor." },
+    { "type": "checkbox", "id": "phone_carousel", "label": "Show as a slider", "default": true, "info": "One row of 4 on desktop and one instructor at a time on phones. Visitors use the arrows or swipe to see more." },
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#DAA520" },
     { "type": "color", "id": "text_color", "label": "Text", "default": "#111111" },

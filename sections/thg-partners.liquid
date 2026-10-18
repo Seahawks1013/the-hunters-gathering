@@ -1,0 +1,188 @@
+{%- comment -%}
+  The Hunter's Gathering: Partner logos
+  A continuous, looping logo scroll. Pauses on hover. People who prefer
+  reduced motion see a static, centered row instead.
+  Each logo can be uploaded in the editor; the current partner logos ship
+  with the theme as a fallback.
+{%- endcomment -%}
+
+{%- capture logos -%}
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign name = block.settings.name | default: 'Partner'
+      assign file = block.settings.builtin_logo | strip
+    -%}
+    <li class="thg-pt__item" {{ block.shopify_attributes }}>
+      {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}" target="_blank" rel="noopener" aria-label="{{ name | escape }}">{%- endif -%}
+      {%- if block.settings.logo != blank -%}
+        {{ block.settings.logo | image_url: width: 500 | image_tag: loading: 'lazy', alt: name, class: 'thg-pt__logo' }}
+      {%- elsif file != blank -%}
+        <img class="thg-pt__logo" src="{{ file | asset_url }}" alt="{{ name | escape }}" loading="lazy" width="400" height="160">
+      {%- else -%}
+        <span class="thg-pt__name">{{ name | escape }}</span>
+      {%- endif -%}
+      {%- if block.settings.url != blank -%}</a>{%- endif -%}
+    </li>
+  {%- endfor -%}
+{%- endcapture -%}
+
+<div
+  class="thg-sec thg-pt"
+  style="
+    --thg-bg: {{ section.settings.background_color }};
+    --thg-text: {{ section.settings.text_color }};
+    --thg-pad-top: {{ section.settings.padding_top }}px;
+    --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --thg-logo-h: {{ section.settings.logo_height }}px;
+    --thg-speed: {{ section.settings.speed }}s;
+  "
+>
+  {%- if section.settings.heading != blank -%}
+    <h2 class="thg-pt__heading">{{ section.settings.heading | escape }}</h2>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="thg-pt__marquee">
+      {%- comment -%} Logos repeat so the loop never shows a gap on wide screens {%- endcomment -%}
+      <ul class="thg-pt__track" role="list">
+        {{ logos }}
+        {%- if section.blocks.size < 8 -%}{{ logos | replace: 'class="thg-pt__item"', 'class="thg-pt__item" aria-hidden="true"' }}{%- endif -%}
+      </ul>
+      <ul class="thg-pt__track thg-pt__track--clone" role="list" aria-hidden="true">
+        {{ logos }}
+        {%- if section.blocks.size < 8 -%}{{ logos }}{%- endif -%}
+      </ul>
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .thg-pt {
+    padding-inline: 0;
+    overflow: hidden;
+  }
+
+  .thg-pt__heading {
+    margin: 0 0 clamp(28px, 4vw, 44px);
+    padding-inline: 16px;
+    text-align: center;
+    font-family: var(--font-heading--family);
+    font-size: clamp(22px, 2.8vw, 32px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: inherit;
+  }
+
+  .thg-pt__marquee {
+    display: flex;
+    width: max-content;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .thg-pt__marquee:hover .thg-pt__track {
+    animation-play-state: paused;
+  }
+
+  .thg-pt__track {
+    display: flex;
+    align-items: center;
+    gap: clamp(48px, 6vw, 96px);
+    margin: 0;
+    padding: 0 clamp(24px, 3vw, 48px);
+    list-style: none;
+    animation: thg-pt-scroll var(--thg-speed) linear infinite;
+  }
+
+  @keyframes thg-pt-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+
+  .thg-pt__item {
+    flex: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .thg-pt__item a {
+    display: block;
+  }
+
+  .thg-pt__logo {
+    display: block;
+    width: auto;
+    height: var(--thg-logo-h);
+    max-width: 240px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .thg-pt__item a:hover .thg-pt__logo {
+    transform: scale(1.06);
+  }
+
+  .thg-pt__name {
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 749px) {
+    .thg-pt__logo { height: calc(var(--thg-logo-h) * 0.75); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .thg-pt__marquee {
+      width: auto;
+      justify-content: center;
+      mask-image: none;
+    }
+
+    .thg-pt__track {
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 28px;
+      animation: none;
+    }
+
+    .thg-pt__track--clone,
+    .thg-pt__item[aria-hidden='true'] { display: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Partner logos",
+  "tag": "section",
+  "class": "thg-pt-section",
+  "max_blocks": 30,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our Partners" },
+    { "type": "range", "id": "logo_height", "label": "Logo height", "min": 32, "max": 120, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "speed", "label": "Scroll speed", "min": 10, "max": 80, "step": 5, "unit": "s", "default": 30, "info": "Seconds for one full loop. Higher is slower." },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#FFFFFF" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#111111" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "partner",
+      "name": "Partner",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Partner" },
+        { "type": "image_picker", "id": "logo", "label": "Logo", "info": "Transparent PNGs look best." },
+        { "type": "url", "id": "url", "label": "Link" },
+        { "type": "text", "id": "builtin_logo", "label": "Built-in logo file", "info": "Used only when no logo is uploaded above. Leave as is." }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Partner logos", "blocks": [{ "type": "partner" }, { "type": "partner" }, { "type": "partner" }] }
+  ]
+}
+{% endschema %}
