@@ -109,12 +109,6 @@
             "image": "shopify://shop_images/14.webp",
             "caption": ""
           }
-        },
-        "photo_PHibTL": {
-          "type": "photo",
-          "settings": {
-            "caption": ""
-          }
         }
       },
       "block_order": [
@@ -131,8 +125,7 @@
         "photo_pLhxfb",
         "photo_Kai6dk",
         "photo_tdEhmJ",
-        "photo_fWEAbD",
-        "photo_PHibTL"
+        "photo_fWEAbD"
       ],
       "settings": {
         "heading": "",
