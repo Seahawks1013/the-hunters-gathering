@@ -36,12 +36,24 @@
         -%}
         <li class="thg-ig__card" {{ block.shopify_attributes }}>
           <a class="thg-ig__photo" href="{{ link }}" aria-label="Read {{ name | escape }}'s bio">
+            <span class="thg-ig__crop">
             {%- if block.settings.image != blank -%}
-              {%- capture focal -%}object-position: {{ block.settings.image.presentation.focal_point }};{%- endcapture -%}
-              {{ block.settings.image | image_url: width: 600 | image_tag: widths: '200, 300, 400, 600', sizes: '(min-width: 990px) 220px, 40vw', loading: 'lazy', alt: name, style: focal }}
+              {%- liquid
+                assign zoom = block.settings.zoom | default: 100
+                assign px = block.settings.pos_x | default: 50
+                assign py = block.settings.pos_y | default: 50
+                if px == 50 and py == 50
+                  assign pos = block.settings.image.presentation.focal_point
+                else
+                  assign pos = px | append: '% ' | append: py | append: '%'
+                endif
+              -%}
+              {%- capture crop_style -%}object-position: {{ pos }}; transform-origin: {{ pos }}; transform: scale({{ zoom | divided_by: 100.0 }});{%- endcapture -%}
+              {{ block.settings.image | image_url: width: 900 | image_tag: widths: '300, 450, 600, 900', sizes: '(min-width: 990px) 220px, 70vw', loading: 'lazy', alt: name, style: crop_style }}
             {%- else -%}
               {{ 'image' | placeholder_svg_tag: 'thg-ig__placeholder' }}
             {%- endif -%}
+            </span>
           </a>
           {%- if block.settings.specialty != blank -%}
             <p class="thg-ig__specialty">{{ block.settings.specialty | escape }}</p>
@@ -119,17 +131,21 @@
     transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
-  .thg-ig__photo img,
-  .thg-ig__placeholder {
+  .thg-ig__crop {
     position: absolute;
     inset: 6px;
-    display: block;
-    width: calc(100% - 12px);
-    height: calc(100% - 12px);
-    border-radius: var(--thg-photo-radius-inner, 3px);
+    overflow: hidden;
     border: 4px solid #fff;
-    object-fit: cover;
+    border-radius: var(--thg-photo-radius-inner, 3px);
     background: #e9e2cf;
+  }
+
+  .thg-ig__crop img,
+  .thg-ig__placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .thg-ig__photo:hover,
@@ -405,7 +421,10 @@
       "type": "instructor",
       "name": "Instructor",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Photo", "info": "Square photos work best. Use the focal point to center the face." },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "range", "id": "zoom", "label": "Zoom", "min": 100, "max": 250, "step": 5, "unit": "%", "default": 100 },
+        { "type": "range", "id": "pos_x", "label": "Move left / right", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50, "info": "0 shows the left side of the photo, 100 the right." },
+        { "type": "range", "id": "pos_y", "label": "Move up / down", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50, "info": "0 shows the top of the photo, 100 the bottom." },
         { "type": "text", "id": "name", "label": "Name", "default": "Instructor name" },
         { "type": "text", "id": "specialty", "label": "Specialty", "default": "Elk" },
         { "type": "url", "id": "instagram_url", "label": "Instagram" },
