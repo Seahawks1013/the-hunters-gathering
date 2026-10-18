@@ -68,6 +68,20 @@
             "website_url": ""
           }
         },
+        "instructor_wpWQ79": {
+          "type": "instructor",
+          "settings": {
+            "image": "shopify://shop_images/Predators__Cody_Sanchez_in_the_Wild.png",
+            "name": "Cody Sanchez",
+            "specialty": "Predators",
+            "bio": "<p>Cody Sanchez’s passion for predator hunting began at just 12 years old when he received his first coyote call. After hearing coyotes answer his very first howl, he was hooked. What started as a childhood fascination grew into years of hands-on experience pursuing predators throughout the Pacific Northwest.</p><p>From calling coyotes in dense timberlands during daylight hours to hunting open valleys at night with thermal optics, Cody has developed a deep understanding of predator behavior, calling techniques, and the equipment needed for success.</p><p>Today, Cody operates a thermal optics and predator hunting equipment business, helping fellow hunters gain access to trusted, field-tested gear. A strong advocate for responsible predator management, Cody is passionate about sharing his knowledge and helping others shorten the learning curve.</p><p>At The Hunter’s Gathering, Cody will share practical, proven predator calling strategies, insights into predator behavior, and techniques to help hunters become more confident and successful in the field.</p>",
+            "instagram_url": "",
+            "youtube_url": "",
+            "facebook_url": "",
+            "podcast_url": "",
+            "website_url": ""
+          }
+        },
         "instructor_rPn9DX": {
           "type": "instructor",
           "settings": {
@@ -116,6 +130,7 @@
         "instructor_tV7VHg",
         "instructor_Ckr3X9",
         "instructor_xTp9tG",
+        "instructor_wpWQ79",
         "instructor_rPn9DX",
         "instructor_amfEVD",
         "instructor_ny8bcC"
