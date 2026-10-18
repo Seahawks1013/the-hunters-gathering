@@ -34,7 +34,7 @@
       "type": "thg-video",
       "settings": {
         "tag": "Watch",
-        "heading": "Four Days. Eight Pros. One Hundred Hunters.",
+        "heading": "Four Days That Will Change the Way You Hunt Forever",
         "text": "<p>We host this event only once each year. Come for the hunting. Leave with your hunting community.</p>",
         "video_url": "https://www.youtube.com/watch?v=2hcqSAqL2ic&t=3s",
         "show_reserve": true,
@@ -51,9 +51,6 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Gritty_Elk_Hunt__Trent_Fisher.png",
-            "zoom": 115,
-            "pos_x": 0,
-            "pos_y": 0,
             "name": "Trent Fisher",
             "specialty": "Elk",
             "instagram_url": "",
@@ -63,10 +60,7 @@
         "instructor_2": {
           "type": "instructor",
           "settings": {
-            "image": "shopify://shop_images/Elk_Hunt_in_Snowy_Mountains_1b7e56cb-f71a-425b-b9aa-c5b12bf9a150.png",
-            "zoom": 145,
-            "pos_x": 58,
-            "pos_y": 68,
+            "image": "shopify://shop_images/Elk_Hunt_in_Snowy_Mountains.png",
             "name": "Casey LaVere Butler",
             "specialty": "Elk",
             "instagram_url": "",
@@ -76,10 +70,7 @@
         "instructor_3": {
           "type": "instructor",
           "settings": {
-            "image": "shopify://shop_images/Blacktail_Hunter__Tom_Ryle_f5e457ba-d881-4670-a799-c161f484b3da.png",
-            "zoom": 105,
-            "pos_x": 100,
-            "pos_y": 52,
+            "image": "shopify://shop_images/Blacktail_Hunter__Tom_Ryle.png",
             "name": "Tom Ryle",
             "specialty": "Blacktail Deer",
             "instagram_url": "",
@@ -89,10 +80,7 @@
         "instructor_4": {
           "type": "instructor",
           "settings": {
-            "image": "shopify://shop_images/THG_SPEAKERS_4_x_4_in_4.png",
-            "zoom": 110,
-            "pos_x": 0,
-            "pos_y": 50,
+            "image": "shopify://shop_images/Blacktail_Night__Dave_Riley_Hunting_Poster.png",
             "name": "Dave Riley",
             "specialty": "Blacktail Deer",
             "instagram_url": "",
@@ -102,10 +90,7 @@
         "instructor_5": {
           "type": "instructor",
           "settings": {
-            "image": "shopify://shop_images/Bear_Hunt__Heather_Aldrich_7c199ad4-6e5b-475f-b29b-dcced78bce6f.png",
-            "zoom": 105,
-            "pos_x": 100,
-            "pos_y": 64,
+            "image": "shopify://shop_images/Bear_Hunt__Heather_Aldrich.png",
             "name": "Heather Aldrich",
             "specialty": "Bear",
             "instagram_url": "",
@@ -115,10 +100,7 @@
         "instructor_6": {
           "type": "instructor",
           "settings": {
-            "image": "shopify://shop_images/Turkey_Hunt__Alex_Chaney_f7b18502-902f-49dd-a834-df8a4576c495.png",
-            "zoom": 125,
-            "pos_x": 50,
-            "pos_y": 90,
+            "image": "shopify://shop_images/Turkey_Hunt__Alex_Chaney.png",
             "name": "Alex Chaney",
             "specialty": "Turkey",
             "instagram_url": "",
@@ -128,10 +110,7 @@
         "instructor_7": {
           "type": "instructor",
           "settings": {
-            "image": "shopify://shop_images/Cougar_in_the_Forest__Jim_Myers_e81fec27-ad41-40b3-a19e-42bfdf029470.png",
-            "zoom": 120,
-            "pos_x": 52,
-            "pos_y": 34,
+            "image": "shopify://shop_images/Cougar_in_the_Forest__Jim_Myers.png",
             "name": "Jim Myers",
             "specialty": "Mountain Lion",
             "instagram_url": "",
@@ -141,10 +120,6 @@
         "instructor_8": {
           "type": "instructor",
           "settings": {
-            "image": "shopify://shop_images/THG_SPEAKERS_4_x_4_in_7.png",
-            "zoom": 130,
-            "pos_x": 50,
-            "pos_y": 50,
             "name": "Cody Sanchez",
             "specialty": "Predators",
             "instagram_url": "",
@@ -183,59 +158,41 @@
         "line_item_1": {
           "type": "line_item",
           "settings": {
-            "title": "Expert instruction",
-            "detail": "Four days of classroom and field sessions with 8 pro instructors",
-            "value": "$XXX"
+            "title": "Expert Instruction",
+            "detail": "Four days of classroom sessions with pro instructors. Each course valued at $500 each.",
+            "value": "$2000"
           }
         },
         "line_item_2": {
           "type": "line_item",
           "settings": {
-            "title": "Field sessions",
-            "detail": "Hands-on master classes in the woods",
-            "value": "$XXX"
-          }
-        },
-        "line_item_3": {
-          "type": "line_item",
-          "settings": {
-            "title": "Lodging, 3 nights",
-            "detail": "Heated log cabins at Cascades Camp & Conference Center",
-            "value": "$XXX"
-          }
-        },
-        "line_item_4": {
-          "type": "line_item",
-          "settings": {
-            "title": "All meals",
-            "detail": "Family-style meals, Thursday through Sunday",
-            "value": "$XXX"
+            "title": "Field Sessions",
+            "detail": "Four days hands-on master classes in the woods.  Each session valued at $250 each.",
+            "value": "$1000"
           }
         },
         "line_item_5": {
           "type": "line_item",
           "settings": {
-            "title": "Field kit",
+            "title": "Field Kit",
             "detail": "Hunter Essentials Kit included with every registration",
             "value": "$400+"
           }
         },
-        "line_item_6": {
+        "line_item_iBneLE": {
           "type": "line_item",
           "settings": {
-            "title": "Keynote & Meet the Pros",
-            "detail": "Success Is No Accident keynote and direct access to the pros all four days",
-            "value": "$XXX"
+            "title": "Four Days with the Pros Meals & Lodging Included",
+            "detail": "All inclusive stay with the Pros at Cascades Camp and Conference Center",
+            "value": "$1200"
           }
         }
       },
       "block_order": [
         "line_item_1",
         "line_item_2",
-        "line_item_3",
-        "line_item_4",
         "line_item_5",
-        "line_item_6"
+        "line_item_iBneLE"
       ],
       "settings": {
         "tag": "All inclusive",
@@ -243,7 +200,7 @@
         "text": "<p>Instruction, lodging, meals and gear. Here's exactly where the value comes from.</p>",
         "receipt_title": "Your four days, itemized",
         "total_label": "Total value",
-        "total_value": "$5,000+",
+        "total_value": "$3400",
         "price_label": "Your price",
         "price_value": "$1,795",
         "footnote": "",
@@ -321,8 +278,8 @@
         "testimonial_1": {
           "type": "testimonial",
           "settings": {
-            "quote": "<p>Being a beginner, this has been a great introduction and I hope to build experience and success from it. I hope to attend this event or others annually.</p>",
-            "name": "Sammie K.",
+            "quote": "<p>\"I had an absolute blast being able to be apart of this event turning from strangers to brothers with everyone it was a great experience with knowledge laughs jokes and just the coolest dynamic and group of people thank you guys for putting this on and letting me be apart.\"</p>",
+            "name": "",
             "detail": "2026 attendee",
             "video_url": ""
           }
@@ -330,8 +287,8 @@
         "testimonial_2": {
           "type": "testimonial",
           "settings": {
-            "quote": "<p>Had a great time with lots of great people. Learned way more than I expected. Great line up of extremely qualified coaching. It was great to have the field work to see exactly what we were taught in the classroom.&nbsp;</p>",
-            "name": "Ryan L.",
+            "quote": "<p>\"Being a beginner, this has been a great introduction and I hope to build experience and success from it. I hope to attend this event or others annually.\"<br/><br/></p>",
+            "name": "",
             "detail": "2026 attendee",
             "video_url": ""
           }
@@ -339,8 +296,8 @@
         "testimonial_3": {
           "type": "testimonial",
           "settings": {
-            "quote": "<p>I had an absolute blast being a part of this event and going from strangers to brothers with everyone. It was a great experience full of knowledge, laughs, jokes, and just the coolest dynamic and group of people. Thank you guys for putting this on and letting me be a part of it!</p>",
-            "name": "Chris M.",
+            "quote": "<p>\"Had a great time with lots of great people. Learned way more than I expected. Great line up of extremely qualified coaching. It was great to have the field work to see exactly what we were taught in the classroom.\"<br/><br/></p>",
+            "name": "",
             "detail": "2026 attendee",
             "video_url": ""
           }
@@ -353,7 +310,7 @@
       ],
       "settings": {
         "tag": "From past attendees",
-        "heading": "Hear It From the Hunters",
+        "heading": "Success Is No Accident",
         "text": "",
         "show_stars": true,
         "show_reserve": true,
@@ -368,7 +325,7 @@
       "settings": {
         "tag": "Limited to 100 hunters",
         "heading": "Reserve Your Seat",
-        "text": "<p>Lock in your spot with a $350 deposit today. The remaining balance is charged automatically on March 15, 2027.</p>",
+        "text": "<p>Lock in your spot with a $350 deposit today. The rest is split into automatic payments before the event.</p>",
         "included": "<ul><li>Expert instruction from 8 pros</li><li>Field training sessions</li><li>Lodging in heated log cabins</li><li>Family-style meals included</li><li>Hunter Essentials field kit</li></ul>",
         "policy_text": "Plans change. Your seat is transferable to another hunter.",
         "policy_link": "",
@@ -378,8 +335,8 @@
         "price_sub": "Over $5,000 in value",
         "today_label": "Due today",
         "deposit": "$350",
-        "plan_title": "Deposit",
-        "plan_text": "Pay the remaining $1,445 later. It's charged automatically to your saved card on March 15, 2027.",
+        "plan_title": "Payment plan",
+        "plan_text": "Remaining $1,445 in 3 automatic payments of $481.67. Final payment due March 15, 2027.",
         "full_title": "Pay in full",
         "full_text": "Pay $1,795 today and you're all set.",
         "discount_text": "Veterans, active-duty military and family groups save $100 with a code at checkout.",
@@ -405,21 +362,21 @@
           "type": "question",
           "settings": {
             "question": "How does the payment plan work, and when is the balance due?",
-            "answer": "<p>Reserve with a $350 deposit today. The remaining $1,445 is charged automatically to your saved card on March 15, 2027, and you'll get a reminder before it's charged. Prefer to pay once? Choose Pay in full ($1,795) when you register. You can also pay your balance early anytime from your account.</p>"
+            "answer": "<p>Reserve with a $350 deposit today. The remaining $1,445 is split into 3 automatic payments of $481.67, with the final payment due March 15, 2027. You can also pay the full $1,795 at checkout.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
             "question": "What's your cancellation, refund and transfer policy?",
-            "answer": "<p>[Confirm with Asha] Your seat is transferable to another hunter at any time. Add refund and cancellation terms here once decided.</p>"
+            "answer": "<p>Your seat is transferable to another hunter at any time. Deposits are non-refundable. If you must cancel your registration we will carry the deposit forward toward the year's gathering.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
             "question": "What are the cabins and lodging like?",
-            "answer": "<p>You'll stay in heated log cabins at Cascades Camp & Conference Center in Yelm, WA. Cabins are shared with other attendees. [Confirm with Asha] Add how many people per cabin and what bedding is provided.</p>"
+            "answer": "<p>You'll stay in heated log cabins at Cascades Camp & Conference Center in Yelm, WA. . Each cabin accommodates 6-11 guests in generous, twin-sized bunks, and one twin/queen bunk. Each cabin has a private bath and shower. Bring bedding and towels.</p>"
           }
         },
         "question_5": {
@@ -433,7 +390,7 @@
           "type": "question",
           "settings": {
             "question": "What should I bring?",
-            "answer": "<p>[Confirm with Asha] Add the packing list (field clothing, boots, rain gear, notebook, etc.). The full list will also be in the 2027 Event Guide.</p>"
+            "answer": "<p>Casual clothing for classes and hiking clothes, and shoes &nbsp;for our field sessions</p><p>We also recommend you bring some mosquito and tick repellent with you.</p><p>Camp chairs for campfires.</p><p><strong>Bring your own sleeping bag, pillow, towels (including hand towels), and toiletries.</strong></p><p><strong>&nbsp;</strong><span style=\"text-decoration:underline\"><strong>If you are flying in, let us know - we can assist with bedding.</strong></span></p><p>The full list will also be in the 2027 Event Guide.</p>"
           }
         },
         "question_7": {
@@ -454,7 +411,7 @@
           "type": "question",
           "settings": {
             "question": "Can my spouse, kids or partner attend?",
-            "answer": "<p>[Confirm with Asha] Add whether guests can attend, any age minimum, and pricing for family groups. Family groups save $100 with a code at checkout.</p>"
+            "answer": "<p>Family groups save $100 with a code at checkout. Minors must attend with a guardian and be at least 12 years of age to participate.</p>"
           }
         }
       },
@@ -509,7 +466,7 @@
           "type": "social",
           "settings": {
             "platform": "instagram",
-            "url": "https://www.instagram.com/thehuntersgathering/",
+            "url": "",
             "label": "",
             "handle": ""
           }
@@ -518,7 +475,7 @@
           "type": "social",
           "settings": {
             "platform": "facebook",
-            "url": "https://www.facebook.com/people/The-Hunters-Gathering/61587359323268/",
+            "url": "",
             "label": "",
             "handle": ""
           }
@@ -527,7 +484,7 @@
           "type": "social",
           "settings": {
             "platform": "youtube",
-            "url": "https://www.youtube.com/@theblacktailcoach987",
+            "url": "",
             "label": "",
             "handle": ""
           }
@@ -536,7 +493,7 @@
           "type": "social",
           "settings": {
             "platform": "podcast",
-            "url": "https://open.spotify.com/show/7xRAaMqhABFOOhJQY8mO3T?si=bd0cef22dccb4c8d",
+            "url": "",
             "label": "",
             "handle": ""
           }
@@ -544,31 +501,28 @@
         "podcast_5": {
           "type": "podcast",
           "settings": {
-            "image": "shopify://shop_images/podcast.webp",
             "host": "Dave Riley",
             "title": "Success Is No Accident",
             "description": "<p>Dave Riley, the Blacktail Coach, shares field-tested tactics for hunters on this weekly podcast. Whether you're a seasoned hunter or just getting started, we'll help you turn preparation into achievement and passion into results.</p>",
-            "url": "https://open.spotify.com/episode/3qA8pmvkPxAsYJ7p3kuHAI?si=zbPjkUqsROGVblICW8rJSA"
+            "url": ""
           }
         },
         "podcast_6": {
           "type": "podcast",
           "settings": {
-            "image": "shopify://shop_images/podcast_58aec832-0f56-4389-ae52-a86d770c53fa.webp",
             "host": "Heather Aldrich",
             "title": "Bear Hunting with Heather Aldrich",
             "description": "<p>Join us for an exciting adventure where we explore field-tested tactics that enhance the skills of both novice and experienced hunters, with hunter training and mentorship from Heather.</p>",
-            "url": "https://open.spotify.com/episode/5QwpYRiUWcvpuKAZNwvkNe?si=XDVLBE55T8GtT4UbzdExiA&nd=1&dlsi=8a75526fc25c4e0a"
+            "url": ""
           }
         },
         "podcast_7": {
           "type": "podcast",
           "settings": {
-            "image": "shopify://shop_images/podcast_7530929f-681a-491d-a0cb-e8328c309acd.webp",
             "host": "Alex Chaney",
             "title": "Talking Turkey with Alex Chaney",
             "description": "<p>We dig into field-tested turkey tactics every hunter should know, and why mentorship helps new hunters refine their skills.</p>",
-            "url": "https://open.spotify.com/episode/4PdAQB01WxdcvgRHVNxq0x?si=d8033c26196f45ba&nd=1&dlsi=cb6833e50fc44a99"
+            "url": ""
           }
         }
       },
