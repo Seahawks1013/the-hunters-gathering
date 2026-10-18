@@ -91,6 +91,34 @@
         "id": "thg_guide_link",
         "label": "Event Guide link",
         "info": "Link to the PDF (upload it under Content → Files) or a sign-up page."
+      },
+      {
+        "type": "header",
+        "content": "Veteran discount"
+      },
+      {
+        "type": "text",
+        "id": "thg_vet_code",
+        "label": "Discount code",
+        "info": "The code from Discounts (e.g. HONOR100). Leave empty to hide the veteran option."
+      },
+      {
+        "type": "text",
+        "id": "thg_vet_label",
+        "label": "Prompt",
+        "default": "Veteran or active-duty military?"
+      },
+      {
+        "type": "text",
+        "id": "thg_vet_button",
+        "label": "Button label",
+        "default": "Apply $100 off"
+      },
+      {
+        "type": "text",
+        "id": "thg_vet_applied",
+        "label": "Applied message",
+        "default": "Thank you for your service. $100 off will apply at checkout."
       }
     ]
   },

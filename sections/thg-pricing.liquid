@@ -70,6 +70,8 @@
         </p>
       {%- endif -%}
 
+      {%- render 'thg-veteran-discount' -%}
+
       <div class="thg-price__action">
         {%- render 'thg-reserve-button', full: true, link: section.settings.reserve_link -%}
         {%- render 'thg-seat-counter', show_bar: true -%}
@@ -319,7 +321,7 @@
     { "type": "text", "id": "plan_text", "label": "Payment plan details", "default": "Remaining $1,445 in 3 automatic payments of $481.67. Final payment due March 15, 2027." },
     { "type": "text", "id": "full_title", "label": "Pay in full title", "default": "Pay in full" },
     { "type": "text", "id": "full_text", "label": "Pay in full details", "default": "Pay $1,795 today and you're all set." },
-    { "type": "text", "id": "discount_text", "label": "Discount note", "default": "Veterans, active-duty military and family groups save $100 with a code at checkout." },
+    { "type": "text", "id": "discount_text", "label": "Discount note", "default": "Family groups save $100 per seat automatically when you register 2 or more." },
     { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true },
     { "type": "text", "id": "secure_text", "label": "Under payment icons", "default": "Secure checkout · Card, Apple Pay or Google Pay" },
     { "type": "header", "content": "Colors" },
