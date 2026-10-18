@@ -239,6 +239,23 @@
         <bdi>{{ total_price }}</bdi>
       </text-component>
     </span>
+    {%- comment -%} The Hunter's Gathering: show what's due now when a deposit plan is in the cart {%- endcomment -%}
+    {%- liquid
+      assign thg_due_now = cart.checkout_charge_amount
+      assign thg_due_later = cart.total_price | minus: thg_due_now
+    -%}
+    {%- if thg_due_later > 0 -%}
+      <div class="thg-due">
+        <span class="thg-due__row thg-due__row--now">
+          <span>Due today</span>
+          <strong>{{ thg_due_now | money }}</strong>
+        </span>
+        <span class="thg-due__row">
+          <span>Remaining balance, charged later</span>
+          <span>{{ thg_due_later | money }}</span>
+        </span>
+      </div>
+    {%- endif -%}
     {% if settings.show_installments %}
       <span class="cart-totals__item cart-totals__installments">
         {% form 'cart', cart %}
@@ -609,5 +626,30 @@
     .cart-summary--extend {
       height: 100%;
     }
+  }
+
+  .thg-due {
+    display: grid;
+    gap: 6px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: rgb(11 74 42 / 0.06);
+    border: 1px solid rgb(11 74 42 / 0.25);
+  }
+
+  .thg-due__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  .thg-due__row--now {
+    font-size: 16px;
+    color: #0b4a2a;
+  }
+
+  .thg-due__row--now strong {
+    font-size: 18px;
   }
 {% endstylesheet %}
