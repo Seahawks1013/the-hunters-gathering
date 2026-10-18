@@ -52,7 +52,7 @@
 
     {%- if section.settings.show_reserve -%}
       <div class="thg-tst__cta">
-        {%- render 'thg-reserve-button' -%}
+        {%- render 'thg-reserve-button', link: section.settings.reserve_link -%}
       </div>
     {%- endif -%}
   </div>
@@ -195,6 +195,7 @@
   "class": "thg-tst-section",
   "max_blocks": 12,
   "settings": [
+    { "type": "url", "id": "reserve_link", "label": "Reserve button link (optional)", "info": "Leave empty to use the registration product from Theme settings → Event registration." },
     { "type": "text", "id": "tag", "label": "Label", "default": "From past attendees" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Success Is No Accident" },
     { "type": "richtext", "id": "text", "label": "Text" },

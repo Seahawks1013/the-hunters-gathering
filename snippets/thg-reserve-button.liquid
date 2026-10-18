@@ -1,6 +1,7 @@
 {%- comment -%}
   The one Reserve button used across the site.
-  Usage: {% render 'thg-reserve-button', variant: 'primary', full: true %}
+  Usage: {% render 'thg-reserve-button', variant: 'primary', full: true, link: section.settings.reserve_link %}
+  link: optional per-section override; otherwise the Event registration product is used.
   variant: 'primary' (default) or 'light' (for dark backgrounds)
   Label, link, sold-out and waitlist all come from
   Theme settings → Event registration.
@@ -21,7 +22,10 @@
     assign href = settings.thg_waitlist_link | default: '#contact'
     assign label = settings.thg_soldout_label | default: 'Sold Out — Join the Waitlist'
   else
-    assign href = settings.thg_reserve_link
+    assign href = link
+    if href == blank
+      assign href = settings.thg_reserve_link
+    endif
     if href == blank and p != blank
       assign href = p.url
     endif

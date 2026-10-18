@@ -66,7 +66,7 @@
 
     {%- if section.settings.show_reserve -%}
       <div class="thg-video__cta">
-        {%- render 'thg-reserve-button', variant: 'light' -%}
+        {%- render 'thg-reserve-button', variant: 'light', link: section.settings.reserve_link -%}
       </div>
     {%- endif -%}
   </div>
@@ -204,6 +204,7 @@
   "tag": "section",
   "class": "thg-video-section",
   "settings": [
+    { "type": "url", "id": "reserve_link", "label": "Reserve button link (optional)", "info": "Leave empty to use the registration product from Theme settings → Event registration." },
     { "type": "text", "id": "tag", "label": "Label", "default": "Watch" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Four Days That Will Change the Way You Hunt Forever" },
     { "type": "richtext", "id": "text", "label": "Text", "default": "<p>We host this event only once each year. Come for the hunting. Leave with your hunting community.</p>" },

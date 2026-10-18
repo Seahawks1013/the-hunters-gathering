@@ -91,7 +91,7 @@
             <span class="thg-hero__price-note">{{ section.settings.price_note | escape }}</span>
           {%- endif -%}
         </div>
-        {%- render 'thg-reserve-button', variant: 'light', full: true -%}
+        {%- render 'thg-reserve-button', variant: 'light', full: true, link: section.settings.reserve_link -%}
         {%- render 'thg-seat-counter', show_bar: true, tone: 'light' -%}
         {%- if section.settings.show_guide_link -%}
           <a class="thg-hero__guide" href="{{ settings.thg_guide_link | default: '#event-guide' }}">
@@ -108,7 +108,7 @@
         <strong>{{ section.settings.price | escape }}</strong>
         <span>{{ section.settings.sticky_note | escape }}</span>
       </div>
-      {%- render 'thg-reserve-button' -%}
+      {%- render 'thg-reserve-button', link: section.settings.reserve_link -%}
     </thg-sticky-reserve>
   {%- endif -%}
 </div>
@@ -397,6 +397,7 @@
   "tag": "section",
   "class": "thg-hero-section",
   "settings": [
+    { "type": "url", "id": "reserve_link", "label": "Reserve button link (optional)", "info": "Leave empty to use the registration product from Theme settings → Event registration." },
     {
       "type": "header",
       "content": "Image"

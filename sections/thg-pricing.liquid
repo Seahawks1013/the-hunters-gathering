@@ -71,7 +71,7 @@
       {%- endif -%}
 
       <div class="thg-price__action">
-        {%- render 'thg-reserve-button', full: true -%}
+        {%- render 'thg-reserve-button', full: true, link: section.settings.reserve_link -%}
         {%- render 'thg-seat-counter', show_bar: true -%}
       </div>
 
@@ -301,6 +301,7 @@
   "tag": "section",
   "class": "thg-price-section",
   "settings": [
+    { "type": "url", "id": "reserve_link", "label": "Reserve button link (optional)", "info": "Leave empty to use the registration product from Theme settings → Event registration." },
     { "type": "text", "id": "tag", "label": "Label", "default": "Limited to 100 hunters" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Reserve Your Seat" },
     { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Lock in your spot with a $350 deposit today. The rest is split into easy payments before the event.</p>" },
