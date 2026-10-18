@@ -32,6 +32,7 @@
       "block_order": [
         "announcement_BxgCk9"
       ],
+      "disabled": true,
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
@@ -61,8 +62,8 @@
           "static": true,
           "settings": {
             "menu": "main-menu",
-            "background_color": "#FFFFFF",
-            "text_color": "#1A1A1A",
+            "background_color": "#ffffff",
+            "text_color": "#1a1a1a",
             "type_font_primary_size": "1rem",
             "menu_font_style": "regular",
             "type_font_primary_link": "body",
