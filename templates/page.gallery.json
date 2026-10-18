@@ -146,6 +146,12 @@
     "gallery_lodging": {
       "type": "thg-gallery",
       "blocks": {
+        "photo_qKmzEz": {
+          "type": "photo",
+          "settings": {
+            "caption": ""
+          }
+        },
         "photo_1": {
           "type": "photo",
           "settings": {
@@ -166,6 +172,7 @@
         }
       },
       "block_order": [
+        "photo_qKmzEz",
         "photo_1",
         "photo_2",
         "photo_3"
