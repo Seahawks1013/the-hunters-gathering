@@ -44,7 +44,8 @@
         "text_color": "#111111",
         "ring_color": "#E2761C",
         "padding_top": 88,
-        "padding_bottom": 88
+        "padding_bottom": 88,
+        "phone_carousel": true
       },
       "blocks": {
         "instructor_1": {
@@ -106,8 +107,8 @@
         "instructor_8": {
           "type": "instructor",
           "settings": {
-            "name": "To Be Announced",
-            "specialty": "Coming soon"
+            "name": "Cody Sanchez",
+            "specialty": "Predators"
           }
         }
       },
