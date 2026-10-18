@@ -39,3 +39,8 @@
     transition: none;
   }
 }
+
+/* Header logo hidden: the menu stands on its own, like the original site */
+header .header-logo {
+  display: none !important;
+}
