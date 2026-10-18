@@ -1,0 +1,267 @@
+{%- comment -%}
+  The Hunter's Gathering: FAQ + policies
+  Accordion of questions (one block each) with links to the store's
+  published policy pages. Also outputs FAQ structured data for Google.
+{%- endcomment -%}
+
+<div
+  id="faq"
+  class="thg-sec thg-faq"
+  style="
+    --thg-bg: {{ section.settings.background_color }};
+    --thg-text: {{ section.settings.text_color }};
+    --thg-pad-top: {{ section.settings.padding_top }}px;
+    --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="thg-wrap thg-faq__layout">
+    <div class="thg-faq__intro">
+      {%- if section.settings.tag != blank -%}<p class="thg-tag">{{ section.settings.tag | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="thg-h2">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="thg-sub">{{ section.settings.text }}</div>{%- endif -%}
+
+      {%- liquid
+        assign policies = ''
+        if shop.refund_policy != blank
+          assign policies = policies | append: shop.refund_policy.url | append: '|' | append: shop.refund_policy.title | append: '~~'
+        endif
+        if shop.terms_of_service != blank
+          assign policies = policies | append: shop.terms_of_service.url | append: '|' | append: shop.terms_of_service.title | append: '~~'
+        endif
+        if shop.privacy_policy != blank
+          assign policies = policies | append: shop.privacy_policy.url | append: '|' | append: shop.privacy_policy.title | append: '~~'
+        endif
+        assign policy_list = policies | split: '~~'
+      -%}
+      {%- if section.settings.show_policies and policy_list.size > 0 -%}
+        <div class="thg-faq__policies">
+          <p class="thg-faq__policies-title">{{ section.settings.policies_title | escape }}</p>
+          <ul role="list">
+            {%- for item in policy_list -%}
+              {%- assign parts = item | split: '|' -%}
+              <li><a href="{{ parts[0] }}">{{ parts[1] }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.contact_text != blank -%}
+        <p class="thg-faq__contact">
+          {{ section.settings.contact_text | escape }}
+          <a href="{{ section.settings.contact_link | default: '#contact' }}">{{ section.settings.contact_link_label | escape }}</a>
+        </p>
+      {%- endif -%}
+    </div>
+
+    <div class="thg-faq__list">
+      {%- for block in section.blocks -%}
+        <details class="thg-faq__item" name="thg-faq-{{ section.id }}" {{ block.shopify_attributes }}{% if forloop.first and section.settings.open_first %} open{% endif %}>
+          <summary class="thg-faq__q">
+            <span>{{ block.settings.question | escape }}</span>
+            <span class="thg-faq__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="thg-faq__a">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- if section.blocks.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for block in section.blocks -%}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.question | json }},
+            "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% stylesheet %}
+  .thg-faq__layout {
+    display: grid;
+    gap: 36px;
+    align-items: start;
+  }
+
+  @media screen and (min-width: 990px) {
+    .thg-faq__layout {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+      gap: 72px;
+    }
+
+    .thg-faq__intro {
+      position: sticky;
+      top: 110px;
+    }
+  }
+
+  .thg-faq__intro .thg-sub { margin-left: 0; }
+
+  .thg-faq__policies {
+    margin-top: 30px;
+    padding: 20px 22px;
+    background: #fff;
+    border-radius: 6px;
+    border-left: 4px solid var(--thg-green);
+  }
+
+  .thg-faq__policies-title {
+    margin: 0 0 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+
+  .thg-faq__policies ul {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .thg-faq__policies a,
+  .thg-faq__contact a {
+    color: var(--thg-green);
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
+
+  .thg-faq__contact {
+    margin: 22px 0 0;
+    font-size: 16px;
+  }
+
+  .thg-faq__list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .thg-faq__item {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 1px 0 rgb(0 0 0 / 0.06);
+    transition: box-shadow 0.25s ease;
+  }
+
+  .thg-faq__item[open] {
+    box-shadow: 0 18px 40px -26px rgb(0 0 0 / 0.45);
+  }
+
+  .thg-faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 20px 22px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .thg-faq__q::-webkit-details-marker { display: none; }
+
+  .thg-faq__q:focus-visible {
+    outline: 2px solid var(--thg-green);
+    outline-offset: -2px;
+    border-radius: 6px;
+  }
+
+  .thg-faq__icon {
+    position: relative;
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--thg-gold);
+  }
+
+  .thg-faq__icon::before,
+  .thg-faq__icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 2px;
+    margin: -1px 0 0 -6px;
+    background: var(--thg-ink);
+    transition: transform 0.25s ease;
+  }
+
+  .thg-faq__icon::after { transform: rotate(90deg); }
+  .thg-faq__item[open] .thg-faq__icon::after { transform: rotate(0deg); }
+
+  .thg-faq__a {
+    padding: 0 22px 22px;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .thg-faq__a p { margin: 0 0 0.75em; }
+  .thg-faq__a > :last-child { margin-bottom: 0; }
+
+  .thg-faq__a a { color: var(--thg-green); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .thg-faq__item[open] .thg-faq__a {
+      animation: thg-faq-in 0.3s ease both;
+    }
+  }
+
+  @keyframes thg-faq-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "FAQ & policies",
+  "tag": "section",
+  "class": "thg-faq-section",
+  "max_blocks": 30,
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Label", "default": "Good to know" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions & Policies" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Everything you need to know before you reserve.</p>" },
+    { "type": "checkbox", "id": "open_first", "label": "Open the first question", "default": true },
+    { "type": "checkbox", "id": "show_policies", "label": "Show policy links", "default": true, "info": "Lists the policies published under Settings → Policies." },
+    { "type": "text", "id": "policies_title", "label": "Policies title", "default": "Our policies" },
+    { "type": "text", "id": "contact_text", "label": "Contact prompt", "default": "Still have a question?" },
+    { "type": "text", "id": "contact_link_label", "label": "Contact link label", "default": "Send us a message" },
+    { "type": "url", "id": "contact_link", "label": "Contact link", "info": "Leave empty to jump to the contact form on this page." },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#F1EBDD" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#111111" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Answer</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "FAQ & policies", "blocks": [{ "type": "question" }, { "type": "question" }, { "type": "question" }] }
+  ]
+}
+{% endschema %}

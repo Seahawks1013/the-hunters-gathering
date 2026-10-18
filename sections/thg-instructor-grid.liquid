@@ -1,0 +1,216 @@
+{%- comment -%}
+  The Hunter's Gathering: Meet your instructors (home page grid)
+  Circle portraits with specialty, name and Instagram/YouTube links.
+  Each card links to that instructor's bio on the Learn from the Pros page.
+{%- endcomment -%}
+
+<div
+  class="thg-sec thg-ig"
+  style="
+    --thg-bg: {{ section.settings.background_color }};
+    --thg-text: {{ section.settings.text_color }};
+    --thg-ring: {{ section.settings.ring_color }};
+    --thg-pad-top: {{ section.settings.padding_top }}px;
+    --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="thg-wrap">
+    <div class="thg-head">
+      {%- if section.settings.tag != blank -%}<p class="thg-tag">{{ section.settings.tag | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="thg-h2">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="thg-sub">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+
+    <ul class="thg-ig__grid" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign name = block.settings.name | default: 'Instructor'
+          assign link = section.settings.bio_page_url | default: '/pages/learn-from-the-pros'
+          assign anchor = name | handleize
+          assign link = link | append: '#' | append: anchor
+        -%}
+        <li class="thg-ig__card" {{ block.shopify_attributes }}>
+          <a class="thg-ig__photo" href="{{ link }}" aria-label="Read {{ name | escape }}'s bio">
+            {%- if block.settings.image != blank -%}
+              {%- capture focal -%}object-position: {{ block.settings.image.presentation.focal_point }};{%- endcapture -%}
+              {{ block.settings.image | image_url: width: 600 | image_tag: widths: '200, 300, 400, 600', sizes: '(min-width: 990px) 220px, 40vw', loading: 'lazy', alt: name, style: focal }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'thg-ig__placeholder' }}
+            {%- endif -%}
+          </a>
+          {%- if block.settings.specialty != blank -%}
+            <p class="thg-ig__specialty">{{ block.settings.specialty | escape }}</p>
+          {%- endif -%}
+          <h3 class="thg-ig__name"><a href="{{ link }}">{{ name | escape }}</a></h3>
+          {%- if block.settings.instagram_url != blank or block.settings.youtube_url != blank -%}
+            <div class="thg-ig__social">
+              {%- if block.settings.instagram_url != blank -%}
+                <a href="{{ block.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="{{ name | escape }} on Instagram">{%- render 'thg-social-icon', icon: 'instagram' -%}</a>
+              {%- endif -%}
+              {%- if block.settings.youtube_url != blank -%}
+                <a href="{{ block.settings.youtube_url }}" target="_blank" rel="noopener" aria-label="{{ name | escape }} on YouTube">{%- render 'thg-social-icon', icon: 'youtube' -%}</a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="thg-ig__cta">
+        <a class="thg-btn thg-btn--outline thg-btn--outline-dark" href="{{ section.settings.bio_page_url | default: '/pages/learn-from-the-pros' }}">{{ section.settings.button_label | escape }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .thg-ig__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .thg-ig__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 48px 28px;
+    }
+  }
+
+  .thg-ig__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .thg-ig__photo {
+    position: relative;
+    display: block;
+    width: min(100%, 220px);
+    aspect-ratio: 1;
+    margin-bottom: 18px;
+    padding: 6px;
+    border-radius: 50%;
+    background: var(--thg-ring);
+    box-shadow: 0 18px 36px -18px rgb(0 0 0 / 0.6);
+    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .thg-ig__photo img,
+  .thg-ig__placeholder {
+    position: absolute;
+    inset: 6px;
+    display: block;
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    border-radius: 50%;
+    border: 4px solid #fff;
+    object-fit: cover;
+    background: #e9e2cf;
+  }
+
+  .thg-ig__photo:hover,
+  .thg-ig__photo:focus-visible {
+    transform: translateY(-4px) scale(1.03);
+  }
+
+  .thg-ig__photo:focus-visible {
+    outline: 3px solid var(--thg-ink);
+    outline-offset: 4px;
+  }
+
+  .thg-ig__specialty {
+    margin: 0 0 4px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .thg-ig__name {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .thg-ig__name a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .thg-ig__name a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  .thg-ig__social {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .thg-ig__social a {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--thg-ink);
+    color: #fff;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .thg-ig__social a:hover { background: #fff; color: var(--thg-ink); }
+  .thg-ig__social .thg-icon { width: 16px; height: 16px; }
+
+  .thg-ig__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 52px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Instructor grid",
+  "tag": "section",
+  "class": "thg-ig-section",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Label", "default": "Learn from the pros" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Meet Your Instructors" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Proven hunters. Proven tactics. Proven results. Spend four days with the people behind the hunts you watch.</p>" },
+    { "type": "url", "id": "bio_page_url", "label": "Bio page", "info": "Each photo links to that instructor on this page. Leave empty for the Learn from the Pros page." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Read Full Bios" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#DAA520" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#111111" },
+    { "type": "color", "id": "ring_color", "label": "Photo ring", "default": "#E2761C" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "instructor",
+      "name": "Instructor",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo", "info": "Square photos work best. Use the focal point to center the face." },
+        { "type": "text", "id": "name", "label": "Name", "default": "Instructor name" },
+        { "type": "text", "id": "specialty", "label": "Specialty", "default": "Elk" },
+        { "type": "url", "id": "instagram_url", "label": "Instagram" },
+        { "type": "url", "id": "youtube_url", "label": "YouTube" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Instructor grid", "blocks": [{ "type": "instructor" }, { "type": "instructor" }, { "type": "instructor" }, { "type": "instructor" }] }
+  ]
+}
+{% endschema %}

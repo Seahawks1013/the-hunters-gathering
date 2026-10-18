@@ -1,0 +1,252 @@
+{%- comment -%}
+  The Hunter's Gathering: Event Guide download + contact form
+  Left: secondary call to action for people not ready to buy. App blocks
+  (like a Klaviyo sign-up form) can be added here in the theme editor.
+  Right: contact form with name, email, phone and question.
+{%- endcomment -%}
+
+<div
+  id="contact"
+  class="thg-sec thg-lead"
+  style="
+    --thg-bg: {{ section.settings.background_color }};
+    --thg-text: {{ section.settings.text_color }};
+    --thg-pad-top: {{ section.settings.padding_top }}px;
+    --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="thg-wrap thg-lead__layout">
+    <div id="event-guide" class="thg-lead__guide">
+      {%- if section.settings.guide_image != blank -%}
+        <div class="thg-lead__cover">
+          {{ section.settings.guide_image | image_url: width: 700 | image_tag: widths: '300, 500, 700', sizes: '240px', loading: 'lazy', alt: section.settings.guide_heading }}
+        </div>
+      {%- endif -%}
+      <div class="thg-lead__guide-body">
+        {%- if section.settings.guide_tag != blank -%}<p class="thg-tag">{{ section.settings.guide_tag | escape }}</p>{%- endif -%}
+        <h2 class="thg-lead__title">{{ section.settings.guide_heading | escape }}</h2>
+        {%- if section.settings.guide_text != blank -%}<div class="thg-lead__text">{{ section.settings.guide_text }}</div>{%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="thg-lead__apps">
+            {%- for block in section.blocks -%}
+              {%- render block -%}
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          {%- render 'thg-guide-button', tone: 'light' -%}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="thg-lead__contact">
+      {%- if section.settings.contact_tag != blank -%}<p class="thg-tag">{{ section.settings.contact_tag | escape }}</p>{%- endif -%}
+      <h2 class="thg-lead__title">{{ section.settings.contact_heading | escape }}</h2>
+      {%- if section.settings.contact_text != blank -%}<div class="thg-lead__text">{{ section.settings.contact_text }}</div>{%- endif -%}
+
+      {%- form 'contact', id: 'thg-contact-form', class: 'thg-form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="thg-form__success" role="status" tabindex="-1" autofocus>
+            {{ section.settings.success_message | escape }}
+          </p>
+        {%- elsif form.errors -%}
+          <div class="thg-form__error" role="alert">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <input type="hidden" name="contact[source]" value="Home page contact form">
+
+        <div class="thg-form__row">
+          <div class="thg-form__field">
+            <label for="thg-contact-name">Name <span aria-hidden="true">*</span></label>
+            <input id="thg-contact-name" type="text" name="contact[name]" autocomplete="name" required value="{{ form.name }}">
+          </div>
+          <div class="thg-form__field">
+            <label for="thg-contact-phone">Phone</label>
+            <input id="thg-contact-phone" type="tel" name="contact[phone]" autocomplete="tel" value="{{ form.phone }}">
+          </div>
+        </div>
+        <div class="thg-form__field">
+          <label for="thg-contact-email">Email <span aria-hidden="true">*</span></label>
+          <input id="thg-contact-email" type="email" name="contact[email]" autocomplete="email" autocapitalize="off" spellcheck="false" required value="{{ form.email }}">
+        </div>
+        <div class="thg-form__field">
+          <label for="thg-contact-question">What's your question? <span aria-hidden="true">*</span></label>
+          <textarea id="thg-contact-question" name="contact[body]" rows="4" required>{{ form.body }}</textarea>
+        </div>
+        <button type="submit" class="thg-btn thg-btn--reserve thg-btn--full">{{ section.settings.submit_label | escape }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .thg-lead__layout {
+    display: grid;
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  @media screen and (min-width: 990px) {
+    .thg-lead__layout {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      gap: 28px;
+    }
+  }
+
+  .thg-lead__guide,
+  .thg-lead__contact {
+    padding: clamp(26px, 4vw, 44px);
+    border-radius: 8px;
+    box-shadow: 0 30px 60px -36px rgb(0 0 0 / 0.6);
+  }
+
+  .thg-lead__guide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 26px;
+    background: var(--thg-green);
+    color: #fff;
+    --thg-tag-bg: var(--thg-gold);
+    --thg-tag-text: var(--thg-ink);
+  }
+
+  .thg-lead__cover {
+    width: min(220px, 60%);
+    transform: rotate(-3deg);
+    box-shadow: 0 24px 40px -18px rgb(0 0 0 / 0.7);
+  }
+
+  .thg-lead__cover img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .thg-lead__contact {
+    background: #fff;
+    color: var(--thg-ink);
+  }
+
+  .thg-lead__title {
+    margin: 0 0 12px;
+    font-family: var(--font-heading--family);
+    font-size: clamp(26px, 3.2vw, 36px);
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: inherit;
+  }
+
+  .thg-lead__text {
+    margin-bottom: 24px;
+    font-size: 17px;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  .thg-lead__text p { margin: 0 0 0.6em; }
+  .thg-lead__text > :last-child { margin-bottom: 0; }
+
+  /* Form */
+  .thg-form {
+    display: grid;
+    gap: 16px;
+  }
+
+  .thg-form__row {
+    display: grid;
+    gap: 16px;
+  }
+
+  @media screen and (min-width: 600px) {
+    .thg-form__row { grid-template-columns: 1fr 1fr; }
+  }
+
+  .thg-form__field {
+    display: grid;
+    gap: 6px;
+  }
+
+  .thg-form__field label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .thg-form__field input,
+  .thg-form__field textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid rgb(0 0 0 / 0.18);
+    border-radius: 4px;
+    background: #faf8f3;
+    color: var(--thg-ink);
+    font: inherit;
+    font-size: 16px;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .thg-form__field textarea { resize: vertical; min-height: 120px; }
+
+  .thg-form__field input:focus-visible,
+  .thg-form__field textarea:focus-visible {
+    outline: none;
+    border-color: var(--thg-green);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgb(11 74 42 / 0.15);
+  }
+
+  .thg-form__success,
+  .thg-form__error {
+    margin: 0;
+    padding: 14px 16px;
+    border-radius: 4px;
+    font-size: 15px;
+  }
+
+  .thg-form__success {
+    background: rgb(11 74 42 / 0.1);
+    border-left: 4px solid var(--thg-green);
+  }
+
+  .thg-form__error {
+    background: rgb(196 40 40 / 0.08);
+    border-left: 4px solid #c42828;
+  }
+
+  .thg-form__error ul { margin: 0; padding-left: 18px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Event Guide & contact",
+  "tag": "section",
+  "class": "thg-lead-section",
+  "settings": [
+    { "type": "header", "content": "Event Guide" },
+    { "type": "text", "id": "guide_tag", "label": "Label", "default": "Not ready to reserve?" },
+    { "type": "text", "id": "guide_heading", "label": "Heading", "default": "Get the Free 2027 Event Guide" },
+    { "type": "richtext", "id": "guide_text", "label": "Text", "default": "<p>The full schedule, instructor line-up, what to bring and lodging details, all in one download.</p>" },
+    { "type": "image_picker", "id": "guide_image", "label": "Guide cover (optional)" },
+    { "type": "paragraph", "content": "The download button uses the Event Guide link in Theme settings → Event registration. Adding an app block here (like a Klaviyo sign-up form) replaces the button." },
+    { "type": "header", "content": "Contact form" },
+    { "type": "text", "id": "contact_tag", "label": "Label", "default": "Contact us" },
+    { "type": "text", "id": "contact_heading", "label": "Heading", "default": "Drop Us a Line" },
+    { "type": "richtext", "id": "contact_text", "label": "Text", "default": "<p>Questions about lodging, travel or which sessions fit you? We'll get back to you quickly.</p>" },
+    { "type": "text", "id": "submit_label", "label": "Button label", "default": "Send Message" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks! We got your message and will be in touch soon." },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#DAA520" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#111111" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 }
+  ],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "Event Guide & contact" }]
+}
+{% endschema %}

@@ -1,0 +1,333 @@
+{%- comment -%}
+  The Hunter's Gathering: Price, deposit and payment plan
+  Anchor id "reserve" so "#reserve" links land here.
+{%- endcomment -%}
+
+<div
+  id="reserve"
+  class="thg-sec thg-price"
+  style="
+    --thg-bg: {{ section.settings.background_color }};
+    --thg-text: {{ section.settings.text_color }};
+    --thg-pad-top: {{ section.settings.padding_top }}px;
+    --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --thg-tag-bg: var(--thg-gold);
+    --thg-tag-text: var(--thg-ink);
+    --thg-check-bg: var(--thg-gold);
+  "
+>
+  <div class="thg-wrap thg-price__layout">
+    <div class="thg-price__copy">
+      {%- if section.settings.tag != blank -%}<p class="thg-tag">{{ section.settings.tag | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="thg-h2">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="thg-sub thg-price__text">{{ section.settings.text }}</div>{%- endif -%}
+      {%- if section.settings.included != blank -%}
+        <div class="thg-rich-checks thg-price__included">{{ section.settings.included }}</div>
+      {%- endif -%}
+      {%- if section.settings.policy_text != blank -%}
+        <div class="thg-price__policy">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.5 8 11 4.6-1.5 8-6 8-11V5l-8-3zm-1.2 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.9-4.9 1.4 1.4-6.3 6.3z"/></svg>
+          <p>
+            {{ section.settings.policy_text | escape }}
+            {%- if section.settings.policy_link != blank %}
+              <a href="{{ section.settings.policy_link }}">{{ section.settings.policy_link_label | escape }}</a>
+            {%- endif -%}
+          </p>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="thg-price__card">
+      <div class="thg-price__top">
+        <p class="thg-price__label">{{ section.settings.price_label | escape }}</p>
+        <p class="thg-price__amount">{{ section.settings.price | escape }}</p>
+        {%- if section.settings.price_sub != blank -%}
+          <p class="thg-price__sub">{{ section.settings.price_sub | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="thg-price__today">
+        <span>{{ section.settings.today_label | escape }}</span>
+        <strong>{{ section.settings.deposit | escape }}</strong>
+      </div>
+
+      <div class="thg-price__options">
+        <div class="thg-price__option">
+          <p class="thg-price__option-title">{{ section.settings.plan_title | escape }}</p>
+          <p class="thg-price__option-text">{{ section.settings.plan_text | escape }}</p>
+        </div>
+        <div class="thg-price__or" aria-hidden="true"><span>or</span></div>
+        <div class="thg-price__option">
+          <p class="thg-price__option-title">{{ section.settings.full_title | escape }}</p>
+          <p class="thg-price__option-text">{{ section.settings.full_text | escape }}</p>
+        </div>
+      </div>
+
+      {%- if section.settings.discount_text != blank -%}
+        <p class="thg-price__discount">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21.4 11.6 12.4 2.6A2 2 0 0 0 11 2H4a2 2 0 0 0-2 2v7c0 .6.2 1.1.6 1.4l9 9a2 2 0 0 0 2.8 0l7-7a2 2 0 0 0 0-2.8zM6.5 8A1.5 1.5 0 1 1 6.5 5a1.5 1.5 0 0 1 0 3z"/></svg>
+          <span>{{ section.settings.discount_text | escape }}</span>
+        </p>
+      {%- endif -%}
+
+      <div class="thg-price__action">
+        {%- render 'thg-reserve-button', full: true -%}
+        {%- render 'thg-seat-counter', show_bar: true -%}
+      </div>
+
+      {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <ul class="thg-price__pay" role="list" aria-label="Accepted payment methods">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>{{ type | payment_type_svg_tag: class: 'thg-price__pay-icon' }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if section.settings.secure_text != blank -%}
+        <p class="thg-price__secure">{{ section.settings.secure_text | escape }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .thg-price {
+    scroll-margin-top: 80px;
+    background-image: radial-gradient(ellipse at 80% 0%, rgb(218 165 32 / 0.16), transparent 55%), radial-gradient(ellipse at 0% 100%, rgb(11 74 42 / 0.5), transparent 60%);
+    background-color: var(--thg-bg);
+  }
+
+  .thg-price__layout {
+    display: grid;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .thg-price__layout {
+      grid-template-columns: minmax(0, 1fr) minmax(380px, 460px);
+      gap: 72px;
+    }
+  }
+
+  .thg-price__text { margin-left: 0; }
+
+  .thg-price__included {
+    margin-top: 28px;
+    font-size: 17px;
+  }
+
+  .thg-price__included ul { gap: 12px; }
+
+  .thg-price__policy {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-top: 32px;
+    padding: 18px 20px;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    border-radius: 6px;
+    background: rgb(255 255 255 / 0.04);
+  }
+
+  .thg-price__policy svg {
+    flex: none;
+    color: var(--thg-gold);
+    margin-top: 2px;
+  }
+
+  .thg-price__policy p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .thg-price__policy a {
+    color: var(--thg-gold-soft);
+    text-underline-offset: 3px;
+  }
+
+  /* Price card */
+  .thg-price__card {
+    padding: clamp(24px, 4vw, 36px);
+    background: var(--thg-cream);
+    color: var(--thg-ink);
+    border-radius: 8px;
+    border-top: 6px solid var(--thg-gold);
+    box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.8);
+  }
+
+  .thg-price__top { text-align: center; }
+
+  .thg-price__label,
+  .thg-price__option-title {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+  }
+
+  .thg-price__amount {
+    margin: 6px 0 0;
+    font-family: var(--font-heading--family);
+    font-size: clamp(52px, 7vw, 68px);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--thg-green);
+  }
+
+  .thg-price__sub {
+    margin: 8px 0 0;
+    font-size: 15px;
+    opacity: 0.7;
+  }
+
+  .thg-price__today {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 16px;
+    padding: 14px 18px;
+    background: var(--thg-green);
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .thg-price__today strong {
+    font-family: var(--font-heading--family);
+    font-size: 28px;
+    letter-spacing: 0;
+    color: var(--thg-gold-soft);
+  }
+
+  .thg-price__options {
+    display: grid;
+    gap: 10px;
+  }
+
+  .thg-price__option {
+    padding: 14px 16px;
+    border: 1px solid rgb(0 0 0 / 0.12);
+    border-radius: 4px;
+    background: #fff;
+  }
+
+  .thg-price__option-text {
+    margin: 4px 0 0;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .thg-price__or {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+
+  .thg-price__or::before,
+  .thg-price__or::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.4;
+  }
+
+  .thg-price__discount {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin: 18px 0 0;
+    padding: 12px 14px;
+    background: rgb(226 118 28 / 0.1);
+    border-left: 3px solid var(--thg-orange);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .thg-price__discount svg {
+    flex: none;
+    color: var(--thg-orange);
+    margin-top: 1px;
+  }
+
+  .thg-price__card .thg-btn {
+    letter-spacing: 0.07em;
+    padding-inline: 18px;
+  }
+
+  .thg-price__action {
+    display: grid;
+    gap: 14px;
+    margin-top: 22px;
+  }
+
+  .thg-price__action .thg-seats { justify-items: center; }
+
+  .thg-price__pay {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .thg-price__pay-icon {
+    width: 38px;
+    height: 24px;
+  }
+
+  .thg-price__secure {
+    margin: 10px 0 0;
+    font-size: 13px;
+    text-align: center;
+    opacity: 0.6;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Price & payment plan",
+  "tag": "section",
+  "class": "thg-price-section",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Label", "default": "Limited to 100 hunters" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Reserve Your Seat" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Lock in your spot with a $350 deposit today. The rest is split into easy payments before the event.</p>" },
+    { "type": "richtext", "id": "included", "label": "What's included list", "default": "<ul><li>Expert instruction from 8 pros</li><li>Field training sessions</li><li>Lodging in heated cabins</li><li>Family-style meals included</li><li>Hunter Essentials field kit</li></ul>" },
+    { "type": "text", "id": "policy_text", "label": "Reassurance", "default": "Plans change. Your seat is transferable to another hunter." },
+    { "type": "url", "id": "policy_link", "label": "Policy link" },
+    { "type": "text", "id": "policy_link_label", "label": "Policy link label", "default": "Read the policy" },
+    { "type": "header", "content": "Price card" },
+    { "type": "text", "id": "price_label", "label": "Price label", "default": "Full registration" },
+    { "type": "text", "id": "price", "label": "Price", "default": "$1,795" },
+    { "type": "text", "id": "price_sub", "label": "Under price", "default": "Over $5,000 in value" },
+    { "type": "text", "id": "today_label", "label": "Due today label", "default": "Due today" },
+    { "type": "text", "id": "deposit", "label": "Deposit", "default": "$350" },
+    { "type": "text", "id": "plan_title", "label": "Payment plan title", "default": "Payment plan" },
+    { "type": "text", "id": "plan_text", "label": "Payment plan details", "default": "Remaining $1,445 in 3 automatic payments of $481.67. Final payment due March 15, 2027." },
+    { "type": "text", "id": "full_title", "label": "Pay in full title", "default": "Pay in full" },
+    { "type": "text", "id": "full_text", "label": "Pay in full details", "default": "Pay $1,795 today and you're all set." },
+    { "type": "text", "id": "discount_text", "label": "Discount note", "default": "Veterans, active-duty military and family groups save $100 with a code at checkout." },
+    { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true },
+    { "type": "text", "id": "secure_text", "label": "Under payment icons", "default": "Secure checkout · Card, Apple Pay or Google Pay" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#111111" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "presets": [{ "name": "Price & payment plan" }]
+}
+{% endschema %}

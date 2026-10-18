@@ -8,6 +8,93 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "Event registration",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Used by every Reserve button and seat counter on the site, so changes here update everywhere."
+      },
+      {
+        "type": "product",
+        "id": "thg_event_product",
+        "label": "Registration product",
+        "info": "Seats remaining are read from this product's inventory. Turn on inventory tracking and set it to 100."
+      },
+      {
+        "type": "text",
+        "id": "thg_reserve_label",
+        "label": "Reserve button label",
+        "default": "Reserve My Seat — $350 Deposit"
+      },
+      {
+        "type": "url",
+        "id": "thg_reserve_link",
+        "label": "Reserve button link (optional)",
+        "info": "Leave empty to send people to the registration product."
+      },
+      {
+        "type": "header",
+        "content": "Seat counter"
+      },
+      {
+        "type": "checkbox",
+        "id": "thg_show_seats",
+        "label": "Show seats remaining",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "thg_total_seats",
+        "label": "Total seats",
+        "default": 100
+      },
+      {
+        "type": "text",
+        "id": "thg_seats_text",
+        "label": "Seats remaining text",
+        "default": "[remaining] of [total] seats remaining",
+        "info": "[remaining] and [total] are filled in automatically."
+      },
+      {
+        "type": "text",
+        "id": "thg_seats_fallback",
+        "label": "Text before inventory is set up",
+        "default": "Limited to [total] hunters"
+      },
+      {
+        "type": "header",
+        "content": "When sold out"
+      },
+      {
+        "type": "text",
+        "id": "thg_soldout_label",
+        "label": "Sold out button label",
+        "default": "Sold Out — Join the Waitlist"
+      },
+      {
+        "type": "url",
+        "id": "thg_waitlist_link",
+        "label": "Waitlist link"
+      },
+      {
+        "type": "header",
+        "content": "Event Guide"
+      },
+      {
+        "type": "text",
+        "id": "thg_guide_label",
+        "label": "Event Guide button label",
+        "default": "Download the 2027 Event Guide"
+      },
+      {
+        "type": "url",
+        "id": "thg_guide_link",
+        "label": "Event Guide link",
+        "info": "Link to the PDF (upload it under Content → Files) or a sign-up page."
+      }
+    ]
+  },
+  {
     "name": "t:names.logo_and_favicon",
     "settings": [
       {

@@ -1,0 +1,212 @@
+{%- comment -%}
+  The Hunter's Gathering: A day at The Gathering + courses
+  One card per day with that day's sessions. Swipes sideways on phones.
+{%- endcomment -%}
+
+<div
+  class="thg-sec thg-sch"
+  style="
+    --thg-bg: {{ section.settings.background_color }};
+    --thg-text: {{ section.settings.text_color }};
+    --thg-pad-top: {{ section.settings.padding_top }}px;
+    --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --thg-tag-bg: var(--thg-gold);
+    --thg-tag-text: var(--thg-ink);
+  "
+>
+  <div class="thg-wrap">
+    <div class="thg-head">
+      {%- if section.settings.tag != blank -%}<p class="thg-tag">{{ section.settings.tag | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="thg-h2">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="thg-sub">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+
+    <ol class="thg-sch__days" role="list">
+      {%- for block in section.blocks -%}
+        <li class="thg-sch__day" {{ block.shopify_attributes }}>
+          <div class="thg-sch__date">
+            <span class="thg-sch__num">{{ block.settings.date_number | escape }}</span>
+            <span class="thg-sch__weekday">{{ block.settings.weekday | escape }}</span>
+          </div>
+          {%- if block.settings.theme != blank -%}
+            <p class="thg-sch__theme">{{ block.settings.theme | escape }}</p>
+          {%- endif -%}
+          <div class="thg-sch__sessions">{{ block.settings.sessions }}</div>
+        </li>
+      {%- endfor -%}
+    </ol>
+
+    {%- if section.settings.note != blank or section.settings.button_label != blank -%}
+      <div class="thg-sch__foot">
+        {%- if section.settings.note != blank -%}<p class="thg-sch__note">{{ section.settings.note | escape }}</p>{%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a class="thg-btn thg-btn--outline thg-btn--outline-light" href="{{ section.settings.button_link | default: '/pages/your-four-day-experience' }}">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .thg-sch__days {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .thg-sch__day {
+    display: flex;
+    flex-direction: column;
+    padding: 26px 24px 28px;
+    background: #e9e3d6;
+    color: var(--thg-ink);
+    border-radius: 14px;
+    box-shadow: 0 24px 50px -30px rgb(0 0 0 / 0.7);
+  }
+
+  .thg-sch__date {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--thg-green);
+  }
+
+  .thg-sch__num {
+    font-family: var(--font-heading--family);
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 0.9;
+    color: var(--thg-green);
+  }
+
+  .thg-sch__weekday {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .thg-sch__theme {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--thg-orange);
+  }
+
+  .thg-sch__sessions {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .thg-sch__sessions p { margin: 0 0 12px; }
+  .thg-sch__sessions > :last-child { margin-bottom: 0; }
+
+  .thg-sch__sessions strong {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--thg-green);
+  }
+
+  .thg-sch__sessions ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .thg-sch__foot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin-top: 44px;
+    text-align: center;
+  }
+
+  .thg-sch__note {
+    margin: 0;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  @media screen and (max-width: 989px) {
+    .thg-sch__days {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* Phones: swipe through the days */
+  @media screen and (max-width: 749px) {
+    .thg-sch {
+      padding-inline: 0;
+    }
+
+    .thg-sch .thg-head { padding-inline: 16px; }
+
+    .thg-sch__days {
+      display: flex;
+      gap: 12px;
+      padding: 0 16px 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 16px;
+      scrollbar-width: none;
+    }
+
+    .thg-sch__days::-webkit-scrollbar { display: none; }
+
+    .thg-sch__day {
+      flex: 0 0 82%;
+      scroll-snap-align: start;
+    }
+
+    .thg-sch__foot { padding-inline: 16px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Daily schedule",
+  "tag": "section",
+  "class": "thg-sch-section",
+  "max_blocks": 7,
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Label", "default": "April 8–11, 2027" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A Day at The Gathering" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Mornings and afternoons split into Option A and Option B sessions, so you build your own four days around the game you hunt.</p>" },
+    { "type": "text", "id": "note", "label": "Note under the days", "default": "...and more to be announced" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "See the Full Four-Day Experience" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Leave empty for the Your Four-Day Experience page." },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#0B4A2A" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "day",
+      "name": "Day",
+      "settings": [
+        { "type": "text", "id": "date_number", "label": "Date number", "default": "8" },
+        { "type": "text", "id": "weekday", "label": "Weekday", "default": "Thursday" },
+        { "type": "text", "id": "theme", "label": "Theme (optional)" },
+        { "type": "richtext", "id": "sessions", "label": "Sessions", "info": "Use bold for labels like AM Option A.", "default": "<p>Add sessions</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Daily schedule", "blocks": [{ "type": "day" }, { "type": "day" }, { "type": "day" }, { "type": "day" }] }
+  ]
+}
+{% endschema %}

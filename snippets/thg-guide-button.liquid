@@ -1,0 +1,12 @@
+{%- comment -%}
+  Secondary call to action: the 2027 Event Guide download.
+  Usage: {% render 'thg-guide-button', tone: 'dark' %}  tone: dark | light
+{%- endcomment -%}
+{%- liquid
+  assign href = settings.thg_guide_link | default: '#event-guide'
+  assign label = settings.thg_guide_label | default: 'Download the 2027 Event Guide'
+-%}
+<a class="thg-btn thg-btn--outline thg-btn--outline-{{ tone | default: 'dark' }}{% if full %} thg-btn--full{% endif %}" href="{{ href }}"{% if settings.thg_guide_link != blank %} target="_blank" rel="noopener"{% endif %}>
+  <svg class="thg-btn__icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M10 3v10M5.5 8.5 10 13l4.5-4.5M4 17h12"/></svg>
+  <span>{{ label | escape }}</span>
+</a>

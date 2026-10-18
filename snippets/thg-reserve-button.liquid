@@ -1,0 +1,48 @@
+{%- comment -%}
+  The one Reserve button used across the site.
+  Usage: {% render 'thg-reserve-button', variant: 'primary', full: true %}
+  variant: 'primary' (default) or 'light' (for dark backgrounds)
+  Label, link, sold-out and waitlist all come from
+  Theme settings → Event registration.
+{%- endcomment -%}
+{%- liquid
+  assign p = settings.thg_event_product
+  assign sold_out = false
+  if p != blank
+    assign v = p.selected_or_first_available_variant | default: p.variants.first
+    if p.available == false
+      assign sold_out = true
+    elsif v.inventory_management == 'shopify' and v.inventory_policy != 'continue' and v.inventory_quantity <= 0
+      assign sold_out = true
+    endif
+  endif
+
+  if sold_out
+    assign href = settings.thg_waitlist_link | default: '#contact'
+    assign label = settings.thg_soldout_label | default: 'Sold Out — Join the Waitlist'
+  else
+    assign href = settings.thg_reserve_link
+    if href == blank and p != blank
+      assign href = p.url
+    endif
+    if href == blank
+      assign href = '#reserve'
+    endif
+    assign label = settings.thg_reserve_label | default: 'Reserve My Seat — $350 Deposit'
+  endif
+
+  assign classes = 'thg-btn thg-btn--reserve'
+  if variant == 'light'
+    assign classes = classes | append: ' thg-btn--reserve-light'
+  endif
+  if full
+    assign classes = classes | append: ' thg-btn--full'
+  endif
+  if sold_out
+    assign classes = classes | append: ' thg-btn--soldout'
+  endif
+-%}
+<a class="{{ classes }}" href="{{ href }}">
+  <span>{{ label | escape }}</span>
+  <svg class="thg-btn__arrow" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 10h11M11 5l5 5-5 5"/></svg>
+</a>

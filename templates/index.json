@@ -1,282 +1,560 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "hero": {
+      "type": "thg-hero",
+      "settings": {
+        "date_text": "April 8–11, 2027",
+        "headline": "Success Is No Accident",
+        "location": "Yelm, WA",
+        "capacity": "Limited to 100 hunters",
+        "venue": "Cabins, meals & field kit included",
+        "price": "$1,795",
+        "price_note": "Reserve today with a $350 deposit",
+        "desktop_height": "natural",
+        "mobile_image_height": 40,
+        "show_guide_link": true,
+        "guide_link_text": "Not ready yet? Get the free 2027 Event Guide",
+        "sticky_mobile": true,
+        "sticky_note": "$350 deposit · payment plan",
+        "bar_background": "#111111",
+        "bar_text": "#FFFFFF"
+      }
+    },
+    "video": {
+      "type": "thg-video",
+      "settings": {
+        "tag": "Watch",
+        "heading": "Four Days That Will Change the Way You Hunt Forever",
+        "text": "<p>We host this event only once each year. Come for the hunting. Leave with your hunting community.</p>",
+        "show_reserve": true,
+        "background_color": "#0B4A2A",
+        "text_color": "#FFFFFF",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
+    "instructors": {
+      "type": "thg-instructor-grid",
+      "settings": {
+        "tag": "Learn from the pros",
+        "heading": "Meet Your 8 Instructors",
+        "text": "<p>Proven hunters. Proven tactics. Proven results. Spend four days learning directly from the people behind the hunts you watch.</p>",
+        "button_label": "Read Full Bios",
+        "background_color": "#DAA520",
+        "text_color": "#111111",
+        "ring_color": "#E2761C",
+        "padding_top": 88,
+        "padding_bottom": 88
+      },
       "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
+        "instructor_1": {
+          "type": "instructor",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.background }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "name": "Trent Fisher",
+            "specialty": "Elk",
+            "image": "shopify://shop_images/Gritty_Elk_Hunt__Trent_Fisher.png"
+          }
         },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
+        "instructor_2": {
+          "type": "instructor",
           "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-custom",
-            "custom_button_background": "rgba(0, 0, 0, 0)",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "name": "Casey LaVere Butler",
+            "specialty": "Elk",
+            "image": "shopify://shop_images/Elk_Hunt_in_Snowy_Mountains.png"
+          }
+        },
+        "instructor_3": {
+          "type": "instructor",
+          "settings": {
+            "name": "Tom Ryle",
+            "specialty": "Blacktail Deer",
+            "image": "shopify://shop_images/Blacktail_Hunter__Tom_Ryle.png"
+          }
+        },
+        "instructor_4": {
+          "type": "instructor",
+          "settings": {
+            "name": "Dave Riley",
+            "specialty": "Blacktail Deer",
+            "image": "shopify://shop_images/Blacktail_Night__Dave_Riley_Hunting_Poster.png"
+          }
+        },
+        "instructor_5": {
+          "type": "instructor",
+          "settings": {
+            "name": "Heather Aldrich",
+            "specialty": "Bear",
+            "image": "shopify://shop_images/Bear_Hunt__Heather_Aldrich.png"
+          }
+        },
+        "instructor_6": {
+          "type": "instructor",
+          "settings": {
+            "name": "Alex Chaney",
+            "specialty": "Turkey",
+            "image": "shopify://shop_images/Turkey_Hunt__Alex_Chaney.png"
+          }
+        },
+        "instructor_7": {
+          "type": "instructor",
+          "settings": {
+            "name": "Jim Myers",
+            "specialty": "Mountain Lion",
+            "image": "shopify://shop_images/Cougar_in_the_Forest__Jim_Myers.png"
+          }
+        },
+        "instructor_8": {
+          "type": "instructor",
+          "settings": {
+            "name": "To Be Announced",
+            "specialty": "Coming soon"
+          }
         }
       },
       "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
-      ],
-      "name": "t:names.hero",
-      "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
-      }
+        "instructor_1",
+        "instructor_2",
+        "instructor_3",
+        "instructor_4",
+        "instructor_5",
+        "instructor_6",
+        "instructor_7",
+        "instructor_8"
+      ]
     },
-    "product_list_fa6P9H": {
-      "type": "product-list",
+    "included": {
+      "type": "thg-value",
+      "settings": {
+        "tag": "All inclusive",
+        "heading": "What's Included",
+        "text": "<p>Instruction, lodging, meals and gear. Here's exactly where the value comes from.</p>",
+        "receipt_title": "Your four days, itemized",
+        "total_label": "Total value",
+        "total_value": "$5,000+",
+        "price_label": "Your price",
+        "price_value": "$1,795",
+        "kit_title": "The Hunter's Gathering Field Kit",
+        "kit_value": "Over $400 value",
+        "kit_items": "<ul><li>Field-tested products</li><li>Gear the pros trust</li><li>Practical tools to support success</li><li>Products you'll use, not just another swag bag</li></ul>",
+        "background_color": "#FBF6EA",
+        "text_color": "#111111",
+        "padding_top": 88,
+        "padding_bottom": 96
+      },
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
+        "line_item_1": {
+          "type": "line_item",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "button-unstyled",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
+            "title": "Expert instruction",
+            "detail": "Four days of classroom and field sessions with 8 pro instructors",
+            "value": "$XXX"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "line_item_2": {
+          "type": "line_item",
           "settings": {
-            "product_card_gap": 4,
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
+            "title": "Field sessions",
+            "detail": "Hands-on master classes in the woods",
+            "value": "$XXX"
+          }
+        },
+        "line_item_3": {
+          "type": "line_item",
+          "settings": {
+            "title": "Lodging, 3 nights",
+            "detail": "Heated log cabins at Cascades Camp & Conference Center",
+            "value": "$XXX"
+          }
+        },
+        "line_item_4": {
+          "type": "line_item",
+          "settings": {
+            "title": "All meals",
+            "detail": "Family-style meals, Thursday through Sunday",
+            "value": "$XXX"
+          }
+        },
+        "line_item_5": {
+          "type": "line_item",
+          "settings": {
+            "title": "Field kit",
+            "detail": "Hunter Essentials Kit included with every registration",
+            "value": "$400+"
+          }
+        },
+        "line_item_6": {
+          "type": "line_item",
+          "settings": {
+            "title": "Keynote & Meet the Pros",
+            "detail": "Success Is No Accident keynote and direct access to the pros all four days",
+            "value": "$XXX"
+          }
         }
       },
-      "name": "t:names.featured_collection",
+      "block_order": [
+        "line_item_1",
+        "line_item_2",
+        "line_item_3",
+        "line_item_4",
+        "line_item_5",
+        "line_item_6"
+      ]
+    },
+    "schedule": {
+      "type": "thg-schedule",
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "tag": "April 8–11, 2027",
+        "heading": "A Day at The Gathering",
+        "text": "<p>Mornings and afternoons split into Option A and Option B sessions, so you build your own four days around the game you hunt.</p>",
+        "note": "...and more to be announced",
+        "button_label": "See the Full Four-Day Experience",
+        "background_color": "#0B4A2A",
+        "text_color": "#FFFFFF",
+        "padding_top": 88,
+        "padding_bottom": 88
+      },
+      "blocks": {
+        "day_1": {
+          "type": "day",
+          "settings": {
+            "date_number": "8",
+            "weekday": "Thursday",
+            "theme": "Arrival",
+            "sessions": "<p>Arrival & check-in</p><p>Meet the Pros & Success Is No Accident keynote</p><p><strong>Option A</strong>Mastering onX trail cam strategies</p><p><strong>Option B</strong>Field dressing & game processing</p>"
+          }
+        },
+        "day_2": {
+          "type": "day",
+          "settings": {
+            "date_number": "9",
+            "weekday": "Friday",
+            "sessions": "<p><strong>AM Option A</strong>Turkey tactics</p><p><strong>AM Option B</strong>Coyote & bobcat tactics</p><p><strong>PM Option A</strong>Blacktail master class & field session</p><p><strong>PM Option B</strong>Bear master class & field session</p>"
+          }
+        },
+        "day_3": {
+          "type": "day",
+          "settings": {
+            "date_number": "10",
+            "weekday": "Saturday",
+            "sessions": "<p><strong>AM Option A</strong>Elk calling & deer rattling</p><p><strong>AM Option B</strong>Predator calling</p><p><strong>PM Option A</strong>Cougar master class & field session</p><p><strong>PM Option B</strong>Elk master class & field session</p>"
+          }
+        },
+        "day_4": {
+          "type": "day",
+          "settings": {
+            "date_number": "11",
+            "weekday": "Sunday",
+            "theme": "Send-off",
+            "sessions": "<p>Elective sessions with the pros</p><p>Closing session</p><p>Group picture</p>"
+          }
+        }
+      },
+      "block_order": [
+        "day_1",
+        "day_2",
+        "day_3",
+        "day_4"
+      ]
+    },
+    "testimonials": {
+      "type": "thg-testimonials",
+      "settings": {
+        "tag": "From past attendees",
+        "heading": "Success Is No Accident",
+        "show_stars": true,
+        "show_reserve": true,
+        "background_color": "#DAA520",
+        "text_color": "#111111",
+        "padding_top": 88,
+        "padding_bottom": 88
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Short quote from a past attendee goes here. Ask for 2–3 sentences about what they learned or harvested.</p>",
+            "name": "Attendee name",
+            "detail": "2026 attendee"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Short quote from a past attendee goes here. Ask for 2–3 sentences about what they learned or harvested.</p>",
+            "name": "Attendee name",
+            "detail": "2026 attendee"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Short quote from a past attendee goes here. Ask for 2–3 sentences about what they learned or harvested.</p>",
+            "name": "Attendee name",
+            "detail": "2026 attendee"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3"
+      ]
+    },
+    "pricing": {
+      "type": "thg-pricing",
+      "settings": {
+        "tag": "Limited to 100 hunters",
+        "heading": "Reserve Your Seat",
+        "text": "<p>Lock in your spot with a $350 deposit today. The rest is split into automatic payments before the event.</p>",
+        "included": "<ul><li>Expert instruction from 8 pros</li><li>Field training sessions</li><li>Lodging in heated log cabins</li><li>Family-style meals included</li><li>Hunter Essentials field kit</li></ul>",
+        "policy_text": "Plans change. Your seat is transferable to another hunter.",
+        "policy_link_label": "Read the policy",
+        "price_label": "Full registration",
+        "price": "$1,795",
+        "price_sub": "Over $5,000 in value",
+        "today_label": "Due today",
+        "deposit": "$350",
+        "plan_title": "Payment plan",
+        "plan_text": "Remaining $1,445 in 3 automatic payments of $481.67. Final payment due March 15, 2027.",
+        "full_title": "Pay in full",
+        "full_text": "Pay $1,795 today and you're all set.",
+        "discount_text": "Veterans, active-duty military and family groups save $100 with a code at checkout.",
+        "show_payment_icons": true,
+        "secure_text": "Secure checkout · Card, Apple Pay or Google Pay",
+        "background_color": "#111111",
+        "text_color": "#FFFFFF",
+        "padding_top": 96,
+        "padding_bottom": 96
       }
+    },
+    "faq": {
+      "type": "thg-faq",
+      "settings": {
+        "tag": "Good to know",
+        "heading": "Questions & Policies",
+        "text": "<p>Everything you need to know before you reserve.</p>",
+        "open_first": true,
+        "show_policies": true,
+        "policies_title": "Our policies",
+        "contact_text": "Still have a question?",
+        "contact_link_label": "Send us a message",
+        "background_color": "#F1EBDD",
+        "text_color": "#111111",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What's included?",
+            "answer": "<p>Four days of instruction from 8 pro instructors, classroom and field sessions, lodging in heated log cabins, family-style meals, and The Hunter's Gathering field kit (over $400 value).</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "How does the payment plan work, and when is the balance due?",
+            "answer": "<p>Reserve with a $350 deposit today. The remaining $1,445 is split into 3 automatic payments of $481.67, with the final payment due March 15, 2027. You can also pay the full $1,795 at checkout.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "What's your cancellation, refund and transfer policy?",
+            "answer": "<p>[Confirm with Asha] Your seat is transferable to another hunter at any time. Add refund and cancellation terms here once decided.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "What are the cabins and lodging like?",
+            "answer": "<p>You'll stay in heated log cabins at Cascades Camp & Conference Center in Yelm, WA. Cabins are shared with other attendees. [Confirm with Asha] Add how many people per cabin and what bedding is provided.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need to be an experienced hunter?",
+            "answer": "<p>No. Sessions are built for both new and seasoned hunters. Whether you're filling your first tag or chasing a record-class animal, you'll leave with tactics you can use this season.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "What should I bring?",
+            "answer": "<p>[Confirm with Asha] Add the packing list (field clothing, boots, rain gear, notebook, etc.). The full list will also be in the 2027 Event Guide.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "I'm flying in. What's the nearest airport?",
+            "answer": "<p>Seattle-Tacoma International (SEA) is about one hour away. Portland International (PDX) is about two hours away. [Confirm with Asha] Add whether shuttle or carpool options are available.</p>"
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "Can I come by myself?",
+            "answer": "<p>Absolutely. Many hunters come solo and leave with mentors, hunting partners and lifelong friends. Meals, campfires and shared cabins make it easy to meet people.</p>"
+          }
+        },
+        "question_9": {
+          "type": "question",
+          "settings": {
+            "question": "Can my spouse, kids or partner attend?",
+            "answer": "<p>[Confirm with Asha] Add whether guests can attend, any age minimum, and pricing for family groups. Family groups save $100 with a code at checkout.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8",
+        "question_9"
+      ]
+    },
+    "guide_contact": {
+      "type": "thg-guide-contact",
+      "settings": {
+        "guide_tag": "Not ready to reserve?",
+        "guide_heading": "Get the Free 2027 Event Guide",
+        "guide_text": "<p>The full schedule, instructor line-up, what to bring and lodging details, all in one download.</p>",
+        "contact_tag": "Contact us",
+        "contact_heading": "Drop Us a Line",
+        "contact_text": "<p>Questions about lodging, travel or which sessions fit you? We'll get back to you quickly.</p>",
+        "submit_label": "Send Message",
+        "success_message": "Thanks! We got your message and will be in touch soon.",
+        "background_color": "#DAA520",
+        "text_color": "#111111",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
+    "social": {
+      "type": "thg-social",
+      "settings": {
+        "tag": "Stay in the hunt",
+        "heading": "Follow The Hunter's Gathering",
+        "podcast_heading": "Voices of The Hunter's Gathering",
+        "partners_heading": "Our Partners",
+        "background_color": "#111111",
+        "text_color": "#FFFFFF",
+        "padding_top": 88,
+        "padding_bottom": 88
+      },
+      "blocks": {
+        "social_1": {
+          "type": "social",
+          "settings": {
+            "platform": "instagram"
+          }
+        },
+        "social_2": {
+          "type": "social",
+          "settings": {
+            "platform": "facebook"
+          }
+        },
+        "social_3": {
+          "type": "social",
+          "settings": {
+            "platform": "youtube"
+          }
+        },
+        "social_4": {
+          "type": "social",
+          "settings": {
+            "platform": "podcast"
+          }
+        },
+        "podcast_5": {
+          "type": "podcast",
+          "settings": {
+            "host": "Dave Riley",
+            "title": "Success Is No Accident",
+            "description": "<p>Dave Riley, the Blacktail Coach, shares field-tested tactics for hunters on this weekly podcast. Whether you're a seasoned hunter or just getting started, we'll help you turn preparation into achievement and passion into results.</p>"
+          }
+        },
+        "podcast_6": {
+          "type": "podcast",
+          "settings": {
+            "host": "Heather Aldrich",
+            "title": "Bear Hunting with Heather Aldrich",
+            "description": "<p>Join us for an exciting adventure where we explore field-tested tactics that enhance the skills of both novice and experienced hunters, with hunter training and mentorship from Heather.</p>"
+          }
+        },
+        "podcast_7": {
+          "type": "podcast",
+          "settings": {
+            "host": "Alex Chaney",
+            "title": "Talking Turkey with Alex Chaney",
+            "description": "<p>We dig into field-tested turkey tactics every hunter should know, and why mentorship helps new hunters refine their skills.</p>"
+          }
+        },
+        "partner_8": {
+          "type": "partner",
+          "settings": {
+            "name": "Bravo! MFG"
+          }
+        },
+        "partner_9": {
+          "type": "partner",
+          "settings": {
+            "name": "Bonded Outdoors"
+          }
+        },
+        "partner_10": {
+          "type": "partner",
+          "settings": {
+            "name": "Partner"
+          }
+        },
+        "partner_11": {
+          "type": "partner",
+          "settings": {
+            "name": "Phelps"
+          }
+        },
+        "partner_12": {
+          "type": "partner",
+          "settings": {
+            "name": "Born Out"
+          }
+        }
+      },
+      "block_order": [
+        "social_1",
+        "social_2",
+        "social_3",
+        "social_4",
+        "podcast_5",
+        "podcast_6",
+        "podcast_7",
+        "partner_8",
+        "partner_9",
+        "partner_10",
+        "partner_11",
+        "partner_12"
+      ]
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "hero",
+    "video",
+    "instructors",
+    "included",
+    "schedule",
+    "testimonials",
+    "pricing",
+    "faq",
+    "guide_contact",
+    "social"
   ]
 }

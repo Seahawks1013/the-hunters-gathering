@@ -1,0 +1,61 @@
+{%- comment -%}
+  "X of 100 seats remaining", read live from the registration product's
+  inventory (Theme settings → Event registration).
+  Usage: {% render 'thg-seat-counter', show_bar: true, tone: 'light' %}
+  tone: 'dark' text (default) or 'light' text for dark backgrounds
+{%- endcomment -%}
+{%- if settings.thg_show_seats -%}
+{%- liquid
+  assign total = settings.thg_total_seats | default: 100
+  assign p = settings.thg_event_product
+  assign tracked = false
+  assign remaining = total
+  if p != blank
+    assign v = p.selected_or_first_available_variant | default: p.variants.first
+    if v.inventory_management == 'shopify'
+      assign tracked = true
+      assign remaining = v.inventory_quantity
+      if remaining < 0
+        assign remaining = 0
+      endif
+      if p.available == false
+        assign remaining = 0
+      endif
+    endif
+  endif
+
+  if tracked
+    assign text = settings.thg_seats_text | default: '[remaining] of [total] seats remaining'
+  else
+    assign text = settings.thg_seats_fallback | default: 'Limited to [total] hunters'
+  endif
+  assign text = text | replace: '[remaining]', remaining | replace: '[total]', total
+
+  assign taken = total | minus: remaining
+  assign pct = taken | times: 100 | divided_by: total
+  if pct > 100
+    assign pct = 100
+  endif
+  if pct < 3 and tracked
+    assign pct = 3
+  endif
+  assign low = false
+  assign low_mark = total | divided_by: 4
+  if tracked and remaining <= low_mark
+    assign low = true
+  endif
+-%}
+<div class="thg-seats thg-seats--{{ tone | default: 'dark' }}{% if low %} thg-seats--low{% endif %}{% if tracked == false %} thg-seats--static{% endif %}">
+  <p class="thg-seats__text">
+    <span class="thg-seats__dot" aria-hidden="true"></span>
+    {%- if tracked and remaining == 0 -%}
+      Sold out. Join the waitlist.
+    {%- else -%}
+      {{ text | escape }}
+    {%- endif -%}
+  </p>
+  {%- if show_bar and tracked -%}
+    <div class="thg-seats__bar" role="presentation"><span style="width: {{ pct }}%;"></span></div>
+  {%- endif -%}
+</div>
+{%- endif -%}

@@ -1,0 +1,224 @@
+{%- comment -%}
+  The Hunter's Gathering: Sizzle video
+  Shopify-hosted video or a YouTube/Vimeo link. YouTube/Vimeo only load
+  when someone presses play, which keeps the page fast.
+{%- endcomment -%}
+
+{%- liquid
+  assign poster = section.settings.poster
+  assign vurl = section.settings.video_url
+-%}
+
+<div
+  class="thg-sec thg-video"
+  style="
+    --thg-bg: {{ section.settings.background_color }};
+    --thg-text: {{ section.settings.text_color }};
+    --thg-pad-top: {{ section.settings.padding_top }}px;
+    --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --thg-tag-bg: var(--thg-gold);
+    --thg-tag-text: var(--thg-ink);
+  "
+>
+  <div class="thg-wrap">
+    <div class="thg-head">
+      {%- if section.settings.tag != blank -%}<p class="thg-tag">{{ section.settings.tag | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="thg-h2">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="thg-sub">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+
+    <thg-video-player class="thg-video__frame">
+      {%- if section.settings.video != blank -%}
+        {{
+          section.settings.video
+          | video_tag: controls: true, playsinline: true, preload: 'metadata', class: 'thg-video__el', image_size: '1600x'
+        }}
+      {%- elsif vurl != blank -%}
+        {%- liquid
+          if vurl.type == 'youtube'
+            assign embed = 'https://www.youtube-nocookie.com/embed/' | append: vurl.id | append: '?autoplay=1&rel=0&modestbranding=1&playsinline=1'
+          else
+            assign embed = 'https://player.vimeo.com/video/' | append: vurl.id | append: '?autoplay=1&title=0&byline=0'
+          endif
+        -%}
+        <button type="button" class="thg-video__facade" data-embed="{{ embed }}" aria-label="Play video: {{ section.settings.heading | escape }}">
+          {%- if poster != blank -%}
+            {{ poster | image_url: width: 1800 | image_tag: widths: '600, 900, 1200, 1800', sizes: '(min-width: 1240px) 1200px, 100vw', loading: 'lazy', class: 'thg-video__poster', alt: '' }}
+          {%- elsif vurl.type == 'youtube' -%}
+            <img class="thg-video__poster" src="https://i.ytimg.com/vi/{{ vurl.id }}/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720">
+          {%- endif -%}
+          <span class="thg-video__play" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg>
+          </span>
+        </button>
+      {%- else -%}
+        <div class="thg-video__empty">
+          {%- if poster != blank -%}
+            {{ poster | image_url: width: 1800 | image_tag: loading: 'lazy', class: 'thg-video__poster', alt: '' }}
+          {%- endif -%}
+          <span class="thg-video__play" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg>
+          </span>
+          <span class="thg-video__empty-label">Sizzle video (60–90 sec) goes here</span>
+        </div>
+      {%- endif -%}
+    </thg-video-player>
+
+    {%- if section.settings.show_reserve -%}
+      <div class="thg-video__cta">
+        {%- render 'thg-reserve-button', variant: 'light' -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .thg-video__frame {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    max-width: 1100px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #000;
+    box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.75), 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+
+  .thg-video__el,
+  .thg-video__frame iframe,
+  .thg-video__poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+  }
+
+  .thg-video__facade,
+  .thg-video__empty {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: radial-gradient(ellipse at center, #1c3a26, #050d08);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .thg-video__empty { cursor: default; }
+
+  .thg-video__facade::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0) 40%, rgb(0 0 0 / 0.45));
+    transition: background-color 0.3s ease;
+  }
+
+  .thg-video__play {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: var(--thg-gold);
+    color: var(--thg-ink);
+    box-shadow: 0 0 0 10px rgb(218 165 32 / 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .thg-video__play svg { margin-left: 4px; }
+
+  .thg-video__facade:hover .thg-video__play,
+  .thg-video__facade:focus-visible .thg-video__play {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 16px rgb(218 165 32 / 0.2);
+  }
+
+  .thg-video__facade:focus-visible {
+    outline: 3px solid var(--thg-gold);
+    outline-offset: -3px;
+  }
+
+  .thg-video__empty-label {
+    position: absolute;
+    bottom: 22px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .thg-video__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .thg-video__play {
+      width: 68px;
+      height: 68px;
+    }
+
+    .thg-video__frame { border-radius: 4px; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('thg-video-player')) {
+    customElements.define(
+      'thg-video-player',
+      class extends HTMLElement {
+        connectedCallback() {
+          const facade = this.querySelector('.thg-video__facade');
+          if (!facade) return;
+          facade.addEventListener('click', () => {
+            const iframe = document.createElement('iframe');
+            iframe.src = facade.dataset.embed;
+            iframe.title = facade.getAttribute('aria-label') || 'Video';
+            iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            iframe.allowFullscreen = true;
+            facade.replaceWith(iframe);
+            iframe.focus();
+          });
+        }
+      }
+    );
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Sizzle video",
+  "tag": "section",
+  "class": "thg-video-section",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Label", "default": "Watch" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Four Days That Will Change the Way You Hunt Forever" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>We host this event only once each year. Come for the hunting. Leave with your hunting community.</p>" },
+    { "type": "header", "content": "Video" },
+    { "type": "video", "id": "video", "label": "Upload a video", "info": "Or use a YouTube/Vimeo link below." },
+    { "type": "video_url", "id": "video_url", "label": "YouTube or Vimeo link", "accept": ["youtube", "vimeo"] },
+    { "type": "image_picker", "id": "poster", "label": "Cover image (optional)" },
+    { "type": "checkbox", "id": "show_reserve", "label": "Show Reserve button under video", "default": true },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#0B4A2A" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 }
+  ],
+  "presets": [{ "name": "Sizzle video" }]
+}
+{% endschema %}
