@@ -1,0 +1,576 @@
+{%- comment -%}
+  The Hunter's Gathering: Instructors ("Learn from the Pros")
+  Alternating photo + bio rows. Every instructor is a block, so photos,
+  names, bios and social links are all edited in the theme editor.
+{%- endcomment -%}
+
+{%- liquid
+  assign ratio_class = 'thg-pros--ratio-' | append: section.settings.image_ratio
+  assign first_side = section.settings.first_image_side
+-%}
+
+<div
+  id="thg-pros-{{ section.id }}"
+  class="thg-pros {{ ratio_class }} thg-pros--align-{{ section.settings.text_align }}{% if section.settings.show_frame %} thg-pros--framed{% endif %}"
+  style="
+    --thg-bg: {{ section.settings.background_color }};
+    --thg-text: {{ section.settings.text_color }};
+    --thg-accent: {{ section.settings.accent_color }};
+    --thg-label-text: {{ section.settings.label_text_color }};
+    --thg-pad-top: {{ section.settings.padding_top }}px;
+    --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="thg-pros__inner">
+    {%- if section.settings.label != blank or section.settings.intro != blank -%}
+      <header class="thg-pros__header">
+        {%- if section.settings.label != blank -%}
+          <h1 class="thg-pros__label">{{ section.settings.label | escape }}</h1>
+        {%- endif -%}
+        {%- if section.settings.intro != blank -%}
+          <div class="thg-pros__intro">{{ section.settings.intro }}</div>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <div class="thg-pros__list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign image_right = false
+          if first_side == 'right'
+            assign image_right = true
+          endif
+          if section.settings.alternate
+            assign mod = forloop.index0 | modulo: 2
+            if mod == 1
+              if image_right
+                assign image_right = false
+              else
+                assign image_right = true
+              endif
+            endif
+          endif
+
+          assign loading = 'lazy'
+          if forloop.first
+            assign loading = 'eager'
+          endif
+
+          assign name = block.settings.name | default: 'Instructor'
+          assign alt = block.settings.image.alt | default: name
+        -%}
+
+        <article
+          id="{{ name | handleize }}"
+          class="thg-pro{% if image_right %} thg-pro--image-right{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="thg-pro__media">
+            <div class="thg-pro__frame">
+              {%- if block.settings.image != blank -%}
+                {%- capture focal_style -%}object-position: {{ block.settings.image.presentation.focal_point }};{%- endcapture -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 1600
+                  | image_tag:
+                    widths: '400, 600, 800, 1000, 1200, 1600',
+                    sizes: '(min-width: 990px) 46vw, calc(100vw - 32px)',
+                    loading: loading,
+                    alt: alt,
+                    class: 'thg-pro__img',
+                    style: focal_style
+                }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'thg-pro__img thg-pro__placeholder' }}
+              {%- endif -%}
+            </div>
+          </div>
+
+          <div class="thg-pro__content">
+            {%- if block.settings.specialty != blank -%}
+              <p class="thg-pro__specialty">{{ block.settings.specialty | escape }}</p>
+            {%- endif -%}
+
+            <h2 class="thg-pro__name">{{ name | escape }}</h2>
+            <span class="thg-pro__rule" aria-hidden="true"></span>
+
+            {%- if block.settings.bio != blank -%}
+              <div class="thg-pro__bio">{{ block.settings.bio }}</div>
+            {%- endif -%}
+
+            {%- liquid
+              assign has_social = false
+              if block.settings.instagram_url != blank or block.settings.youtube_url != blank or block.settings.facebook_url != blank or block.settings.podcast_url != blank or block.settings.website_url != blank
+                assign has_social = true
+              endif
+            -%}
+            {%- if has_social -%}
+              <ul class="thg-pro__social" role="list">
+                {%- if block.settings.instagram_url != blank -%}
+                  <li>
+                    <a href="{{ block.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="{{ name | escape }} on Instagram">
+                      {%- render 'thg-social-icon', icon: 'instagram' -%}
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if block.settings.youtube_url != blank -%}
+                  <li>
+                    <a href="{{ block.settings.youtube_url }}" target="_blank" rel="noopener" aria-label="{{ name | escape }} on YouTube">
+                      {%- render 'thg-social-icon', icon: 'youtube' -%}
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if block.settings.facebook_url != blank -%}
+                  <li>
+                    <a href="{{ block.settings.facebook_url }}" target="_blank" rel="noopener" aria-label="{{ name | escape }} on Facebook">
+                      {%- render 'thg-social-icon', icon: 'facebook' -%}
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if block.settings.podcast_url != blank -%}
+                  <li>
+                    <a href="{{ block.settings.podcast_url }}" target="_blank" rel="noopener" aria-label="{{ name | escape }}'s podcast">
+                      {%- render 'thg-social-icon', icon: 'podcast' -%}
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if block.settings.website_url != blank -%}
+                  <li>
+                    <a href="{{ block.settings.website_url }}" target="_blank" rel="noopener" aria-label="{{ name | escape }}'s website">
+                      {%- render 'thg-social-icon', icon: 'website' -%}
+                    </a>
+                  </li>
+                {%- endif -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .thg-pros {
+    background: var(--thg-bg);
+    color: var(--thg-text);
+    padding: var(--thg-pad-top) 16px var(--thg-pad-bottom);
+  }
+
+  .thg-pros__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  /* Page label: the black tag from the original site */
+  .thg-pros__header {
+    text-align: center;
+    margin-bottom: clamp(40px, 6vw, 72px);
+  }
+
+  .thg-pros__label {
+    display: inline-block;
+    margin: 0;
+    padding: 10px 22px 9px;
+    background: var(--thg-accent);
+    color: var(--thg-label-text);
+    font-family: var(--font-body--family);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .thg-pros__intro {
+    max-width: 640px;
+    margin: 20px auto 0;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .thg-pros__intro > :first-child { margin-top: 0; }
+  .thg-pros__intro > :last-child { margin-bottom: 0; }
+
+  .thg-pros__list {
+    display: grid;
+    gap: clamp(56px, 8vw, 112px);
+  }
+
+  /* One instructor row */
+  .thg-pro {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: center;
+    scroll-margin-top: 96px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .thg-pro {
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 88px);
+    }
+
+    .thg-pro--image-right .thg-pro__media {
+      order: 2;
+    }
+  }
+
+  /* Photo */
+  .thg-pro__media {
+    position: relative;
+  }
+
+  .thg-pro__frame {
+    position: relative;
+    overflow: hidden;
+    background: rgb(0 0 0 / 0.08);
+    box-shadow: 0 18px 40px -18px rgb(0 0 0 / 0.45);
+  }
+
+  .thg-pros--ratio-portrait .thg-pro__frame { aspect-ratio: 4 / 5; }
+  .thg-pros--ratio-square .thg-pro__frame { aspect-ratio: 1 / 1; }
+  .thg-pros--ratio-landscape .thg-pro__frame { aspect-ratio: 4 / 3; }
+
+  .thg-pro__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.8s cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+
+  .thg-pros--ratio-portrait .thg-pro__img,
+  .thg-pros--ratio-square .thg-pro__img,
+  .thg-pros--ratio-landscape .thg-pro__img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .thg-pro__placeholder {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    opacity: 0.35;
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .thg-pro:hover .thg-pro__img {
+      transform: scale(1.03);
+    }
+  }
+
+  /* Offset outline: a matted, framed-print look */
+  .thg-pros--framed .thg-pro__media::before {
+    content: '';
+    position: absolute;
+    inset: 14px -14px -14px 14px;
+    border: 1px solid var(--thg-accent);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .thg-pros--framed .thg-pro--image-right .thg-pro__media::before {
+    inset: 14px 14px -14px -14px;
+  }
+
+  .thg-pros--framed .thg-pro__frame {
+    z-index: 1;
+  }
+
+  /* Text */
+  .thg-pro__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .thg-pros--align-left .thg-pro__content {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .thg-pro__specialty {
+    margin: 0 0 10px;
+    font-family: var(--font-body--family);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .thg-pro__name {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: var(--font-heading--weight, 500);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: inherit;
+  }
+
+  .thg-pro__rule {
+    display: block;
+    width: 64px;
+    height: 2px;
+    margin: 18px 0 22px;
+    background: var(--thg-accent);
+  }
+
+  .thg-pro__bio {
+    max-width: 58ch;
+    font-family: var(--font-body--family);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .thg-pro__bio p {
+    margin: 0 0 1em;
+  }
+
+  .thg-pro__bio > :last-child {
+    margin-bottom: 0;
+  }
+
+  .thg-pro__bio a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Social links */
+  .thg-pro__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .thg-pro__social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid var(--thg-accent);
+    border-radius: 50%;
+    color: var(--thg-accent);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .thg-pro__social a:hover,
+  .thg-pro__social a:focus-visible {
+    background: var(--thg-accent);
+    color: var(--thg-bg);
+  }
+
+  .thg-pro__social a:focus-visible {
+    outline: 2px solid var(--thg-accent);
+    outline-offset: 3px;
+  }
+
+  .thg-pro__social .thg-icon {
+    width: 18px;
+    height: 18px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Instructors",
+  "tag": "section",
+  "class": "thg-pros-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Page label",
+      "default": "Learn from the Pros"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro text (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Photo shape",
+      "options": [
+        { "value": "portrait", "label": "Portrait (4:5)" },
+        { "value": "square", "label": "Square" },
+        { "value": "landscape", "label": "Landscape (4:3)" },
+        { "value": "original", "label": "Original photo shape" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "select",
+      "id": "first_image_side",
+      "label": "First photo side",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "alternate",
+      "label": "Alternate photo sides",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_frame",
+      "label": "Show offset frame behind photos",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#DAA520"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (label, lines, icons)",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "label_text_color",
+      "label": "Label text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "instructor",
+      "name": "Instructor",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Use the focal point tool to keep faces in frame."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Instructor name"
+        },
+        {
+          "type": "text",
+          "id": "specialty",
+          "label": "Specialty",
+          "info": "Small line above the name, e.g. Elk or Blacktail Deer."
+        },
+        {
+          "type": "richtext",
+          "id": "bio",
+          "label": "Bio",
+          "default": "<p>Add this instructor's bio.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Social links"
+        },
+        {
+          "type": "url",
+          "id": "instagram_url",
+          "label": "Instagram"
+        },
+        {
+          "type": "url",
+          "id": "youtube_url",
+          "label": "YouTube"
+        },
+        {
+          "type": "url",
+          "id": "facebook_url",
+          "label": "Facebook"
+        },
+        {
+          "type": "url",
+          "id": "podcast_url",
+          "label": "Podcast"
+        },
+        {
+          "type": "url",
+          "id": "website_url",
+          "label": "Website"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instructors",
+      "blocks": [
+        { "type": "instructor" },
+        { "type": "instructor" },
+        { "type": "instructor" }
+      ]
+    }
+  ]
+}
+{% endschema %}
