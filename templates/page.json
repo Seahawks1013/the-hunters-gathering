@@ -12,50 +12,95 @@
     "main": {
       "type": "main-page",
       "blocks": {
-        "heading": {
-          "type": "text",
-          "name": "t:names.title",
-          "settings": {
-            "text": "<h1>{{ closest.page.title }}</h1>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "page-content": {
           "type": "page-content",
-          "settings": {},
+          "disabled": true,
+          "settings": {
+            "text_color": ""
+          },
           "blocks": {}
         }
       },
       "block_order": [
-        "heading",
         "page-content"
       ],
+      "disabled": true,
       "settings": {
         "content_direction": "column",
         "gap": 32,
+        "background_color": "",
         "padding-block-start": 40,
         "padding-block-end": 80
+      }
+    },
+    "thg_instructors_ajPkcd": {
+      "type": "thg-instructors",
+      "blocks": {
+        "instructor_B6yDAk": {
+          "type": "instructor",
+          "settings": {
+            "name": "Trent Fisher",
+            "specialty": "",
+            "bio": "<p>&nbsp;For as long as I can remember, the outdoors has been my home. I’ve spent &nbsp;a lifetime chasing elk across the mountains, learning through trial, &nbsp;error, and a deep passion for the hunt. That passion led to building a &nbsp;call company dedicated to helping others experience the same excitement &nbsp;and connection that calling elk brings.<br/></p><p>Our hunting camp was born &nbsp;from that same drive, to share what I’ve learned, the mistakes I’ve &nbsp;made, and the lessons that only time in the woods can teach. Over the &nbsp;years, my family, my faith, and my brothers in the outdoors have been &nbsp;the foundation of everything we do. Together, we’ve filmed hundreds of &nbsp;hunts for our YouTube channel, giving people an honest look at the highs &nbsp;and lows that come with a life spent in pursuit of elk.<br/></p><p>This &nbsp;spring, I want to bring that same authenticity to camp. My goal is &nbsp;simple: to help hunters narrow the learning curve, gain confidence in &nbsp;the woods, and experience the kind of hunts that change you, not just &nbsp;as a hunter, but as a person.&nbsp;</p>",
+            "instagram_url": "",
+            "youtube_url": "",
+            "facebook_url": "",
+            "podcast_url": "",
+            "website_url": ""
+          }
+        },
+        "instructor_tV7VHg": {
+          "type": "instructor",
+          "settings": {
+            "name": "Instructor name",
+            "specialty": "",
+            "bio": "<p>Add this instructor's bio.</p>",
+            "instagram_url": "",
+            "youtube_url": "",
+            "facebook_url": "",
+            "podcast_url": "",
+            "website_url": ""
+          }
+        },
+        "instructor_Ckr3X9": {
+          "type": "instructor",
+          "settings": {
+            "name": "Instructor name",
+            "specialty": "",
+            "bio": "<p>Add this instructor's bio.</p>",
+            "instagram_url": "",
+            "youtube_url": "",
+            "facebook_url": "",
+            "podcast_url": "",
+            "website_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "instructor_B6yDAk",
+        "instructor_tV7VHg",
+        "instructor_Ckr3X9"
+      ],
+      "name": "Instructors",
+      "settings": {
+        "label": "Learn from the Pros",
+        "intro": "",
+        "image_ratio": "portrait",
+        "first_image_side": "left",
+        "alternate": true,
+        "text_align": "center",
+        "show_frame": true,
+        "background_color": "#DAA520",
+        "text_color": "#1A1A1A",
+        "accent_color": "#111111",
+        "label_text_color": "#FFFFFF",
+        "padding_top": 64,
+        "padding_bottom": 96
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "thg_instructors_ajPkcd"
   ]
 }
