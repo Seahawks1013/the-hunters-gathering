@@ -1,0 +1,236 @@
+{%- comment -%}
+  The Hunter's Gathering: Date banner + image
+  Gold background, black date badge on top, one large image below
+  (used for the event schedule graphic on "Your Four-Day Experience").
+  If no image is picked in the editor, it falls back to the schedule
+  graphic stored in the theme's assets.
+{%- endcomment -%}
+
+<div
+  class="thg-dbi"
+  style="
+    --thg-bg: {{ section.settings.background_color }};
+    --thg-badge-bg: {{ section.settings.badge_background }};
+    --thg-badge-text: {{ section.settings.badge_text_color }};
+    --thg-max: {{ section.settings.image_max_width }}px;
+    --thg-pad-top: {{ section.settings.padding_top }}px;
+    --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="thg-dbi__inner">
+    {%- if section.settings.badge_text != blank -%}
+      <h1 class="thg-dbi__badge">{{ section.settings.badge_text | escape }}</h1>
+    {%- endif -%}
+
+    {%- liquid
+      assign alt = section.settings.image_alt | default: section.settings.badge_text | default: 'Event schedule'
+    -%}
+
+    {%- if section.settings.image != blank or section.settings.use_default_image -%}
+      <figure class="thg-dbi__figure">
+        {%- if section.settings.link_to_full_size -%}
+          {%- if section.settings.image != blank -%}
+            {%- assign full_url = section.settings.image | image_url: width: 3000 -%}
+          {%- else -%}
+            {%- assign full_url = 'thg-event-schedule-2027.webp' | asset_url -%}
+          {%- endif -%}
+          <a class="thg-dbi__link" href="{{ full_url }}" target="_blank" rel="noopener">
+        {%- endif -%}
+
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 2400
+            | image_tag:
+              widths: '600, 900, 1200, 1600, 2000, 2400',
+              sizes: '(min-width: 1440px) 1360px, calc(100vw - 32px)',
+              loading: 'eager',
+              alt: alt,
+              class: 'thg-dbi__img'
+          }}
+        {%- else -%}
+          <img
+            class="thg-dbi__img"
+            src="{{ 'thg-event-schedule-2027.webp' | asset_url }}"
+            width="2480"
+            height="3307"
+            alt="{{ alt | escape }}"
+            loading="eager"
+            fetchpriority="high"
+          >
+        {%- endif -%}
+
+        {%- if section.settings.link_to_full_size -%}
+          </a>
+        {%- endif -%}
+      </figure>
+    {%- endif -%}
+
+    {%- if section.settings.caption != blank -%}
+      <div class="thg-dbi__caption">{{ section.settings.caption }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .thg-dbi {
+    background: var(--thg-bg);
+    padding: var(--thg-pad-top) 16px var(--thg-pad-bottom);
+  }
+
+  .thg-dbi__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: var(--thg-max);
+    margin: 0 auto;
+  }
+
+  .thg-dbi__badge {
+    display: inline-block;
+    margin: 0 0 clamp(28px, 4vw, 48px);
+    padding: 0.18em 0.6em 0.14em;
+    background: var(--thg-badge-bg);
+    color: var(--thg-badge-text);
+    font-family: var(--font-heading--family);
+    font-size: clamp(26px, 4.2vw, 44px);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .thg-dbi__figure {
+    width: 100%;
+    margin: 0;
+  }
+
+  .thg-dbi__link {
+    display: block;
+  }
+
+  .thg-dbi__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 24px 48px -24px rgb(0 0 0 / 0.5);
+  }
+
+  .thg-dbi__caption {
+    max-width: 640px;
+    margin-top: 24px;
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Date banner + image",
+  "tag": "section",
+  "class": "thg-dbi-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Date badge",
+      "default": "APRIL 8–11, 2027"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Leave empty to show the built-in 2027 event schedule graphic."
+    },
+    {
+      "type": "checkbox",
+      "id": "use_default_image",
+      "label": "Show built-in schedule graphic when no image is picked",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image description (for screen readers)",
+      "default": "2027 PNW Hunters Gathering event schedule, April 8 to 11"
+    },
+    {
+      "type": "checkbox",
+      "id": "link_to_full_size",
+      "label": "Open full-size image when clicked",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "caption",
+      "label": "Text below image (optional)"
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "label": "Max width",
+      "min": 600,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "default": 1360
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#DAA520"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#DAA520"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Date banner + image"
+    }
+  ]
+}
+{% endschema %}
