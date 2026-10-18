@@ -1,0 +1,846 @@
+{%- comment -%}
+  The Hunter's Gathering: Photo gallery
+  - Each photo is a block. Photos are grouped into rows ("Photos per row").
+  - Justified layout: every row fills the full width and photos keep their
+    own shape, so a row of 4 or a row of 3 always lines up edge to edge.
+  - Only the first rows show; "Show more" reveals more rows at a time.
+  - Clicking a photo opens a full-screen viewer with counter, arrows,
+    keyboard, swipe and a slide animation.
+{%- endcomment -%}
+
+{%- liquid
+  assign per_row = section.settings.per_row | plus: 0
+  assign initial_rows = section.settings.initial_rows | plus: 0
+  assign total = section.blocks.size
+  assign total_rows = total | plus: per_row | minus: 1 | divided_by: per_row
+  assign last_col = per_row | minus: 1
+  assign has_more = false
+  if total_rows > initial_rows
+    assign has_more = true
+  endif
+-%}
+
+<thg-gallery
+  class="thg-gal thg-gal--{{ section.settings.layout }}"
+  data-step="{{ section.settings.rows_per_click }}"
+  style="
+    --thg-bg: {{ section.settings.background_color }};
+    --thg-text: {{ section.settings.text_color }};
+    --thg-gap: {{ section.settings.gap }}px;
+    --thg-cols: {{ per_row }};
+    --thg-tile-ratio: {{ section.settings.tile_ratio }};
+    --thg-pad-top: {{ section.settings.padding_top }}px;
+    --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="thg-gal__inner{% if section.settings.full_width %} thg-gal__inner--full{% endif %}">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="thg-gal__heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    <div class="thg-gal__rows">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign col = forloop.index0 | modulo: per_row
+          assign row_index = forloop.index0 | divided_by: per_row
+          assign img = block.settings.image
+          assign ratio = 1.333
+          if img != blank
+            assign ratio = img.aspect_ratio | default: 1.333
+          endif
+          assign alt = img.alt | default: block.settings.caption | default: section.settings.heading | default: 'The Hunter’s Gathering photo'
+        -%}
+
+        {%- if col == 0 -%}
+          <div class="thg-gal__row" data-row="{{ row_index }}"{% if row_index >= initial_rows %} hidden{% endif %}>
+        {%- endif -%}
+
+        <button
+          type="button"
+          class="thg-gal__tile"
+          style="--r: {{ ratio }};"
+          data-index="{{ forloop.index0 }}"
+          aria-label="Open photo {{ forloop.index }} of {{ total }}"
+          {% if img != blank %}
+            data-full="{{ img | image_url: width: 2400 }}"
+            data-thumb="{{ img | image_url: width: 400 }}"
+            data-w="{{ img.width }}"
+            data-h="{{ img.height }}"
+          {% endif %}
+          data-alt="{{ alt | escape }}"
+          data-caption="{{ block.settings.caption | escape }}"
+          {{ block.shopify_attributes }}
+        >
+          {%- if img != blank -%}
+            {%- capture focal -%}object-position: {{ img.presentation.focal_point }};{%- endcapture -%}
+            {%- capture sizes -%}(min-width: 750px) calc(100vw / {{ per_row }}), 50vw{%- endcapture -%}
+            {{
+              img
+              | image_url: width: 1400
+              | image_tag:
+                widths: '300, 450, 600, 800, 1000, 1400',
+                sizes: sizes,
+                loading: 'lazy',
+                alt: alt,
+                class: 'thg-gal__img',
+                style: focal
+            }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'thg-gal__img thg-gal__placeholder' }}
+          {%- endif -%}
+          <span class="thg-gal__zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg>
+          </span>
+        </button>
+
+        {%- if col == last_col or forloop.last -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.blocks.size == 0 -%}
+      <p class="thg-gal__empty">Add photos to this gallery in the theme editor.</p>
+    {%- endif -%}
+
+    {%- if has_more -%}
+      <div class="thg-gal__more-wrap">
+        <button type="button" class="thg-gal__more">
+          <span aria-hidden="true">+</span> {{ section.settings.more_label | escape }}
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <dialog class="thg-lb" aria-label="Photo viewer">
+    <div class="thg-lb__bg" aria-hidden="true"><img alt="" width="1600" height="1200"></div>
+    <div class="thg-lb__progress" aria-hidden="true"><span></span></div>
+
+    <div class="thg-lb__top">
+      <p class="thg-lb__count" aria-live="polite"></p>
+      <button type="button" class="thg-lb__close" aria-label="Close">
+        <svg viewBox="0 0 24 24" width="26" height="26"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+
+    <div class="thg-lb__stage">
+      <figure class="thg-lb__figure">
+        <img class="thg-lb__img" alt="" width="1600" height="1200">
+        <figcaption class="thg-lb__caption"></figcaption>
+      </figure>
+    </div>
+
+    <button type="button" class="thg-lb__nav thg-lb__nav--prev" aria-label="Previous photo">
+      <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M15.5 4.5 7 12l8.5 7.5z"/></svg>
+    </button>
+    <button type="button" class="thg-lb__nav thg-lb__nav--next" aria-label="Next photo">
+      <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M8.5 4.5 17 12l-8.5 7.5z"/></svg>
+    </button>
+  </dialog>
+</thg-gallery>
+
+{% stylesheet %}
+  .thg-gal {
+    display: block;
+    background: var(--thg-bg);
+    color: var(--thg-text);
+    padding: var(--thg-pad-top) 0 var(--thg-pad-bottom);
+  }
+
+  .thg-gal__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .thg-gal__inner--full {
+    max-width: none;
+    padding: 0;
+  }
+
+  .thg-gal__heading {
+    margin: 0 0 32px;
+    text-align: center;
+    font-family: var(--font-heading--family);
+    font-size: clamp(26px, 3.4vw, 40px);
+    color: inherit;
+  }
+
+  .thg-gal__rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--thg-gap);
+  }
+
+  .thg-gal__row {
+    display: flex;
+    gap: var(--thg-gap);
+  }
+
+  .thg-gal__row[hidden] {
+    display: none !important;
+  }
+
+  .thg-gal__row.is-revealing .thg-gal__tile {
+    animation: thg-gal-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  @keyframes thg-gal-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* Tile */
+  .thg-gal__tile {
+    position: relative;
+    display: block;
+    flex: var(--r) 1 0%;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: rgb(0 0 0 / 0.12);
+    overflow: hidden;
+    cursor: zoom-in;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .thg-gal__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--r);
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1), filter 0.4s ease;
+  }
+
+  .thg-gal__placeholder {
+    fill: currentColor;
+    opacity: 0.35;
+  }
+
+  .thg-gal__zoom {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgb(0 0 0 / 0.55);
+    color: #fff;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  @media (hover: hover) {
+    .thg-gal__tile:hover .thg-gal__img {
+      transform: scale(1.05);
+      filter: brightness(1.06);
+    }
+
+    .thg-gal__tile:hover .thg-gal__zoom {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .thg-gal__tile:focus-visible {
+    outline: 3px solid var(--thg-text);
+    outline-offset: 2px;
+    z-index: 1;
+  }
+
+  /* Uniform grid layout: every photo cropped to the same shape */
+  .thg-gal--grid .thg-gal__rows {
+    display: grid;
+    grid-template-columns: repeat(var(--thg-cols), minmax(0, 1fr));
+  }
+
+  .thg-gal--grid .thg-gal__row {
+    display: contents;
+  }
+
+  .thg-gal--grid .thg-gal__img {
+    aspect-ratio: var(--thg-tile-ratio);
+  }
+
+  /* Phones: two even columns so photos stay a good size */
+  @media screen and (max-width: 749px) {
+    .thg-gal__rows,
+    .thg-gal--grid .thg-gal__rows {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .thg-gal__row {
+      display: contents;
+    }
+
+    .thg-gal__img,
+    .thg-gal--grid .thg-gal__img {
+      aspect-ratio: 1;
+    }
+  }
+
+  /* Show more */
+  .thg-gal__more-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px 0;
+  }
+
+  .thg-gal__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 30px;
+    border: 1.5px solid currentColor;
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    font-family: var(--font-body--family);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  .thg-gal__more span {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .thg-gal__more:hover,
+  .thg-gal__more:focus-visible {
+    background: var(--thg-text);
+    color: var(--thg-bg);
+  }
+
+  .thg-gal__empty {
+    text-align: center;
+    opacity: 0.7;
+  }
+
+  /* Lightbox */
+  .thg-lb {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #0d0c0a;
+    color: #fff;
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
+
+  .thg-lb::backdrop {
+    background: #0d0c0a;
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
+
+  .thg-lb[open] {
+    animation: thg-lb-open 0.35s ease both;
+  }
+
+  @keyframes thg-lb-open {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .thg-lb__bg {
+    position: absolute;
+    inset: -10%;
+    pointer-events: none;
+  }
+
+  .thg-lb__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(60px) saturate(1.2);
+    opacity: 0.5;
+    transform: scale(1.1);
+    transition: opacity 0.5s ease;
+  }
+
+  .thg-lb__bg.is-fading img {
+    opacity: 0;
+  }
+
+  .thg-lb__progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgb(255 255 255 / 0.12);
+    z-index: 3;
+  }
+
+  .thg-lb__progress span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: #daa520;
+    transition: width 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .thg-lb__top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px clamp(16px, 4vw, 48px);
+    z-index: 3;
+  }
+
+  .thg-lb__count {
+    margin: 0;
+    font-family: var(--font-body--family);
+    font-size: 17px;
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .thg-lb__close,
+  .thg-lb__nav {
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .thg-lb__close {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    color: #fff;
+    opacity: 0.85;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .thg-lb__close:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+  }
+
+  .thg-lb__stage {
+    position: absolute;
+    inset: 76px clamp(16px, 8vw, 120px) 56px;
+    display: grid;
+    place-items: center;
+    touch-action: pan-y;
+    z-index: 2;
+  }
+
+  .thg-lb__figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .thg-lb__img {
+    display: block;
+    max-width: 100%;
+    max-height: calc(100dvh - 160px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.7);
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .thg-lb__caption {
+    margin-top: 14px;
+    font-size: 15px;
+    text-align: center;
+    opacity: 0.85;
+  }
+
+  .thg-lb__caption:empty {
+    display: none;
+  }
+
+  .thg-lb__nav {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    border-radius: 50%;
+    background: #fff;
+    color: #111;
+    box-shadow: 0 6px 20px rgb(0 0 0 / 0.35);
+    z-index: 3;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .thg-lb__nav:hover {
+    transform: scale(1.08);
+  }
+
+  .thg-lb__nav--prev { left: clamp(10px, 3vw, 40px); }
+  .thg-lb__nav--next { right: clamp(10px, 3vw, 40px); }
+
+  .thg-lb__close:focus-visible,
+  .thg-lb__nav:focus-visible {
+    outline: 2px solid #daa520;
+    outline-offset: 3px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .thg-lb__stage {
+      inset: 70px 0 90px;
+    }
+
+    .thg-lb__img {
+      max-height: calc(100dvh - 180px);
+    }
+
+    .thg-lb__nav {
+      top: auto;
+      bottom: 22px;
+      margin-top: 0;
+      width: 46px;
+      height: 46px;
+    }
+
+    .thg-lb__nav--prev { left: calc(50% - 60px); }
+    .thg-lb__nav--next { right: calc(50% - 60px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .thg-gal__img,
+    .thg-lb__progress span,
+    .thg-lb__bg img {
+      transition: none;
+    }
+
+    .thg-gal__row.is-revealing .thg-gal__tile,
+    .thg-lb[open] {
+      animation: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('thg-gallery')) {
+    class ThgGallery extends HTMLElement {
+      connectedCallback() {
+        this.tiles = Array.from(this.querySelectorAll('.thg-gal__tile'));
+        this.dialog = this.querySelector('.thg-lb');
+        this.img = this.querySelector('.thg-lb__img');
+        this.caption = this.querySelector('.thg-lb__caption');
+        this.count = this.querySelector('.thg-lb__count');
+        this.bg = this.querySelector('.thg-lb__bg');
+        this.bgImg = this.bg.querySelector('img');
+        this.bar = this.querySelector('.thg-lb__progress span');
+        this.more = this.querySelector('.thg-gal__more');
+        this.index = 0;
+        this.busy = false;
+        this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        this.tiles.forEach((tile) => {
+          tile.addEventListener('click', () => this.open(Number(tile.dataset.index)));
+        });
+
+        if (this.more) this.more.addEventListener('click', () => this.showMore());
+
+        this.querySelector('.thg-lb__close').addEventListener('click', () => this.dialog.close());
+        this.querySelector('.thg-lb__nav--prev').addEventListener('click', () => this.go(-1));
+        this.querySelector('.thg-lb__nav--next').addEventListener('click', () => this.go(1));
+
+        // Click on empty space around the photo closes the viewer
+        const stage = this.querySelector('.thg-lb__stage');
+        stage.addEventListener('click', (e) => {
+          if (e.target === stage || e.target.classList.contains('thg-lb__figure')) this.dialog.close();
+        });
+
+        // Swipe left / right on touch screens
+        let startX = null;
+        let startY = null;
+        stage.addEventListener('pointerdown', (e) => {
+          startX = e.clientX;
+          startY = e.clientY;
+        });
+        stage.addEventListener('pointerup', (e) => {
+          if (startX === null) return;
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+          startX = null;
+          if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) this.go(dx < 0 ? 1 : -1);
+        });
+
+        this.dialog.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') { e.preventDefault(); this.go(1); }
+          if (e.key === 'ArrowLeft') { e.preventDefault(); this.go(-1); }
+        });
+
+        this.dialog.addEventListener('close', () => {
+          const tile = this.tiles[this.index];
+          if (tile && !tile.closest('[hidden]')) tile.focus({ preventScroll: true });
+        });
+      }
+
+      showMore() {
+        const step = Number(this.dataset.step) || 1;
+        const hidden = Array.from(this.querySelectorAll('.thg-gal__row[hidden]')).slice(0, step);
+        hidden.forEach((row) => {
+          row.hidden = false;
+          row.classList.add('is-revealing');
+          row.addEventListener('animationend', () => row.classList.remove('is-revealing'), { once: true });
+        });
+        if (!this.querySelector('.thg-gal__row[hidden]')) this.more.parentElement.remove();
+      }
+
+      open(index) {
+        if (!this.tiles.length) return;
+        this.render(index);
+        this.dialog.showModal();
+        this.querySelector('.thg-lb__close').focus();
+      }
+
+      render(index) {
+        const total = this.tiles.length;
+        this.index = (index + total) % total;
+        const tile = this.tiles[this.index];
+        const src = tile.dataset.full || '';
+
+        this.img.src = src;
+        this.img.alt = tile.dataset.alt || '';
+        if (tile.dataset.w) {
+          this.img.width = Number(tile.dataset.w);
+          this.img.height = Number(tile.dataset.h);
+        }
+        this.caption.textContent = tile.dataset.caption || '';
+        this.count.textContent = (this.index + 1) + ' / ' + total;
+        this.bar.style.width = ((this.index + 1) / total) * 100 + '%';
+
+        this.bg.classList.add('is-fading');
+        const thumb = tile.dataset.thumb || src;
+        setTimeout(() => {
+          this.bgImg.src = thumb;
+          this.bg.classList.remove('is-fading');
+        }, this.reduce ? 0 : 250);
+
+        // Preload neighbours so arrows feel instant
+        [1, -1].forEach((d) => {
+          const n = this.tiles[(this.index + d + total) % total];
+          if (n && n.dataset.full) new Image().src = n.dataset.full;
+        });
+      }
+
+      async go(dir) {
+        if (this.busy || this.tiles.length < 2) return;
+        this.busy = true;
+        const figure = this.querySelector('.thg-lb__figure');
+        const dist = 60 * dir;
+
+        if (!this.reduce && figure.animate) {
+          await figure.animate(
+            [{ transform: 'translateX(0)', opacity: 1 }, { transform: 'translateX(' + -dist + 'px)', opacity: 0 }],
+            { duration: 200, easing: 'cubic-bezier(0.4, 0, 1, 1)', fill: 'forwards' }
+          ).finished;
+          this.render(this.index + dir);
+          try { await this.img.decode(); } catch (e) {}
+          await figure.animate(
+            [{ transform: 'translateX(' + dist + 'px)', opacity: 0 }, { transform: 'translateX(0)', opacity: 1 }],
+            { duration: 320, easing: 'cubic-bezier(0, 0, 0.2, 1)', fill: 'forwards' }
+          ).finished;
+          figure.getAnimations().forEach((a) => a.cancel());
+        } else {
+          this.render(this.index + dir);
+        }
+        this.busy = false;
+      }
+    }
+
+    customElements.define('thg-gallery', ThgGallery);
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Photo gallery",
+  "tag": "section",
+  "class": "thg-gal-section",
+  "max_blocks": 50,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "justified", "label": "Rows that fill the width (keeps photo shape)" },
+        { "value": "grid", "label": "Even grid (crops photos to one shape)" }
+      ],
+      "default": "justified"
+    },
+    {
+      "type": "range",
+      "id": "per_row",
+      "label": "Photos per row",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "tile_ratio",
+      "label": "Photo shape (even grid only)",
+      "options": [
+        { "value": "4 / 3", "label": "Landscape (4:3)" },
+        { "value": "16 / 9", "label": "Wide (16:9)" },
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "4 / 5", "label": "Portrait (4:5)" }
+      ],
+      "default": "4 / 3"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between photos",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full page width",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Show more"
+    },
+    {
+      "type": "range",
+      "id": "initial_rows",
+      "label": "Rows shown at first",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "default": 2,
+      "info": "With 4 photos per row, 2 rows = 8 photos."
+    },
+    {
+      "type": "range",
+      "id": "rows_per_click",
+      "label": "Rows added per click",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "text",
+      "id": "more_label",
+      "label": "Button label",
+      "default": "Show More"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#DAA520"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text and button",
+      "default": "#111111"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption (optional)",
+          "info": "Shown under the photo in the full-screen viewer."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Photo gallery",
+      "blocks": [
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" }
+      ]
+    }
+  ]
+}
+{% endschema %}
