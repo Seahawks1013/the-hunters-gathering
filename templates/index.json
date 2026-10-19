@@ -40,7 +40,7 @@
         "text": "<p>We host this event only once each year. Come for the hunting. Leave with your hunting community.</p>",
         "video_url": "https://www.youtube.com/watch?v=2hcqSAqL2ic&t=3s",
         "show_reserve": true,
-        "background_color": "#0A2819",
+        "background_color": "#0a2819",
         "text_color": "#ffffff",
         "padding_top": 88,
         "padding_bottom": 88
@@ -293,7 +293,7 @@
         "note": "...and more to be announced",
         "button_label": "See the Full Four-Day Experience",
         "button_link": "",
-        "background_color": "#0A2819",
+        "background_color": "#0a2819",
         "text_color": "#ffffff",
         "padding_top": 88,
         "padding_bottom": 88
@@ -343,7 +343,7 @@
         "show_stars": true,
         "show_reserve": true,
         "background_color": "#daa520",
-        "text_color": "#111111",
+        "text_color": "#0A2819",
         "padding_top": 88,
         "padding_bottom": 88
       }
@@ -483,7 +483,7 @@
         "submit_label": "Send Message",
         "success_message": "Thanks! We got your message and will be in touch soon.",
         "background_color": "#daa520",
-        "text_color": "#111111",
+        "text_color": "#0A2819",
         "padding_top": 88,
         "padding_bottom": 88
       }
