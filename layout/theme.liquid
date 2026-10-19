@@ -20,6 +20,15 @@
     {%- render 'meta-tags' -%}
     {%- render 'stylesheets' -%}
     {{ 'thg-custom.css' | asset_url | stylesheet_tag }}
+    <style>
+      :root {
+        {%- if settings.thg_color_green != blank %} --thg-green: {{ settings.thg_color_green }};{% endif -%}
+        {%- if settings.thg_color_gold != blank %} --thg-gold: {{ settings.thg_color_gold }};{% endif -%}
+        {%- if settings.thg_color_ink != blank %} --thg-ink: {{ settings.thg_color_ink }};{% endif -%}
+        {%- if settings.thg_color_cream != blank %} --thg-cream: {{ settings.thg_color_cream }};{% endif -%}
+        {%- if settings.thg_color_orange != blank %} --thg-orange: {{ settings.thg_color_orange }};{% endif %}
+      }
+    </style>
     {%- render 'card-hover-effect-styles' -%}
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}

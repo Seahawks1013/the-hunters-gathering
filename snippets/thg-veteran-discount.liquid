@@ -31,9 +31,9 @@
       gap: 8px 12px;
       margin: 0 0 16px;
       padding: 12px 14px;
-      border: 1.5px dashed rgb(11 74 42 / 0.45);
+      border: 1.5px dashed color-mix(in srgb, var(--thg-green) 45%, transparent);
       border-radius: 8px;
-      background: rgb(11 74 42 / 0.04);
+      background: color-mix(in srgb, var(--thg-green) 4%, transparent);
       color: #111;
       font-size: 15px;
       line-height: 1.4;
@@ -49,7 +49,7 @@
       display: grid;
       place-items: center;
       flex: none;
-      color: #0b4a2a;
+      color: var(--thg-green);
     }
 
     .thg-vet--light .thg-vet__flag { color: #daa520; }
@@ -60,7 +60,7 @@
       flex: none;
       padding: 8px 14px;
       border-radius: 99px;
-      background: #0b4a2a;
+      background: var(--thg-green);
       color: #fff;
       font-size: 13px;
       font-weight: 700;
@@ -85,7 +85,7 @@
       flex-basis: 100%;
       font-size: 14px;
       font-weight: 600;
-      color: #0b4a2a;
+      color: var(--thg-green);
     }
 
     .thg-vet--light .thg-vet__done { color: #f3d57e; }

@@ -21,6 +21,7 @@
     --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
     --thg-tag-bg: var(--thg-gold);
     --thg-tag-text: var(--thg-ink);
+    {%- render 'thg-section-colors', s: section.settings -%}
   "
 >
   <div class="thg-wrap">
@@ -306,17 +307,105 @@
   "tag": "section",
   "class": "thg-soc-section",
   "settings": [
-    { "type": "text", "id": "tag", "label": "Label", "default": "Stay in the hunt" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Follow The Hunter's Gathering" },
-    { "type": "richtext", "id": "text", "label": "Text" },
-    { "type": "text", "id": "podcast_heading", "label": "Podcasts heading", "default": "Voices of The Hunter's Gathering" },
-    { "type": "text", "id": "partners_heading", "label": "Partners heading", "default": "Our Partners" },
-    { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "background_color", "label": "Background", "default": "#111111" },
-    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
-    { "type": "header", "content": "Spacing" },
-    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 }
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Label",
+      "default": "Stay in the hunt"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Follow The Hunter's Gathering"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "podcast_heading",
+      "label": "Podcasts heading",
+      "default": "Voices of The Hunter's Gathering"
+    },
+    {
+      "type": "text",
+      "id": "partners_heading",
+      "label": "Partners heading",
+      "default": "Our Partners"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "More colors",
+      "info": "Leave any of these empty to use the brand colors from Theme settings → Brand colors."
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (checkmarks, links, lines)"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "color",
+      "id": "label_bg",
+      "label": "Label background"
+    },
+    {
+      "type": "color",
+      "id": "label_text",
+      "label": "Label text"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 88
+    }
   ],
   "blocks": [
     {
@@ -328,38 +417,104 @@
           "id": "platform",
           "label": "Platform",
           "options": [
-            { "value": "instagram", "label": "Instagram" },
-            { "value": "facebook", "label": "Facebook" },
-            { "value": "youtube", "label": "YouTube" },
-            { "value": "podcast", "label": "Podcast" },
-            { "value": "tiktok", "label": "TikTok" },
-            { "value": "website", "label": "Website" }
+            {
+              "value": "instagram",
+              "label": "Instagram"
+            },
+            {
+              "value": "facebook",
+              "label": "Facebook"
+            },
+            {
+              "value": "youtube",
+              "label": "YouTube"
+            },
+            {
+              "value": "podcast",
+              "label": "Podcast"
+            },
+            {
+              "value": "tiktok",
+              "label": "TikTok"
+            },
+            {
+              "value": "website",
+              "label": "Website"
+            }
           ],
           "default": "instagram"
         },
-        { "type": "url", "id": "url", "label": "Link" },
-        { "type": "text", "id": "label", "label": "Label (optional)" },
-        { "type": "text", "id": "handle", "label": "Handle (optional)", "info": "e.g. @thehuntersgathering" }
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label (optional)"
+        },
+        {
+          "type": "text",
+          "id": "handle",
+          "label": "Handle (optional)",
+          "info": "e.g. @thehuntersgathering"
+        }
       ]
     },
     {
       "type": "podcast",
       "name": "Podcast",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Cover" },
-        { "type": "text", "id": "host", "label": "Host", "default": "Host name" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Podcast title" },
-        { "type": "richtext", "id": "description", "label": "Description" },
-        { "type": "url", "id": "url", "label": "Listen link" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Cover"
+        },
+        {
+          "type": "text",
+          "id": "host",
+          "label": "Host",
+          "default": "Host name"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Podcast title"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Listen link"
+        }
       ]
     },
     {
       "type": "partner",
       "name": "Partner logo",
       "settings": [
-        { "type": "image_picker", "id": "logo", "label": "Logo" },
-        { "type": "text", "id": "name", "label": "Name", "default": "Partner" },
-        { "type": "url", "id": "url", "label": "Link" }
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Partner"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
       ]
     }
   ],
@@ -367,10 +522,30 @@
     {
       "name": "Social & podcasts",
       "blocks": [
-        { "type": "social", "settings": { "platform": "instagram" } },
-        { "type": "social", "settings": { "platform": "facebook" } },
-        { "type": "social", "settings": { "platform": "youtube" } },
-        { "type": "social", "settings": { "platform": "podcast" } }
+        {
+          "type": "social",
+          "settings": {
+            "platform": "instagram"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "facebook"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "youtube"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "podcast"
+          }
+        }
       ]
     }
   ]

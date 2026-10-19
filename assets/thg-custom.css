@@ -51,8 +51,8 @@ header .header-logo {
 :root {
   --thg-gold: #daa520;
   --thg-gold-soft: #f3d57e;
-  --thg-green: #0b4a2a;
-  --thg-green-deep: #06331c;
+  --thg-green: #0a2819;
+  --thg-green-deep: color-mix(in srgb, var(--thg-green) 65%, #000);
   --thg-ink: #111111;
   --thg-cream: #fbf6ea;
   --thg-orange: #e2761c;
@@ -148,9 +148,9 @@ header .header-logo {
 .thg-btn:hover .thg-btn__arrow { transform: translateX(4px); }
 
 .thg-btn--reserve {
-  background: var(--thg-green);
-  color: #fff;
-  box-shadow: 0 10px 24px -12px rgb(6 51 28 / 0.8);
+  background: var(--thg-btn-bg, var(--thg-green));
+  color: var(--thg-btn-text, #fff);
+  box-shadow: 0 10px 24px -12px rgb(0 0 0 / 0.6);
 }
 
 .thg-btn--reserve:hover,
@@ -161,8 +161,8 @@ header .header-logo {
 }
 
 .thg-btn--reserve-light {
-  background: var(--thg-gold);
-  color: var(--thg-ink);
+  background: var(--thg-btn-bg, var(--thg-gold));
+  color: var(--thg-btn-text, var(--thg-ink));
 }
 
 .thg-btn--reserve-light:hover,

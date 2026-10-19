@@ -1,0 +1,14 @@
+{%- comment -%}
+  The Hunter's Gathering: optional per-section color overrides
+  Outputs CSS variables for any color the editor has set on this section.
+  Empty settings fall back to the brand colors in Theme settings.
+  Usage (inside a section's style="" attribute, last):
+    {% render 'thg-section-colors', s: section.settings %}
+{%- endcomment -%}
+{%- if s.accent_color != blank %} --thg-green: {{ s.accent_color }};{% endif -%}
+{%- if s.button_bg != blank %} --thg-btn-bg: {{ s.button_bg }};{% endif -%}
+{%- if s.button_text != blank %} --thg-btn-text: {{ s.button_text }};{% endif -%}
+{%- if s.label_bg != blank %} --thg-tag-bg: {{ s.label_bg }};{% endif -%}
+{%- if s.label_text != blank %} --thg-tag-text: {{ s.label_text }};{% endif -%}
+{%- if s.card_bg != blank %} --thg-card-bg: {{ s.card_bg }};{% endif -%}
+{%- if s.card_text != blank %} --thg-card-text: {{ s.card_text }};{% endif -%}

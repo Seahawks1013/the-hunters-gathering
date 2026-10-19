@@ -12,6 +12,7 @@
     --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
     --thg-tag-bg: var(--thg-gold);
     --thg-tag-text: var(--thg-ink);
+    {%- render 'thg-section-colors', s: section.settings -%}
   "
 >
   <div class="thg-wrap">
@@ -180,33 +181,163 @@
   "class": "thg-sch-section",
   "max_blocks": 7,
   "settings": [
-    { "type": "text", "id": "tag", "label": "Label", "default": "April 8–11, 2027" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "A Day at The Gathering" },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Mornings and afternoons split into Option A and Option B sessions, so you build your own four days around the game you hunt.</p>" },
-    { "type": "text", "id": "note", "label": "Note under the days", "default": "...and more to be announced" },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "See the Full Four-Day Experience" },
-    { "type": "url", "id": "button_link", "label": "Button link", "info": "Leave empty for the Your Four-Day Experience page." },
-    { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "background_color", "label": "Background", "default": "#0B4A2A" },
-    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
-    { "type": "header", "content": "Spacing" },
-    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 }
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Label",
+      "default": "April 8–11, 2027"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A Day at The Gathering"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Mornings and afternoons split into Option A and Option B sessions, so you build your own four days around the game you hunt.</p>"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note under the days",
+      "default": "...and more to be announced"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "See the Full Four-Day Experience"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Leave empty for the Your Four-Day Experience page."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0A2819"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "More colors",
+      "info": "Leave any of these empty to use the brand colors from Theme settings → Brand colors."
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (checkmarks, links, lines)"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "color",
+      "id": "label_bg",
+      "label": "Label background"
+    },
+    {
+      "type": "color",
+      "id": "label_text",
+      "label": "Label text"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 88
+    }
   ],
   "blocks": [
     {
       "type": "day",
       "name": "Day",
       "settings": [
-        { "type": "text", "id": "date_number", "label": "Date number", "default": "8" },
-        { "type": "text", "id": "weekday", "label": "Weekday", "default": "Thursday" },
-        { "type": "text", "id": "theme", "label": "Theme (optional)" },
-        { "type": "richtext", "id": "sessions", "label": "Sessions", "info": "Use bold for labels like AM Option A.", "default": "<p>Add sessions</p>" }
+        {
+          "type": "text",
+          "id": "date_number",
+          "label": "Date number",
+          "default": "8"
+        },
+        {
+          "type": "text",
+          "id": "weekday",
+          "label": "Weekday",
+          "default": "Thursday"
+        },
+        {
+          "type": "text",
+          "id": "theme",
+          "label": "Theme (optional)"
+        },
+        {
+          "type": "richtext",
+          "id": "sessions",
+          "label": "Sessions",
+          "info": "Use bold for labels like AM Option A.",
+          "default": "<p>Add sessions</p>"
+        }
       ]
     }
   ],
   "presets": [
-    { "name": "Daily schedule", "blocks": [{ "type": "day" }, { "type": "day" }, { "type": "day" }, { "type": "day" }] }
+    {
+      "name": "Daily schedule",
+      "blocks": [
+        {
+          "type": "day"
+        },
+        {
+          "type": "day"
+        },
+        {
+          "type": "day"
+        },
+        {
+          "type": "day"
+        }
+      ]
+    }
   ]
 }
 {% endschema %}

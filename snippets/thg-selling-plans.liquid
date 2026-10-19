@@ -53,9 +53,9 @@
     .thg-plans { display: grid; gap: 10px; margin: 0 0 18px; padding: 0; border: 0; min-width: 0; }
     .thg-plans__legend { margin-bottom: 10px; padding: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
     .thg-plans__option { position: relative; display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border: 1.5px solid rgb(0 0 0 / 0.15); border-radius: 8px; background: #fff; cursor: pointer; transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease; }
-    .thg-plans__option:hover { border-color: rgb(11 74 42 / 0.5); }
-    .thg-plans__option:has(input:checked) { border-color: #0b4a2a; background: rgb(11 74 42 / 0.04); box-shadow: 0 0 0 1px #0b4a2a; }
-    .thg-plans__option input { flex: none; width: 18px; height: 18px; margin: 2px 0 0; accent-color: #0b4a2a; }
+    .thg-plans__option:hover { border-color: color-mix(in srgb, var(--thg-green) 50%, transparent); }
+    .thg-plans__option:has(input:checked) { border-color: var(--thg-green); background: color-mix(in srgb, var(--thg-green) 4%, transparent); box-shadow: 0 0 0 1px var(--thg-green); }
+    .thg-plans__option input { flex: none; width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--thg-green); }
     .thg-plans__option input:focus-visible { outline: 2px solid #daa520; outline-offset: 2px; }
     .thg-plans__body { display: grid; gap: 3px; }
     .thg-plans__title { font-weight: 700; line-height: 1.3; }

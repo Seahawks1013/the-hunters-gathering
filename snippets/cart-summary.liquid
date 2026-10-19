@@ -633,8 +633,8 @@
     gap: 6px;
     padding: 12px 14px;
     border-radius: 8px;
-    background: rgb(11 74 42 / 0.06);
-    border: 1px solid rgb(11 74 42 / 0.25);
+    background: color-mix(in srgb, var(--thg-green) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--thg-green) 25%, transparent);
   }
 
   .thg-due__row {
@@ -646,7 +646,7 @@
 
   .thg-due__row--now {
     font-size: 16px;
-    color: #0b4a2a;
+    color: var(--thg-green);
   }
 
   .thg-due__row--now strong {

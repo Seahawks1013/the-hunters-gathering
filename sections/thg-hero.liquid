@@ -12,6 +12,7 @@
     --thg-bar-bg: {{ section.settings.bar_background }};
     --thg-bar-text: {{ section.settings.bar_text }};
     --thg-mobile-media-h: {{ section.settings.mobile_image_height }}svh;
+    {%- render 'thg-section-colors', s: section.settings -%}
   "
 >
   <div class="thg-hero__media">
@@ -140,7 +141,7 @@
     display: grid;
     place-items: center;
     aspect-ratio: 16 / 7;
-    background: linear-gradient(160deg, #0b4a2a, #06331c 60%, #3b2a0c);
+    background: linear-gradient(160deg, var(--thg-green), var(--thg-green-deep) 60%, #3b2a0c);
     color: #f3d57e;
     overflow: hidden;
   }
@@ -397,7 +398,12 @@
   "tag": "section",
   "class": "thg-hero-section",
   "settings": [
-    { "type": "url", "id": "reserve_link", "label": "Reserve button link (optional)", "info": "Leave empty to use the registration product from Theme settings → Event registration." },
+    {
+      "type": "url",
+      "id": "reserve_link",
+      "label": "Reserve button link (optional)",
+      "info": "Leave empty to use the registration product from Theme settings → Event registration."
+    },
     {
       "type": "header",
       "content": "Image"
@@ -418,8 +424,14 @@
       "id": "desktop_height",
       "label": "Image height on desktop",
       "options": [
-        { "value": "natural", "label": "Show the full image" },
-        { "value": "screen", "label": "Fill most of the screen (crops edges)" }
+        {
+          "value": "natural",
+          "label": "Show the full image"
+        },
+        {
+          "value": "screen",
+          "label": "Fill most of the screen (crops edges)"
+        }
       ],
       "default": "natural"
     },
@@ -527,6 +539,36 @@
       "id": "bar_text",
       "label": "Info bar text",
       "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "More colors",
+      "info": "Leave any of these empty to use the brand colors from Theme settings → Brand colors."
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (checkmarks, links, lines)"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "color",
+      "id": "label_bg",
+      "label": "Label background"
+    },
+    {
+      "type": "color",
+      "id": "label_text",
+      "label": "Label text"
     }
   ],
   "presets": [

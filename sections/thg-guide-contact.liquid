@@ -13,6 +13,7 @@
     --thg-text: {{ section.settings.text_color }};
     --thg-pad-top: {{ section.settings.padding_top }}px;
     --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'thg-section-colors', s: section.settings -%}
   "
 >
   <div class="thg-wrap thg-lead__layout">
@@ -126,8 +127,8 @@
   }
 
   .thg-lead__contact {
-    background: #fff;
-    color: var(--thg-ink);
+    background: var(--thg-card-bg, #fff);
+    color: var(--thg-card-text, var(--thg-ink));
   }
 
   .thg-lead__title {
@@ -197,7 +198,7 @@
     outline: none;
     border-color: var(--thg-green);
     background: #fff;
-    box-shadow: 0 0 0 3px rgb(11 74 42 / 0.15);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--thg-green) 15%, transparent);
   }
 
   .thg-form__success,
@@ -209,7 +210,7 @@
   }
 
   .thg-form__success {
-    background: rgb(11 74 42 / 0.1);
+    background: color-mix(in srgb, var(--thg-green) 10%, transparent);
     border-left: 4px solid var(--thg-green);
   }
 
@@ -227,26 +228,161 @@
   "tag": "section",
   "class": "thg-lead-section",
   "settings": [
-    { "type": "header", "content": "Event Guide" },
-    { "type": "text", "id": "guide_tag", "label": "Label", "default": "Not ready to reserve?" },
-    { "type": "text", "id": "guide_heading", "label": "Heading", "default": "Get the Free 2027 Event Guide" },
-    { "type": "richtext", "id": "guide_text", "label": "Text", "default": "<p>The full schedule, instructor line-up, what to bring and lodging details, all in one download.</p>" },
-    { "type": "image_picker", "id": "guide_image", "label": "Guide cover (optional)" },
-    { "type": "paragraph", "content": "The download button uses the Event Guide link in Theme settings → Event registration. Adding an app block here (like a Klaviyo sign-up form) replaces the button." },
-    { "type": "header", "content": "Contact form" },
-    { "type": "text", "id": "contact_tag", "label": "Label", "default": "Contact us" },
-    { "type": "text", "id": "contact_heading", "label": "Heading", "default": "Drop Us a Line" },
-    { "type": "richtext", "id": "contact_text", "label": "Text", "default": "<p>Questions about lodging, travel or which sessions fit you? We'll get back to you quickly.</p>" },
-    { "type": "text", "id": "submit_label", "label": "Button label", "default": "Send Message" },
-    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks! We got your message and will be in touch soon." },
-    { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "background_color", "label": "Background", "default": "#DAA520" },
-    { "type": "color", "id": "text_color", "label": "Text", "default": "#111111" },
-    { "type": "header", "content": "Spacing" },
-    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 }
+    {
+      "type": "header",
+      "content": "Event Guide"
+    },
+    {
+      "type": "text",
+      "id": "guide_tag",
+      "label": "Label",
+      "default": "Not ready to reserve?"
+    },
+    {
+      "type": "text",
+      "id": "guide_heading",
+      "label": "Heading",
+      "default": "Get the Free 2027 Event Guide"
+    },
+    {
+      "type": "richtext",
+      "id": "guide_text",
+      "label": "Text",
+      "default": "<p>The full schedule, instructor line-up, what to bring and lodging details, all in one download.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "guide_image",
+      "label": "Guide cover (optional)"
+    },
+    {
+      "type": "paragraph",
+      "content": "The download button uses the Event Guide link in Theme settings → Event registration. Adding an app block here (like a Klaviyo sign-up form) replaces the button."
+    },
+    {
+      "type": "header",
+      "content": "Contact form"
+    },
+    {
+      "type": "text",
+      "id": "contact_tag",
+      "label": "Label",
+      "default": "Contact us"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Heading",
+      "default": "Drop Us a Line"
+    },
+    {
+      "type": "richtext",
+      "id": "contact_text",
+      "label": "Text",
+      "default": "<p>Questions about lodging, travel or which sessions fit you? We'll get back to you quickly.</p>"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Button label",
+      "default": "Send Message"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks! We got your message and will be in touch soon."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#DAA520"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#111111"
+    },
+    {
+      "type": "header",
+      "content": "More colors",
+      "info": "Leave any of these empty to use the brand colors from Theme settings → Brand colors."
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (checkmarks, links, lines)"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "color",
+      "id": "label_bg",
+      "label": "Label background"
+    },
+    {
+      "type": "color",
+      "id": "label_text",
+      "label": "Label text"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background"
+    },
+    {
+      "type": "color",
+      "id": "card_text",
+      "label": "Card text"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 88
+    }
   ],
-  "blocks": [{ "type": "@app" }],
-  "presets": [{ "name": "Event Guide & contact" }]
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Event Guide & contact"
+    }
+  ]
 }
 {% endschema %}

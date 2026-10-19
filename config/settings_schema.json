@@ -2231,5 +2231,44 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "Brand colors",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Used across The Hunter's Gathering sections, buttons and checkout options. Each section can also override these under More colors."
+      },
+      {
+        "type": "color",
+        "id": "thg_color_green",
+        "label": "Forest green",
+        "default": "#0A2819"
+      },
+      {
+        "type": "color",
+        "id": "thg_color_gold",
+        "label": "Gold",
+        "default": "#DAA520"
+      },
+      {
+        "type": "color",
+        "id": "thg_color_ink",
+        "label": "Ink (near black)",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "thg_color_cream",
+        "label": "Cream",
+        "default": "#FBF6EA"
+      },
+      {
+        "type": "color",
+        "id": "thg_color_orange",
+        "label": "Orange",
+        "default": "#E2761C"
+      }
+    ]
   }
 ]

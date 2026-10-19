@@ -18,6 +18,7 @@
     --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
     --thg-tag-bg: var(--thg-gold);
     --thg-tag-text: var(--thg-ink);
+    {%- render 'thg-section-colors', s: section.settings -%}
   "
 >
   <div class="thg-wrap">
@@ -105,7 +106,7 @@
     width: 100%;
     padding: 0;
     border: 0;
-    background: radial-gradient(ellipse at center, #1c3a26, #050d08);
+    background: radial-gradient(ellipse at center, var(--thg-green), #030a06);
     color: #fff;
     cursor: pointer;
   }
@@ -204,22 +205,135 @@
   "tag": "section",
   "class": "thg-video-section",
   "settings": [
-    { "type": "url", "id": "reserve_link", "label": "Reserve button link (optional)", "info": "Leave empty to use the registration product from Theme settings → Event registration." },
-    { "type": "text", "id": "tag", "label": "Label", "default": "Watch" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Four Days That Will Change the Way You Hunt Forever" },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>We host this event only once each year. Come for the hunting. Leave with your hunting community.</p>" },
-    { "type": "header", "content": "Video" },
-    { "type": "video", "id": "video", "label": "Upload a video", "info": "Or use a YouTube/Vimeo link below." },
-    { "type": "video_url", "id": "video_url", "label": "YouTube or Vimeo link", "accept": ["youtube", "vimeo"] },
-    { "type": "image_picker", "id": "poster", "label": "Cover image (optional)" },
-    { "type": "checkbox", "id": "show_reserve", "label": "Show Reserve button under video", "default": true },
-    { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "background_color", "label": "Background", "default": "#0B4A2A" },
-    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
-    { "type": "header", "content": "Spacing" },
-    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 88 }
+    {
+      "type": "url",
+      "id": "reserve_link",
+      "label": "Reserve button link (optional)",
+      "info": "Leave empty to use the registration product from Theme settings → Event registration."
+    },
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Label",
+      "default": "Watch"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Four Days That Will Change the Way You Hunt Forever"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>We host this event only once each year. Come for the hunting. Leave with your hunting community.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Upload a video",
+      "info": "Or use a YouTube/Vimeo link below."
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "YouTube or Vimeo link",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "Cover image (optional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reserve",
+      "label": "Show Reserve button under video",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0A2819"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "More colors",
+      "info": "Leave any of these empty to use the brand colors from Theme settings → Brand colors."
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (checkmarks, links, lines)"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "color",
+      "id": "label_bg",
+      "label": "Label background"
+    },
+    {
+      "type": "color",
+      "id": "label_text",
+      "label": "Label text"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 88
+    }
   ],
-  "presets": [{ "name": "Sizzle video" }]
+  "presets": [
+    {
+      "name": "Sizzle video"
+    }
+  ]
 }
 {% endschema %}
