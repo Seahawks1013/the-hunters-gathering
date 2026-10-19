@@ -56,29 +56,19 @@
 -%}
 
 <div
-  class="thg-sec thg-count thg-count--fx-{{ section.settings.animation }}{% if low %} thg-count--low{% endif %}{% if sold_out %} thg-count--soldout{% endif %}"
+  class="thg-sec thg-count{% if low %} thg-count--low{% endif %}{% if sold_out %} thg-count--soldout{% endif %}"
   style="
     --thg-bg: {{ section.settings.background_color }};
     --thg-text: {{ section.settings.text_color }};
     --thg-num: {{ section.settings.number_color }};
     --thg-bar: {{ section.settings.bar_color }};
     --thg-low: {{ section.settings.low_color }};
-    --thg-topo: url('{{ 'thg-topo.svg' | asset_url }}');
     --thg-pattern: color-mix(in srgb, {{ section.settings.pattern_color }} {{ section.settings.pattern_strength }}%, transparent);
     --thg-pad-top: {{ section.settings.padding_top }}px;
     --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
     {%- render 'thg-section-colors', s: section.settings -%}
   "
 >
-  {%- if section.settings.animation != 'none' -%}
-    <div class="thg-count__bg" aria-hidden="true">
-      <span class="thg-count__topo"></span>
-      <span class="thg-count__ping"></span>
-      <span class="thg-count__ping"></span>
-      <span class="thg-count__ping"></span>
-    </div>
-  {%- endif -%}
-
   <div class="thg-wrap thg-count__inner">
     {%- if section.settings.label != blank -%}
       <p class="thg-count__live">
@@ -88,12 +78,21 @@
     {%- endif -%}
 
     <p class="thg-count__figure">
-      <thg-count-up
+      <span class="thg-count__numwrap">
+        {%- if section.settings.ripple -%}
+          <span class="thg-count__ripples" aria-hidden="true">
+            <span class="thg-count__ping"></span>
+            <span class="thg-count__ping"></span>
+            <span class="thg-count__ping"></span>
+          </span>
+        {%- endif -%}
+        <thg-count-up
         class="thg-count__num"
         data-to="{{ remaining }}"
         data-from="{{ total }}"
         {% unless section.settings.animate %}data-static{% endunless %}
-      >{{ remaining }}</thg-count-up>
+        >{{ remaining }}</thg-count-up>
+      </span>
       <span class="thg-count__of">
         {%- if sold_out -%}
           {{ section.settings.soldout_word | escape }}
@@ -139,70 +138,46 @@
 </div>
 
 {% stylesheet %}
-  .thg-count {
+  /* Ripples that pulse out from behind the number */
+  .thg-count__numwrap {
     position: relative;
-    overflow: hidden;
+    display: inline-grid;
+    place-items: center;
     isolation: isolate;
   }
 
-  .thg-count__bg {
+  .thg-count__ripples {
     position: absolute;
-    inset: 0;
+    inset: 50% auto auto 50%;
     z-index: -1;
+    width: 0;
+    height: 0;
     pointer-events: none;
   }
 
-  /* Topographic contour lines (assets/thg-topo.svg) that slowly drift */
-  .thg-count__topo {
-    position: absolute;
-    inset: 0;
-    -webkit-mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 25%, transparent 80%);
-    mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 25%, transparent 80%);
-  }
-
-  .thg-count__topo::before {
-    content: '';
-    position: absolute;
-    inset: -12%;
-    background: var(--thg-pattern);
-    -webkit-mask: var(--thg-topo) center / cover no-repeat;
-    mask: var(--thg-topo) center / cover no-repeat;
-    animation: thg-count-drift 60s ease-in-out infinite alternate;
-  }
-
-  @keyframes thg-count-drift {
-    from { transform: translate3d(-4%, -2%, 0) scale(1); }
-    to { transform: translate3d(4%, 2%, 0) scale(1.06); }
-  }
-
-  /* Soft radar rings pulsing out from behind the number */
   .thg-count__ping {
     position: absolute;
-    top: 46%;
-    left: 50%;
-    width: min(70vw, 620px);
+    top: 0;
+    left: 0;
+    width: clamp(220px, 34vw, 380px);
     aspect-ratio: 1;
-    border: 1.5px solid var(--thg-pattern);
+    border: 2px solid var(--thg-pattern);
     border-radius: 50%;
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.25);
-    animation: thg-count-ping 7.5s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+    transform: translate(-50%, -50%) scale(0.35);
+    animation: thg-count-ping 6s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
   }
 
-  .thg-count__ping:nth-child(3) { animation-delay: 2.5s; }
-  .thg-count__ping:nth-child(4) { animation-delay: 5s; }
+  .thg-count__ping:nth-child(2) { animation-delay: 2s; }
+  .thg-count__ping:nth-child(3) { animation-delay: 4s; }
 
   @keyframes thg-count-ping {
-    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.25); }
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.35); }
     15% { opacity: 1; }
-    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.6); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.3); }
   }
 
-  .thg-count--fx-topo .thg-count__ping,
-  .thg-count--fx-pings .thg-count__topo { display: none; }
-
   @media (prefers-reduced-motion: reduce) {
-    .thg-count__topo::before { animation: none; }
     .thg-count__ping { display: none; }
   }
 
@@ -487,47 +462,29 @@
     },
     {
       "type": "header",
-      "content": "Background animation"
+      "content": "Ripple"
     },
     {
-      "type": "select",
-      "id": "animation",
-      "label": "Animation",
-      "options": [
-        {
-          "value": "both",
-          "label": "Contour lines + radar rings"
-        },
-        {
-          "value": "topo",
-          "label": "Contour lines only"
-        },
-        {
-          "value": "pings",
-          "label": "Radar rings only"
-        },
-        {
-          "value": "none",
-          "label": "None"
-        }
-      ],
-      "default": "both"
+      "type": "checkbox",
+      "id": "ripple",
+      "label": "Ripple behind the number",
+      "default": true
     },
     {
       "type": "color",
       "id": "pattern_color",
-      "label": "Animation color",
+      "label": "Ripple color",
       "default": "#0A2819"
     },
     {
       "type": "range",
       "id": "pattern_strength",
-      "label": "Animation strength",
+      "label": "Ripple strength",
       "min": 2,
       "max": 40,
       "step": 1,
       "unit": "%",
-      "default": 16
+      "default": 22
     },
     {
       "type": "header",

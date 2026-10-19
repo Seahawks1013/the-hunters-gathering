@@ -743,9 +743,9 @@
         "padding_bottom": 72,
         "bar_color": "#0A2819",
         "low_color": "#7A1F0A",
-        "animation": "both",
         "pattern_color": "#0A2819",
-        "pattern_strength": 16
+        "pattern_strength": 22,
+        "ripple": true
       }
     }
   },
