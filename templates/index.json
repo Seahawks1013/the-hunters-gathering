@@ -713,15 +713,10 @@
         "padding_top": 64,
         "padding_bottom": 64
       }
-    },
-    "seat_count": {
-      "type": "thg-seat-count",
-      "settings": {}
     }
   },
   "order": [
     "hero",
-    "seat_count",
     "video",
     "instructors",
     "included",
