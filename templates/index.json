@@ -36,6 +36,40 @@
         "label_text": ""
       }
     },
+    "thg_seat_count_xRkfYG": {
+      "type": "thg-seat-count",
+      "name": "Live seat counter",
+      "settings": {
+        "product": "",
+        "label": "Live seat count",
+        "of_text": "of [total] seats remaining",
+        "text": "Every reservation lowers this number. When it hits zero, the 2027 Gathering is full.",
+        "low_threshold": 25,
+        "low_text": "Only [remaining] seats left. Reserve yours before they're gone.",
+        "soldout_word": "Sold out",
+        "soldout_text": "All [total] seats are taken. Join the waitlist to hear first if a seat opens up.",
+        "animate": true,
+        "show_bar": true,
+        "show_reserve": true,
+        "button_style": "primary",
+        "reserve_link": "",
+        "ripple": true,
+        "pattern_color": "#0a2819",
+        "pattern_strength": 22,
+        "background_color": "#ffffff",
+        "text_color": "#111111",
+        "number_color": "#0a2819",
+        "bar_color": "#0a2819",
+        "low_color": "#7a1f0a",
+        "accent_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "label_bg": "",
+        "label_text": "",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
     "video": {
       "type": "thg-video",
       "settings": {
@@ -622,6 +656,7 @@
         "podcast_6",
         "podcast_7"
       ],
+      "disabled": true,
       "settings": {
         "tag": "Stay in the hunt",
         "heading": "Follow The Hunter's Gathering",
@@ -712,40 +747,6 @@
         "label_text": "",
         "padding_top": 64,
         "padding_bottom": 64
-      }
-    },
-    "thg_seat_count_xRkfYG": {
-      "type": "thg-seat-count",
-      "name": "Live seat counter",
-      "settings": {
-        "product": "",
-        "label": "Live seat count",
-        "of_text": "of [total] seats remaining",
-        "text": "Every reservation lowers this number. When it hits zero, the 2027 Gathering is full.",
-        "low_threshold": 25,
-        "low_text": "Only [remaining] seats left. Reserve yours before they're gone.",
-        "soldout_word": "Sold out",
-        "soldout_text": "All [total] seats are taken. Join the waitlist to hear first if a seat opens up.",
-        "animate": true,
-        "show_bar": true,
-        "show_reserve": true,
-        "button_style": "primary",
-        "reserve_link": "",
-        "background_color": "#FFFFFF",
-        "text_color": "#111111",
-        "number_color": "#0A2819",
-        "accent_color": "",
-        "button_bg": "",
-        "button_text": "",
-        "label_bg": "",
-        "label_text": "",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "bar_color": "#0A2819",
-        "low_color": "#7A1F0A",
-        "pattern_color": "#0A2819",
-        "pattern_strength": 22,
-        "ripple": true
       }
     }
   },
