@@ -119,6 +119,12 @@
         "id": "thg_vet_applied",
         "label": "Applied message",
         "default": "Thank you for your service. $100 off will apply at checkout."
+      },
+      {
+        "type": "text",
+        "id": "thg_vet_undo",
+        "label": "Undo button label",
+        "default": "Undo"
       }
     ]
   },

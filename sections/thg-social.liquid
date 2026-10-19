@@ -61,6 +61,7 @@
         {%- if section.settings.podcast_heading != blank -%}
           <h3 class="thg-soc__subhead">{{ section.settings.podcast_heading | escape }}</h3>
         {%- endif -%}
+        <thg-pod-slider class="thg-soc__slider">
         <ul class="thg-soc__pod-grid" role="list">
           {%- for block in podcasts -%}
             <li class="thg-soc__pod" {{ block.shopify_attributes }}>
@@ -80,6 +81,22 @@
             </li>
           {%- endfor -%}
         </ul>
+        {%- if podcasts.size > 1 -%}
+          <div class="thg-soc__nav">
+            <button type="button" class="thg-soc__arrow" data-dir="-1" aria-label="Previous podcast">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <div class="thg-soc__dots">
+              {%- for block in podcasts -%}
+                <button type="button" class="thg-soc__dot{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Podcast {{ forloop.index }} of {{ podcasts.size }}"></button>
+              {%- endfor -%}
+            </div>
+            <button type="button" class="thg-soc__arrow" data-dir="1" aria-label="Next podcast">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        {%- endif -%}
+        </thg-pod-slider>
       </div>
     {%- endif -%}
 
@@ -296,10 +313,137 @@
     opacity: 0.8;
   }
 
+  .thg-soc__slider { display: block; }
+  .thg-soc__nav { display: none; }
+
+  /* Phones: one podcast at a time, swipe left/right */
   @media screen and (max-width: 749px) {
-    .thg-soc__pod-grid { grid-template-columns: 1fr; gap: 36px; }
+    .thg-soc__pods { margin-inline: -16px; }
+    .thg-soc__pods .thg-soc__subhead { padding-inline: 16px; }
+
+    .thg-soc__pod-grid {
+      display: flex;
+      gap: 14px;
+      padding: 0 16px 4px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 16px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .thg-soc__pod-grid::-webkit-scrollbar { display: none; }
+
+    .thg-soc__pod {
+      flex: 0 0 calc(100% - 32px);
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+    }
+
+    .thg-soc__nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .thg-soc__arrow {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+      border-radius: 50%;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      transition: opacity 0.2s ease, border-color 0.2s ease;
+    }
+
+    .thg-soc__arrow:hover,
+    .thg-soc__arrow:focus-visible { border-color: var(--thg-gold); }
+    .thg-soc__arrow:disabled { opacity: 0.3; cursor: default; }
+
+    .thg-soc__dots { display: flex; gap: 8px; }
+
+    .thg-soc__dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 0;
+      border-radius: 99px;
+      background: color-mix(in srgb, currentColor 35%, transparent);
+      cursor: pointer;
+      transition: width 0.25s ease, background-color 0.25s ease;
+    }
+
+    .thg-soc__dot.is-active { width: 22px; background: var(--thg-gold); }
   }
 {% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('thg-pod-slider')) {
+    customElements.define(
+      'thg-pod-slider',
+      class extends HTMLElement {
+        connectedCallback() {
+          this.track = this.querySelector('.thg-soc__pod-grid');
+          this.items = [...this.track.children];
+          this.dots = [...this.querySelectorAll('.thg-soc__dot')];
+          this.arrows = [...this.querySelectorAll('.thg-soc__arrow')];
+          if (!this.items.length) return;
+
+          this.arrows.forEach((a) =>
+            a.addEventListener('click', () => this.go(this.index() + Number(a.dataset.dir)))
+          );
+          this.dots.forEach((d) => d.addEventListener('click', () => this.go(Number(d.dataset.index))));
+
+          let raf;
+          this.track.addEventListener('scroll', () => {
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(() => this.update());
+          }, { passive: true });
+          this.update();
+        }
+
+        index() {
+          const mid = this.track.scrollLeft + this.track.clientWidth / 2;
+          let best = 0;
+          let dist = Infinity;
+          this.items.forEach((el, i) => {
+            const d = Math.abs(el.offsetLeft + el.offsetWidth / 2 - mid);
+            if (d < dist) { dist = d; best = i; }
+          });
+          return best;
+        }
+
+        go(i) {
+          const n = Math.max(0, Math.min(this.items.length - 1, i));
+          const el = this.items[n];
+          this.track.scrollTo({
+            left: el.offsetLeft - (this.track.clientWidth - el.offsetWidth) / 2,
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          });
+        }
+
+        update() {
+          const i = this.index();
+          this.dots.forEach((d, n) => {
+            d.classList.toggle('is-active', n === i);
+            d.setAttribute('aria-current', n === i ? 'true' : 'false');
+          });
+          if (this.arrows.length) {
+            this.arrows[0].disabled = i === 0;
+            this.arrows[1].disabled = i === this.items.length - 1;
+          }
+        }
+      }
+    );
+  }
+{% endjavascript %}
 
 {% schema %}
 {
