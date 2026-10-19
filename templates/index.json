@@ -28,7 +28,12 @@
         "sticky_mobile": true,
         "sticky_note": "$350 deposit · payment plan",
         "bar_background": "#111111",
-        "bar_text": "#ffffff"
+        "bar_text": "#ffffff",
+        "accent_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "label_bg": "",
+        "label_text": ""
       }
     },
     "video": {
@@ -38,10 +43,15 @@
         "tag": "Watch",
         "heading": "Four Days That Will Change the Way You Hunt Forever",
         "text": "<p>We host this event only once each year. Come for the hunting. Leave with your hunting community.</p>",
-        "video_url": "https://www.youtube.com/watch?v=2hcqSAqL2ic&t=3s",
+        "video_url": "https://youtu.be/iQc0cRuJMvA?is=ZT27LAdxlYU3MZq1",
         "show_reserve": true,
         "background_color": "#0a2819",
         "text_color": "#ffffff",
+        "accent_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "label_bg": "",
+        "label_text": "",
         "padding_top": 88,
         "padding_bottom": 88
       }
@@ -174,6 +184,11 @@
         "background_color": "#daa520",
         "text_color": "#111111",
         "ring_color": "#e2761c",
+        "accent_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "label_bg": "",
+        "label_text": "",
         "padding_top": 88,
         "padding_bottom": 88
       }
@@ -236,6 +251,13 @@
         "kit_items": "<ul><li>Field-tested products</li><li>Gear the pros trust</li><li>Practical tools to support success</li><li>Products you'll use, not just another swag bag</li></ul>",
         "background_color": "#fbf6ea",
         "text_color": "#111111",
+        "accent_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "label_bg": "",
+        "label_text": "",
+        "card_bg": "",
+        "card_text": "",
         "padding_top": 88,
         "padding_bottom": 96
       }
@@ -295,6 +317,11 @@
         "button_link": "",
         "background_color": "#0a2819",
         "text_color": "#ffffff",
+        "accent_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "label_bg": "",
+        "label_text": "",
         "padding_top": 88,
         "padding_bottom": 88
       }
@@ -343,7 +370,14 @@
         "show_stars": true,
         "show_reserve": true,
         "background_color": "#daa520",
-        "text_color": "#0A2819",
+        "text_color": "#0a2819",
+        "accent_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "label_bg": "",
+        "label_text": "",
+        "card_bg": "",
+        "card_text": "",
         "padding_top": 88,
         "padding_bottom": 88
       }
@@ -373,6 +407,13 @@
         "secure_text": "Secure checkout · Card, Apple Pay or Google Pay",
         "background_color": "#111111",
         "text_color": "#ffffff",
+        "accent_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "label_bg": "",
+        "label_text": "",
+        "card_bg": "",
+        "card_text": "",
         "padding_top": 96,
         "padding_bottom": 96
       }
@@ -467,6 +508,13 @@
         "contact_link": "",
         "background_color": "#f1ebdd",
         "text_color": "#111111",
+        "accent_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "label_bg": "",
+        "label_text": "",
+        "card_bg": "",
+        "card_text": "",
         "padding_top": 96,
         "padding_bottom": 96
       }
@@ -483,7 +531,14 @@
         "submit_label": "Send Message",
         "success_message": "Thanks! We got your message and will be in touch soon.",
         "background_color": "#daa520",
-        "text_color": "#0A2819",
+        "text_color": "#0a2819",
+        "accent_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "label_bg": "",
+        "label_text": "",
+        "card_bg": "",
+        "card_text": "",
         "padding_top": 88,
         "padding_bottom": 88
       }
@@ -572,6 +627,11 @@
         "partners_heading": "Our Partners",
         "background_color": "#111111",
         "text_color": "#ffffff",
+        "accent_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "label_bg": "",
+        "label_text": "",
         "padding_top": 88,
         "padding_bottom": 88
       }
@@ -642,6 +702,11 @@
         "speed": 30,
         "background_color": "#ffffff",
         "text_color": "#111111",
+        "accent_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "label_bg": "",
+        "label_text": "",
         "padding_top": 64,
         "padding_bottom": 64
       }
