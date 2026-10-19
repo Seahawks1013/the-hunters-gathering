@@ -12,6 +12,7 @@
     "hero": {
       "type": "thg-hero",
       "settings": {
+        "reserve_link": "",
         "image": "shopify://shop_images/NEW_THG_WEB_BANNER.png",
         "desktop_height": "natural",
         "mobile_image_height": 40,
@@ -33,6 +34,7 @@
     "video": {
       "type": "thg-video",
       "settings": {
+        "reserve_link": "",
         "tag": "Watch",
         "heading": "Four Days That Will Change the Way You Hunt Forever",
         "text": "<p>We host this event only once each year. Come for the hunting. Leave with your hunting community.</p>",
@@ -51,6 +53,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Gritty_Elk_Hunt__Trent_Fisher.png",
+            "zoom": 100,
+            "pos_x": 50,
+            "pos_y": 50,
             "name": "Trent Fisher",
             "specialty": "Elk",
             "instagram_url": "",
@@ -61,6 +66,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Elk_Hunt_in_Snowy_Mountains.png",
+            "zoom": 100,
+            "pos_x": 50,
+            "pos_y": 50,
             "name": "Casey LaVere Butler",
             "specialty": "Elk",
             "instagram_url": "",
@@ -71,6 +79,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Blacktail_Hunter__Tom_Ryle.png",
+            "zoom": 100,
+            "pos_x": 50,
+            "pos_y": 50,
             "name": "Tom Ryle",
             "specialty": "Blacktail Deer",
             "instagram_url": "",
@@ -81,6 +92,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Blacktail_Night__Dave_Riley_Hunting_Poster.png",
+            "zoom": 100,
+            "pos_x": 50,
+            "pos_y": 50,
             "name": "Dave Riley",
             "specialty": "Blacktail Deer",
             "instagram_url": "",
@@ -91,6 +105,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Bear_Hunt__Heather_Aldrich.png",
+            "zoom": 100,
+            "pos_x": 50,
+            "pos_y": 50,
             "name": "Heather Aldrich",
             "specialty": "Bear",
             "instagram_url": "",
@@ -101,6 +118,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Turkey_Hunt__Alex_Chaney.png",
+            "zoom": 100,
+            "pos_x": 50,
+            "pos_y": 50,
             "name": "Alex Chaney",
             "specialty": "Turkey",
             "instagram_url": "",
@@ -111,6 +131,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/Cougar_in_the_Forest__Jim_Myers.png",
+            "zoom": 100,
+            "pos_x": 50,
+            "pos_y": 50,
             "name": "Jim Myers",
             "specialty": "Mountain Lion",
             "instagram_url": "",
@@ -120,6 +143,9 @@
         "instructor_8": {
           "type": "instructor",
           "settings": {
+            "zoom": 100,
+            "pos_x": 50,
+            "pos_y": 50,
             "name": "Cody Sanchez",
             "specialty": "Predators",
             "instagram_url": "",
@@ -204,6 +230,7 @@
         "price_label": "Your price",
         "price_value": "$1,795",
         "footnote": "",
+        "kit_image": "shopify://shop_images/13.webp",
         "kit_title": "The Hunter's Gathering Field Kit",
         "kit_value": "Over $400 value",
         "kit_items": "<ul><li>Field-tested products</li><li>Gear the pros trust</li><li>Practical tools to support success</li><li>Products you'll use, not just another swag bag</li></ul>",
@@ -309,6 +336,7 @@
         "testimonial_3"
       ],
       "settings": {
+        "reserve_link": "",
         "tag": "From past attendees",
         "heading": "Success Is No Accident",
         "text": "",
@@ -323,6 +351,7 @@
     "pricing": {
       "type": "thg-pricing",
       "settings": {
+        "reserve_link": "",
         "tag": "Limited to 100 hunters",
         "heading": "Reserve Your Seat",
         "text": "<p>Lock in your spot with a $350 deposit today. The rest is split into automatic payments before the event.</p>",
@@ -550,6 +579,14 @@
     "partners": {
       "type": "thg-partners",
       "blocks": {
+        "partner_W9Lmcp": {
+          "type": "partner",
+          "settings": {
+            "name": "Partner",
+            "url": "",
+            "builtin_logo": ""
+          }
+        },
         "partner_1": {
           "type": "partner",
           "settings": {
@@ -592,6 +629,7 @@
         }
       },
       "block_order": [
+        "partner_W9Lmcp",
         "partner_1",
         "partner_2",
         "partner_3",
