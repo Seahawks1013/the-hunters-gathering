@@ -63,6 +63,7 @@
     --thg-num: {{ section.settings.number_color }};
     --thg-bar: {{ section.settings.bar_color }};
     --thg-low: {{ section.settings.low_color }};
+    --thg-topo: url('{{ 'thg-topo.svg' | asset_url }}');
     --thg-pattern: color-mix(in srgb, {{ section.settings.pattern_color }} {{ section.settings.pattern_strength }}%, transparent);
     --thg-pad-top: {{ section.settings.padding_top }}px;
     --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
@@ -151,21 +152,27 @@
     pointer-events: none;
   }
 
-  /* Faint contour lines that slowly drift */
+  /* Topographic contour lines (assets/thg-topo.svg) that slowly drift */
   .thg-count__topo {
     position: absolute;
-    inset: -25%;
-    background:
-      repeating-radial-gradient(ellipse 60% 48% at 22% 35%, transparent 0 37px, var(--thg-pattern) 38.25px, transparent 39.5px),
-      repeating-radial-gradient(ellipse 52% 60% at 80% 70%, transparent 0 51px, var(--thg-pattern) 52.25px, transparent 53.5px);
-    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 75%);
-    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 75%);
-    animation: thg-count-drift 48s ease-in-out infinite alternate;
+    inset: 0;
+    -webkit-mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 25%, transparent 80%);
+    mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 25%, transparent 80%);
+  }
+
+  .thg-count__topo::before {
+    content: '';
+    position: absolute;
+    inset: -12%;
+    background: var(--thg-pattern);
+    -webkit-mask: var(--thg-topo) center / cover no-repeat;
+    mask: var(--thg-topo) center / cover no-repeat;
+    animation: thg-count-drift 60s ease-in-out infinite alternate;
   }
 
   @keyframes thg-count-drift {
-    from { transform: translate3d(-3%, -2%, 0) rotate(0deg); }
-    to { transform: translate3d(3%, 2%, 0) rotate(4deg); }
+    from { transform: translate3d(-4%, -2%, 0) scale(1); }
+    to { transform: translate3d(4%, 2%, 0) scale(1.06); }
   }
 
   /* Soft radar rings pulsing out from behind the number */
@@ -195,7 +202,7 @@
   .thg-count--fx-pings .thg-count__topo { display: none; }
 
   @media (prefers-reduced-motion: reduce) {
-    .thg-count__topo { animation: none; }
+    .thg-count__topo::before { animation: none; }
     .thg-count__ping { display: none; }
   }
 
@@ -517,10 +524,10 @@
       "id": "pattern_strength",
       "label": "Animation strength",
       "min": 2,
-      "max": 30,
+      "max": 40,
       "step": 1,
       "unit": "%",
-      "default": 9
+      "default": 16
     },
     {
       "type": "header",
