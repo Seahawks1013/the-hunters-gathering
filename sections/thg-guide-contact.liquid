@@ -270,26 +270,24 @@
           const api = (path, body) =>
             fetch(`https://a.klaviyo.com/client/${path}/?company_id=${encodeURIComponent(key)}`, {
               method: 'POST',
+              keepalive: true, // finishes even if the page moves on
               headers: { 'Content-Type': 'application/vnd.api+json', revision: '2024-10-15' },
               body: JSON.stringify({ data: body }),
             });
 
-          // Listen on the wrapper so it works no matter when the form is parsed
-          this.addEventListener('submit', async (e) => {
-            const form = e.target;
-            if (!(form instanceof HTMLFormElement) || form.dataset.klSent || !form.checkValidity()) return;
-            e.preventDefault();
+          const send = (form) => {
             const v = (n) => (form.querySelector(`[name="contact[${n}]"]`)?.value || '').trim();
             const email = v('email');
+            if (!email) return Promise.resolve();
             const [first, ...rest] = v('name').split(/\s+/);
             const phone = v('phone');
             const question = v('body');
             const optin = form.querySelector('[name="contact[accepts_updates]"]')?.checked;
-            const profile = { email, first_name: first || undefined, last_name: rest.join(' ') || undefined,
-              properties: { Phone: phone || undefined, 'Last question': question, 'Lead source': 'Website contact form' } };
-
             const calls = [
-              api('profiles', { type: 'profile', attributes: profile }),
+              api('profiles', { type: 'profile', attributes: {
+                email, first_name: first || undefined, last_name: rest.join(' ') || undefined,
+                properties: { Phone: phone || undefined, 'Last question': question, 'Lead source': 'Website contact form' },
+              } }),
               api('events', { type: 'event', attributes: {
                 properties: { Question: question, Phone: phone, Page: location.pathname },
                 metric: { data: { type: 'metric', attributes: { name: 'Submitted Contact Form' } } },
@@ -303,13 +301,26 @@
                     subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } } } } } },
                 relationships: { list: { data: { type: 'list', id: list } } } }));
             }
+            return Promise.allSettled(calls);
+          };
 
-            const btn = form.querySelector('[type="submit"]');
-            if (btn) btn.setAttribute('aria-busy', 'true');
-            // Never hold the visitor up for more than ~2.5 seconds
-            await Promise.race([Promise.allSettled(calls), new Promise((r) => setTimeout(r, 2500))]);
+          // Listen on the wrapper so it works no matter when the form is parsed.
+          // Shopify's own submit handling (including its spam check / CAPTCHA) always runs.
+          this.addEventListener('submit', async (e) => {
+            const form = e.target;
+            if (!(form instanceof HTMLFormElement) || !form.checkValidity()) return;
+            if (form.dataset.klSent) return; // second pass: let Shopify submit normally
             form.dataset.klSent = '1';
-            HTMLFormElement.prototype.submit.call(form); // continue the normal Shopify contact submit
+            const sending = send(form);
+
+            // Shopify is already handling this submit (e.g. running its CAPTCHA): don't interfere
+            if (e.defaultPrevented) return;
+
+            // Otherwise give Klaviyo a moment, then resubmit through Shopify's normal path
+            e.preventDefault();
+            await Promise.race([sending, new Promise((r) => setTimeout(r, 1500))]);
+            if (form.requestSubmit) form.requestSubmit(e.submitter || undefined);
+            else HTMLFormElement.prototype.submit.call(form);
           });
         }
       }
