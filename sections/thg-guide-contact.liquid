@@ -45,6 +45,14 @@
       <h2 class="thg-lead__title">{{ section.settings.contact_heading | escape }}</h2>
       {%- if section.settings.contact_text != blank -%}<div class="thg-lead__text">{{ section.settings.contact_text }}</div>{%- endif -%}
 
+      {%- liquid
+        assign kl_key = settings.thg_klaviyo_key | strip
+        assign kl_list = settings.thg_klaviyo_list | strip
+      -%}
+      <thg-klaviyo-form
+        {% if kl_key != blank %}data-kl-key="{{ kl_key | escape }}"{% endif %}
+        {% if kl_list != blank %}data-kl-list="{{ kl_list | escape }}"{% endif %}
+      >
       {%- form 'contact', id: 'thg-contact-form', class: 'thg-form' -%}
         {%- if form.posted_successfully? -%}
           <p class="thg-form__success" role="status" tabindex="-1" autofocus>
@@ -76,13 +84,40 @@
           <label for="thg-contact-question">What's your question? <span aria-hidden="true">*</span></label>
           <textarea id="thg-contact-question" name="contact[body]" rows="4" required>{{ form.body }}</textarea>
         </div>
+        {%- if section.settings.show_optin -%}
+          <label class="thg-form__optin">
+            <input type="checkbox" name="contact[accepts_updates]" value="yes" {% if section.settings.optin_checked %}checked{% endif %}>
+            <span>{{ section.settings.optin_label | escape }}</span>
+          </label>
+        {%- endif -%}
         <button type="submit" class="thg-btn thg-btn--reserve thg-btn--full">{{ section.settings.submit_label | escape }}</button>
       {%- endform -%}
+      </thg-klaviyo-form>
     </div>
   </div>
 </div>
 
 {% stylesheet %}
+  thg-klaviyo-form { display: block; }
+
+  .thg-form__optin {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 4px 0 18px;
+    font-size: 14px;
+    line-height: 1.45;
+    cursor: pointer;
+  }
+
+  .thg-form__optin input {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin: 1px 0 0;
+    accent-color: var(--thg-green);
+  }
+
   .thg-lead__layout {
     display: grid;
     gap: 22px;
@@ -222,6 +257,66 @@
   .thg-form__error ul { margin: 0; padding-left: 18px; }
 {% endstylesheet %}
 
+{% javascript %}
+  if (!customElements.get('thg-klaviyo-form')) {
+    customElements.define(
+      'thg-klaviyo-form',
+      class extends HTMLElement {
+        connectedCallback() {
+          const key = this.dataset.klKey;
+          if (!key || key.startsWith('pk_') || this.dataset.ready) return;
+          this.dataset.ready = '1';
+          const list = this.dataset.klList;
+          const api = (path, body) =>
+            fetch(`https://a.klaviyo.com/client/${path}/?company_id=${encodeURIComponent(key)}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/vnd.api+json', revision: '2024-10-15' },
+              body: JSON.stringify({ data: body }),
+            });
+
+          // Listen on the wrapper so it works no matter when the form is parsed
+          this.addEventListener('submit', async (e) => {
+            const form = e.target;
+            if (!(form instanceof HTMLFormElement) || form.dataset.klSent || !form.checkValidity()) return;
+            e.preventDefault();
+            const v = (n) => (form.querySelector(`[name="contact[${n}]"]`)?.value || '').trim();
+            const email = v('email');
+            const [first, ...rest] = v('name').split(/\s+/);
+            const phone = v('phone');
+            const question = v('body');
+            const optin = form.querySelector('[name="contact[accepts_updates]"]')?.checked;
+            const profile = { email, first_name: first || undefined, last_name: rest.join(' ') || undefined,
+              properties: { Phone: phone || undefined, 'Last question': question, 'Lead source': 'Website contact form' } };
+
+            const calls = [
+              api('profiles', { type: 'profile', attributes: profile }),
+              api('events', { type: 'event', attributes: {
+                properties: { Question: question, Phone: phone, Page: location.pathname },
+                metric: { data: { type: 'metric', attributes: { name: 'Submitted Contact Form' } } },
+                profile: { data: { type: 'profile', attributes: { email } } },
+              } }),
+            ];
+            if (optin && list) {
+              calls.push(api('subscriptions', { type: 'subscription',
+                attributes: { custom_source: 'Website contact form',
+                  profile: { data: { type: 'profile', attributes: { email,
+                    subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } } } } } },
+                relationships: { list: { data: { type: 'list', id: list } } } }));
+            }
+
+            const btn = form.querySelector('[type="submit"]');
+            if (btn) btn.setAttribute('aria-busy', 'true');
+            // Never hold the visitor up for more than ~2.5 seconds
+            await Promise.race([Promise.allSettled(calls), new Promise((r) => setTimeout(r, 2500))]);
+            form.dataset.klSent = '1';
+            HTMLFormElement.prototype.submit.call(form); // continue the normal Shopify contact submit
+          });
+        }
+      }
+    );
+  }
+{% endjavascript %}
+
 {% schema %}
 {
   "name": "Event Guide & contact",
@@ -292,6 +387,28 @@
       "id": "success_message",
       "label": "Success message",
       "default": "Thanks! We got your message and will be in touch soon."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_optin",
+      "label": "Show email updates checkbox",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "optin_label",
+      "label": "Updates checkbox text",
+      "default": "Send me updates about The Hunter's Gathering"
+    },
+    {
+      "type": "checkbox",
+      "id": "optin_checked",
+      "label": "Checkbox ticked by default",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Form entries also go to Klaviyo once the key and list are set in Theme settings → Klaviyo."
     },
     {
       "type": "header",

@@ -2276,5 +2276,26 @@
         "default": "#E2761C"
       }
     ]
+  },
+  {
+    "name": "Klaviyo",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Sends the site's contact form to Klaviyo. Find both values in Klaviyo: Settings → Account → API keys (Public API key / Site ID) and Lists & Segments → your list → Settings (List ID)."
+      },
+      {
+        "type": "text",
+        "id": "thg_klaviyo_key",
+        "label": "Klaviyo public API key (Site ID)",
+        "info": "6 characters, e.g. AbC123. Never paste a private key (pk_...) here."
+      },
+      {
+        "type": "text",
+        "id": "thg_klaviyo_list",
+        "label": "List ID",
+        "info": "People who tick the updates box are added to this list."
+      }
+    ]
   }
 ]
