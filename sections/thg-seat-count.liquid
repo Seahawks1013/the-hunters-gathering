@@ -58,6 +58,7 @@
   assign message = message | replace: '[remaining]', remaining | replace: '[total]', total | replace: '[taken]', taken
 -%}
 
+<!-- thg-seats: product={{ p.handle | default: 'none' }} tracked={{ tracked }} remaining={{ remaining }} total={{ total }} -->
 <div
   class="thg-sec thg-count{% if low %} thg-count--low{% endif %}{% if sold_out %} thg-count--soldout{% endif %}"
   style="
@@ -321,35 +322,35 @@
       'thg-count-up',
       class extends HTMLElement {
         connectedCallback() {
+          // The real number is rendered by Shopify and stays visible by default.
+          // The count-down is only a bonus: if anything about it fails, the real number remains.
           const to = parseInt(this.dataset.to, 10);
           const from = parseInt(this.dataset.from, 10);
           const still = this.hasAttribute('data-static') || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          if (still || isNaN(to) || isNaN(from) || from === to) return;
+          if (still || isNaN(to) || isNaN(from) || from <= to || !('IntersectionObserver' in window)) return;
 
-          this.textContent = from;
           const run = () => {
             const start = performance.now();
-            const dur = 1400;
+            const dur = 1200;
             const step = (now) => {
               const t = Math.min(1, (now - start) / dur);
               const eased = 1 - Math.pow(1 - t, 3);
-              this.textContent = Math.round(from + (to - from) * eased);
+              this.textContent = t < 1 ? Math.round(from + (to - from) * eased) : to;
               if (t < 1) requestAnimationFrame(step);
             };
             requestAnimationFrame(step);
           };
 
-          if (!('IntersectionObserver' in window)) {
-            this.textContent = to;
-            return;
-          }
           const io = new IntersectionObserver((entries) => {
             if (entries.some((e) => e.isIntersecting)) {
               io.disconnect();
               run();
             }
-          }, { threshold: 0.4 });
+          }, { threshold: 0.1 });
           io.observe(this);
+
+          // Safety net: always end on the real number
+          setTimeout(() => { this.textContent = to; }, 8000);
         }
       }
     );
