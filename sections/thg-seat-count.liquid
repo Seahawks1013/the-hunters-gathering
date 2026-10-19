@@ -8,7 +8,10 @@
 
 {%- liquid
   assign total = settings.thg_total_seats | default: 100
-  assign p = section.settings.product | default: settings.thg_event_product
+  assign p = settings.thg_event_product
+  if section.settings.product != blank and section.settings.product.id != blank
+    assign p = section.settings.product
+  endif
   assign tracked = false
   assign remaining = total
 
