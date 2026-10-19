@@ -60,6 +60,7 @@
 
 <!-- thg-seats: product={{ p.handle | default: 'none' }} tracked={{ tracked }} remaining={{ remaining }} total={{ total }} -->
 <div
+  data-sid="{{ section.id }}"
   class="thg-sec thg-count{% if low %} thg-count--low{% endif %}{% if sold_out %} thg-count--soldout{% endif %}"
   style="
     --thg-bg: {{ section.settings.background_color }};
@@ -321,7 +322,33 @@
     customElements.define(
       'thg-count-up',
       class extends HTMLElement {
+        // Pages can be cached for a few minutes, so the counter fetches a fresh copy of
+        // this section on every page view, and again every minute while the page is open,
+        // and swaps it in whenever the seat count changes.
+        refresh() {
+          const sec = this.closest('.thg-count');
+          if (!sec || !sec.dataset.sid || sec.dataset.live || window.Shopify?.designMode) return;
+          sec.dataset.live = '1';
+          const root = window.Shopify?.routes?.root || '/';
+          const check = () =>
+            fetch(`${root}?section_id=${encodeURIComponent(sec.dataset.sid)}&thg=${Date.now()}`, { cache: 'no-store' })
+              .then((r) => (r.ok ? r.text() : ''))
+              .then((html) => {
+                if (!html) return;
+                const fresh = new DOMParser().parseFromString(html, 'text/html').querySelector('.thg-count');
+                const num = fresh?.querySelector('.thg-count__num');
+                const current = sec.querySelector('.thg-count__num');
+                if (!num || !current || num.dataset.to === current.dataset.to) return;
+                sec.className = fresh.className;
+                sec.querySelector('.thg-count__inner').innerHTML = fresh.querySelector('.thg-count__inner').innerHTML;
+              })
+              .catch(() => {});
+          check();
+          setInterval(() => { if (!document.hidden) check(); }, 60000);
+        }
+
         connectedCallback() {
+          this.refresh();
           // The real number is rendered by Shopify and stays visible by default.
           // The count-down is only a bonus: if anything about it fails, the real number remains.
           const to = parseInt(this.dataset.to, 10);
