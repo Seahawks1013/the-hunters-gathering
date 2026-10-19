@@ -731,7 +731,7 @@
         "show_reserve": true,
         "button_style": "primary",
         "reserve_link": "",
-        "background_color": "#DAA520",
+        "background_color": "#FFFFFF",
         "text_color": "#111111",
         "number_color": "#0A2819",
         "accent_color": "",
@@ -742,7 +742,10 @@
         "padding_top": 72,
         "padding_bottom": 72,
         "bar_color": "#0A2819",
-        "low_color": "#7A1F0A"
+        "low_color": "#7A1F0A",
+        "animation": "both",
+        "pattern_color": "#0A2819",
+        "pattern_strength": 9
       }
     }
   },

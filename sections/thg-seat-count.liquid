@@ -56,18 +56,28 @@
 -%}
 
 <div
-  class="thg-sec thg-count{% if low %} thg-count--low{% endif %}{% if sold_out %} thg-count--soldout{% endif %}"
+  class="thg-sec thg-count thg-count--fx-{{ section.settings.animation }}{% if low %} thg-count--low{% endif %}{% if sold_out %} thg-count--soldout{% endif %}"
   style="
     --thg-bg: {{ section.settings.background_color }};
     --thg-text: {{ section.settings.text_color }};
     --thg-num: {{ section.settings.number_color }};
     --thg-bar: {{ section.settings.bar_color }};
     --thg-low: {{ section.settings.low_color }};
+    --thg-pattern: color-mix(in srgb, {{ section.settings.pattern_color }} {{ section.settings.pattern_strength }}%, transparent);
     --thg-pad-top: {{ section.settings.padding_top }}px;
     --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
     {%- render 'thg-section-colors', s: section.settings -%}
   "
 >
+  {%- if section.settings.animation != 'none' -%}
+    <div class="thg-count__bg" aria-hidden="true">
+      <span class="thg-count__topo"></span>
+      <span class="thg-count__ping"></span>
+      <span class="thg-count__ping"></span>
+      <span class="thg-count__ping"></span>
+    </div>
+  {%- endif -%}
+
   <div class="thg-wrap thg-count__inner">
     {%- if section.settings.label != blank -%}
       <p class="thg-count__live">
@@ -128,6 +138,67 @@
 </div>
 
 {% stylesheet %}
+  .thg-count {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .thg-count__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Faint contour lines that slowly drift */
+  .thg-count__topo {
+    position: absolute;
+    inset: -25%;
+    background:
+      repeating-radial-gradient(ellipse 60% 48% at 22% 35%, transparent 0 37px, var(--thg-pattern) 38.25px, transparent 39.5px),
+      repeating-radial-gradient(ellipse 52% 60% at 80% 70%, transparent 0 51px, var(--thg-pattern) 52.25px, transparent 53.5px);
+    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 75%);
+    animation: thg-count-drift 48s ease-in-out infinite alternate;
+  }
+
+  @keyframes thg-count-drift {
+    from { transform: translate3d(-3%, -2%, 0) rotate(0deg); }
+    to { transform: translate3d(3%, 2%, 0) rotate(4deg); }
+  }
+
+  /* Soft radar rings pulsing out from behind the number */
+  .thg-count__ping {
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    width: min(70vw, 620px);
+    aspect-ratio: 1;
+    border: 1.5px solid var(--thg-pattern);
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.25);
+    animation: thg-count-ping 7.5s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+  }
+
+  .thg-count__ping:nth-child(3) { animation-delay: 2.5s; }
+  .thg-count__ping:nth-child(4) { animation-delay: 5s; }
+
+  @keyframes thg-count-ping {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.25); }
+    15% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.6); }
+  }
+
+  .thg-count--fx-topo .thg-count__ping,
+  .thg-count--fx-pings .thg-count__topo { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .thg-count__topo { animation: none; }
+    .thg-count__ping { display: none; }
+  }
+
   .thg-count__inner {
     display: flex;
     flex-direction: column;
@@ -409,13 +480,57 @@
     },
     {
       "type": "header",
+      "content": "Background animation"
+    },
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "Animation",
+      "options": [
+        {
+          "value": "both",
+          "label": "Contour lines + radar rings"
+        },
+        {
+          "value": "topo",
+          "label": "Contour lines only"
+        },
+        {
+          "value": "pings",
+          "label": "Radar rings only"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "Animation color",
+      "default": "#0A2819"
+    },
+    {
+      "type": "range",
+      "id": "pattern_strength",
+      "label": "Animation strength",
+      "min": 2,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 9
+    },
+    {
+      "type": "header",
       "content": "Colors"
     },
     {
       "type": "color",
       "id": "background_color",
       "label": "Background",
-      "default": "#DAA520"
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
