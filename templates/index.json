@@ -729,18 +729,20 @@
         "animate": true,
         "show_bar": true,
         "show_reserve": true,
-        "button_style": "light",
+        "button_style": "primary",
         "reserve_link": "",
-        "background_color": "#111111",
-        "text_color": "#FFFFFF",
-        "number_color": "#DAA520",
+        "background_color": "#DAA520",
+        "text_color": "#111111",
+        "number_color": "#0A2819",
         "accent_color": "",
         "button_bg": "",
         "button_text": "",
         "label_bg": "",
         "label_text": "",
         "padding_top": 72,
-        "padding_bottom": 72
+        "padding_bottom": 72,
+        "bar_color": "#0A2819",
+        "low_color": "#7A1F0A"
       }
     }
   },

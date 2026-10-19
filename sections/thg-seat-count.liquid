@@ -61,6 +61,8 @@
     --thg-bg: {{ section.settings.background_color }};
     --thg-text: {{ section.settings.text_color }};
     --thg-num: {{ section.settings.number_color }};
+    --thg-bar: {{ section.settings.bar_color }};
+    --thg-low: {{ section.settings.low_color }};
     --thg-pad-top: {{ section.settings.padding_top }}px;
     --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
     {%- render 'thg-section-colors', s: section.settings -%}
@@ -184,6 +186,7 @@
     letter-spacing: -0.03em;
     color: var(--thg-num);
     font-variant-numeric: tabular-nums;
+    text-shadow: 0 10px 30px color-mix(in srgb, var(--thg-num) 25%, transparent);
   }
 
   .thg-count__of {
@@ -209,7 +212,7 @@
     height: 100%;
     min-width: 6px;
     border-radius: inherit;
-    background: linear-gradient(90deg, var(--thg-gold), var(--thg-orange));
+    background: var(--thg-bar);
   }
 
   .thg-count__scale {
@@ -233,7 +236,7 @@
   }
 
   .thg-count--low .thg-count__msg {
-    color: var(--thg-orange);
+    color: var(--thg-low);
     font-weight: 700;
     opacity: 1;
   }
@@ -313,42 +316,190 @@
       "label": "Registration product (optional)",
       "info": "Leave empty to use the product from Theme settings → Event registration."
     },
-    { "type": "text", "id": "label", "label": "Label", "default": "Live seat count" },
-    { "type": "text", "id": "of_text", "label": "Text under the number", "default": "of [total] seats remaining", "info": "[total] is filled in automatically." },
-    { "type": "text", "id": "text", "label": "Message", "default": "Every reservation lowers this number. When it hits zero, the 2027 Gathering is full.", "info": "You can use [remaining], [total] and [taken]." },
-    { "type": "range", "id": "low_threshold", "label": "Show the \"almost full\" message at (seats left)", "min": 5, "max": 50, "step": 5, "default": 25 },
-    { "type": "text", "id": "low_text", "label": "Almost full message", "default": "Only [remaining] seats left. Reserve yours before they're gone." },
-    { "type": "text", "id": "soldout_word", "label": "Sold out text under the number", "default": "Sold out" },
-    { "type": "text", "id": "soldout_text", "label": "Sold out message", "default": "All [total] seats are taken. Join the waitlist to hear first if a seat opens up." },
-    { "type": "checkbox", "id": "animate", "label": "Count down when it scrolls into view", "default": true },
-    { "type": "checkbox", "id": "show_bar", "label": "Show progress bar", "default": true },
-    { "type": "header", "content": "Button" },
-    { "type": "checkbox", "id": "show_reserve", "label": "Show Reserve button", "default": true },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Live seat count"
+    },
+    {
+      "type": "text",
+      "id": "of_text",
+      "label": "Text under the number",
+      "default": "of [total] seats remaining",
+      "info": "[total] is filled in automatically."
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Message",
+      "default": "Every reservation lowers this number. When it hits zero, the 2027 Gathering is full.",
+      "info": "You can use [remaining], [total] and [taken]."
+    },
+    {
+      "type": "range",
+      "id": "low_threshold",
+      "label": "Show the \"almost full\" message at (seats left)",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "default": 25
+    },
+    {
+      "type": "text",
+      "id": "low_text",
+      "label": "Almost full message",
+      "default": "Only [remaining] seats left. Reserve yours before they're gone."
+    },
+    {
+      "type": "text",
+      "id": "soldout_word",
+      "label": "Sold out text under the number",
+      "default": "Sold out"
+    },
+    {
+      "type": "text",
+      "id": "soldout_text",
+      "label": "Sold out message",
+      "default": "All [total] seats are taken. Join the waitlist to hear first if a seat opens up."
+    },
+    {
+      "type": "checkbox",
+      "id": "animate",
+      "label": "Count down when it scrolls into view",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bar",
+      "label": "Show progress bar",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reserve",
+      "label": "Show Reserve button",
+      "default": true
+    },
     {
       "type": "select",
       "id": "button_style",
       "label": "Button style",
       "options": [
-        { "value": "light", "label": "Gold" },
-        { "value": "primary", "label": "Forest green" }
+        {
+          "value": "light",
+          "label": "Gold"
+        },
+        {
+          "value": "primary",
+          "label": "Forest green"
+        }
       ],
-      "default": "light"
+      "default": "primary"
     },
-    { "type": "url", "id": "reserve_link", "label": "Reserve button link (optional)", "info": "Leave empty to use the registration product from Theme settings → Event registration." },
-    { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "background_color", "label": "Background", "default": "#111111" },
-    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
-    { "type": "color", "id": "number_color", "label": "Big number", "default": "#DAA520" },
-    { "type": "header", "content": "More colors", "info": "Leave any of these empty to use the brand colors from Theme settings → Brand colors." },
-    { "type": "color", "id": "accent_color", "label": "Accent (checkmarks, links, lines)" },
-    { "type": "color", "id": "button_bg", "label": "Button background" },
-    { "type": "color", "id": "button_text", "label": "Button text" },
-    { "type": "color", "id": "label_bg", "label": "Label background" },
-    { "type": "color", "id": "label_text", "label": "Label text" },
-    { "type": "header", "content": "Spacing" },
-    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 72 }
+    {
+      "type": "url",
+      "id": "reserve_link",
+      "label": "Reserve button link (optional)",
+      "info": "Leave empty to use the registration product from Theme settings → Event registration."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#DAA520"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Big number",
+      "default": "#0A2819"
+    },
+    {
+      "type": "color",
+      "id": "bar_color",
+      "label": "Progress bar",
+      "default": "#0A2819"
+    },
+    {
+      "type": "color",
+      "id": "low_color",
+      "label": "Almost full message",
+      "default": "#7A1F0A"
+    },
+    {
+      "type": "header",
+      "content": "More colors",
+      "info": "Leave any of these empty to use the brand colors from Theme settings → Brand colors."
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (checkmarks, links, lines)"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "color",
+      "id": "label_bg",
+      "label": "Label background"
+    },
+    {
+      "type": "color",
+      "id": "label_text",
+      "label": "Label text"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    }
   ],
-  "presets": [{ "name": "Live seat counter" }]
+  "presets": [
+    {
+      "name": "Live seat counter"
+    }
+  ]
 }
 {% endschema %}
