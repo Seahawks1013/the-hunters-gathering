@@ -93,7 +93,9 @@
           {%- endif -%}
         </div>
         {%- render 'thg-reserve-button', variant: 'light', full: true, link: section.settings.reserve_link -%}
-        {%- render 'thg-seat-counter', show_bar: true, tone: 'light' -%}
+        {%- if section.settings.show_seats -%}
+          {%- render 'thg-seat-counter', show_bar: true, tone: 'light' -%}
+        {%- endif -%}
         {%- if section.settings.show_guide_link -%}
           <a class="thg-hero__guide" href="{{ settings.thg_guide_link | default: '#event-guide' }}">
             {{ section.settings.guide_link_text | escape }}
@@ -498,9 +500,15 @@
     },
     {
       "type": "checkbox",
+      "id": "show_seats",
+      "label": "Show seats remaining",
+      "default": false
+    },
+    {
+      "type": "checkbox",
       "id": "show_guide_link",
       "label": "Show Event Guide link",
-      "default": true
+      "default": false
     },
     {
       "type": "text",

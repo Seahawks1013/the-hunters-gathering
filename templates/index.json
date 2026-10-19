@@ -23,7 +23,7 @@
         "venue": "Cabins, meals & field kit included",
         "price": "$1,795",
         "price_note": "Reserve today with a $350 deposit",
-        "show_guide_link": true,
+        "show_guide_link": false,
         "guide_link_text": "Not ready yet? Get the free 2027 Event Guide",
         "sticky_mobile": true,
         "sticky_note": "$350 deposit · payment plan",
@@ -33,7 +33,8 @@
         "button_bg": "",
         "button_text": "",
         "label_bg": "",
-        "label_text": ""
+        "label_text": "",
+        "show_seats": false
       }
     },
     "thg_seat_count_xRkfYG": {
@@ -534,7 +535,7 @@
         "tag": "Good to know",
         "heading": "Questions & Policies",
         "text": "<p>Everything you need to know before you reserve.</p>",
-        "open_first": true,
+        "open_first": false,
         "show_policies": true,
         "policies_title": "Our policies",
         "contact_text": "Still have a question?",
