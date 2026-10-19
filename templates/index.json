@@ -189,9 +189,9 @@
           "type": "instructor",
           "settings": {
             "image": "shopify://shop_images/THG_SPEAKERS_4_x_4_in_7.png",
-            "zoom": 100,
-            "pos_x": 50,
-            "pos_y": 50,
+            "zoom": 125,
+            "pos_x": 36,
+            "pos_y": 44,
             "name": "Cody Sanchez",
             "specialty": "Predators",
             "instagram_url": "",
