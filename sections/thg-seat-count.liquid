@@ -1,0 +1,354 @@
+{%- comment -%}
+  The Hunter's Gathering: Live seat counter
+  A large "seats remaining" number read live from the registration
+  product's inventory. Every order (deposit or paid in full) lowers the
+  inventory, so the number updates by itself. Total seats come from
+  Theme settings → Event registration (100).
+{%- endcomment -%}
+
+{%- liquid
+  assign total = settings.thg_total_seats | default: 100
+  assign p = section.settings.product | default: settings.thg_event_product
+  assign tracked = false
+  assign remaining = total
+
+  if p != blank
+    assign v = p.selected_or_first_available_variant | default: p.variants.first
+    if v.inventory_management == 'shopify'
+      assign tracked = true
+      assign remaining = v.inventory_quantity
+      if remaining < 0
+        assign remaining = 0
+      endif
+      if p.available == false
+        assign remaining = 0
+      endif
+    endif
+  endif
+
+  assign taken = total | minus: remaining
+  if taken < 0
+    assign taken = 0
+  endif
+  assign pct = taken | times: 100 | divided_by: total
+  if pct > 100
+    assign pct = 100
+  endif
+
+  assign low_mark = section.settings.low_threshold
+  assign sold_out = false
+  if tracked and remaining == 0
+    assign sold_out = true
+  endif
+  assign low = false
+  if tracked and remaining <= low_mark and sold_out == false
+    assign low = true
+  endif
+
+  if sold_out
+    assign message = section.settings.soldout_text
+  elsif low
+    assign message = section.settings.low_text
+  else
+    assign message = section.settings.text
+  endif
+  assign message = message | replace: '[remaining]', remaining | replace: '[total]', total | replace: '[taken]', taken
+-%}
+
+<div
+  class="thg-sec thg-count{% if low %} thg-count--low{% endif %}{% if sold_out %} thg-count--soldout{% endif %}"
+  style="
+    --thg-bg: {{ section.settings.background_color }};
+    --thg-text: {{ section.settings.text_color }};
+    --thg-num: {{ section.settings.number_color }};
+    --thg-pad-top: {{ section.settings.padding_top }}px;
+    --thg-pad-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'thg-section-colors', s: section.settings -%}
+  "
+>
+  <div class="thg-wrap thg-count__inner">
+    {%- if section.settings.label != blank -%}
+      <p class="thg-count__live">
+        <span class="thg-count__dot" aria-hidden="true"></span>
+        {{ section.settings.label | escape }}
+      </p>
+    {%- endif -%}
+
+    <p class="thg-count__figure">
+      <thg-count-up
+        class="thg-count__num"
+        data-to="{{ remaining }}"
+        data-from="{{ total }}"
+        {% unless section.settings.animate %}data-static{% endunless %}
+      >{{ remaining }}</thg-count-up>
+      <span class="thg-count__of">
+        {%- if sold_out -%}
+          {{ section.settings.soldout_word | escape }}
+        {%- else -%}
+          {{ section.settings.of_text | replace: '[total]', total | escape }}
+        {%- endif -%}
+      </span>
+    </p>
+
+    {%- if section.settings.show_bar -%}
+      <div
+        class="thg-count__bar"
+        role="progressbar"
+        aria-label="Seats reserved"
+        aria-valuemin="0"
+        aria-valuemax="{{ total }}"
+        aria-valuenow="{{ taken }}"
+      >
+        <span style="width: {{ pct }}%;"></span>
+      </div>
+      <div class="thg-count__scale" aria-hidden="true">
+        <span>{{ taken }} reserved</span>
+        <span>{{ total }} seats</span>
+      </div>
+    {%- endif -%}
+
+    {%- if message != blank -%}
+      <p class="thg-count__msg">{{ message | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.show_reserve -%}
+      <div class="thg-count__cta">
+        {%- render 'thg-reserve-button', variant: section.settings.button_style, link: section.settings.reserve_link -%}
+      </div>
+    {%- endif -%}
+
+    {%- if tracked == false and request.design_mode -%}
+      <p class="thg-count__note">
+        Editor note: pick the registration product in Theme settings → Event registration and turn on "Track quantity" so this number comes from inventory. Until then it shows the total.
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .thg-count__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 760px;
+    text-align: center;
+  }
+
+  .thg-count__live {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .thg-count__dot {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--thg-num);
+  }
+
+  .thg-count__dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: inherit;
+    animation: thg-count-pulse 1.8s ease-out infinite;
+  }
+
+  @keyframes thg-count-pulse {
+    from { transform: scale(1); opacity: 0.7; }
+    to { transform: scale(3); opacity: 0; }
+  }
+
+  .thg-count__figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .thg-count__num {
+    display: block;
+    font-family: var(--font-heading--family);
+    font-size: clamp(120px, 24vw, 240px);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--thg-num);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .thg-count__of {
+    margin-top: 10px;
+    font-size: clamp(18px, 2.6vw, 26px);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .thg-count__bar {
+    width: 100%;
+    max-width: 520px;
+    height: 10px;
+    margin-top: 32px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: color-mix(in srgb, currentColor 18%, transparent);
+  }
+
+  .thg-count__bar span {
+    display: block;
+    height: 100%;
+    min-width: 6px;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--thg-gold), var(--thg-orange));
+  }
+
+  .thg-count__scale {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 520px;
+    margin-top: 8px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .thg-count__msg {
+    max-width: 560px;
+    margin: 22px 0 0;
+    font-size: 18px;
+    line-height: 1.5;
+    opacity: 0.9;
+  }
+
+  .thg-count--low .thg-count__msg {
+    color: var(--thg-orange);
+    font-weight: 700;
+    opacity: 1;
+  }
+
+  .thg-count--soldout .thg-count__dot::after { animation: none; }
+
+  .thg-count__cta { margin-top: 32px; }
+
+  .thg-count__note {
+    max-width: 520px;
+    margin: 24px 0 0;
+    padding: 10px 14px;
+    border: 1px dashed currentColor;
+    font-size: 13px;
+    opacity: 0.75;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .thg-count__dot::after { animation: none; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('thg-count-up')) {
+    customElements.define(
+      'thg-count-up',
+      class extends HTMLElement {
+        connectedCallback() {
+          const to = parseInt(this.dataset.to, 10);
+          const from = parseInt(this.dataset.from, 10);
+          const still = this.hasAttribute('data-static') || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (still || isNaN(to) || isNaN(from) || from === to) return;
+
+          this.textContent = from;
+          const run = () => {
+            const start = performance.now();
+            const dur = 1400;
+            const step = (now) => {
+              const t = Math.min(1, (now - start) / dur);
+              const eased = 1 - Math.pow(1 - t, 3);
+              this.textContent = Math.round(from + (to - from) * eased);
+              if (t < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+          };
+
+          if (!('IntersectionObserver' in window)) {
+            this.textContent = to;
+            return;
+          }
+          const io = new IntersectionObserver((entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              io.disconnect();
+              run();
+            }
+          }, { threshold: 0.4 });
+          io.observe(this);
+        }
+      }
+    );
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Live seat counter",
+  "tag": "section",
+  "class": "thg-count-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Reads the seats left straight from the registration product's inventory. Total seats are set in Theme settings → Event registration."
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Registration product (optional)",
+      "info": "Leave empty to use the product from Theme settings → Event registration."
+    },
+    { "type": "text", "id": "label", "label": "Label", "default": "Live seat count" },
+    { "type": "text", "id": "of_text", "label": "Text under the number", "default": "of [total] seats remaining", "info": "[total] is filled in automatically." },
+    { "type": "text", "id": "text", "label": "Message", "default": "Every reservation lowers this number. When it hits zero, the 2027 Gathering is full.", "info": "You can use [remaining], [total] and [taken]." },
+    { "type": "range", "id": "low_threshold", "label": "Show the \"almost full\" message at", "min": 5, "max": 50, "step": 5, "unit": "seats", "default": 25 },
+    { "type": "text", "id": "low_text", "label": "Almost full message", "default": "Only [remaining] seats left. Reserve yours before they're gone." },
+    { "type": "text", "id": "soldout_word", "label": "Sold out text under the number", "default": "Sold out" },
+    { "type": "text", "id": "soldout_text", "label": "Sold out message", "default": "All [total] seats are taken. Join the waitlist to hear first if a seat opens up." },
+    { "type": "checkbox", "id": "animate", "label": "Count down when it scrolls into view", "default": true },
+    { "type": "checkbox", "id": "show_bar", "label": "Show progress bar", "default": true },
+    { "type": "header", "content": "Button" },
+    { "type": "checkbox", "id": "show_reserve", "label": "Show Reserve button", "default": true },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "light", "label": "Gold" },
+        { "value": "primary", "label": "Forest green" }
+      ],
+      "default": "light"
+    },
+    { "type": "url", "id": "reserve_link", "label": "Reserve button link (optional)", "info": "Leave empty to use the registration product from Theme settings → Event registration." },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#111111" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "color", "id": "number_color", "label": "Big number", "default": "#DAA520" },
+    { "type": "header", "content": "More colors", "info": "Leave any of these empty to use the brand colors from Theme settings → Brand colors." },
+    { "type": "color", "id": "accent_color", "label": "Accent (checkmarks, links, lines)" },
+    { "type": "color", "id": "button_bg", "label": "Button background" },
+    { "type": "color", "id": "button_text", "label": "Button text" },
+    { "type": "color", "id": "label_bg", "label": "Label background" },
+    { "type": "color", "id": "label_text", "label": "Label text" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 72 }
+  ],
+  "presets": [{ "name": "Live seat counter" }]
+}
+{% endschema %}
