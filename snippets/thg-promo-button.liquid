@@ -1,0 +1,15 @@
+{%- comment -%}
+  The Hunter's Gathering: one-tap limited-time promo code (hides itself after the end date)
+  Usage: {% render 'thg-promo-button' %}   tone: 'light' for dark backgrounds
+{%- endcomment -%}
+{%- capture promo_on -%}{%- render 'thg-promo-active' -%}{%- endcapture -%}
+{%- if promo_on contains 'yes' -%}
+  {%- render 'thg-veteran-discount',
+    code: settings.thg_promo_code,
+    label: settings.thg_promo_label,
+    button: settings.thg_promo_button,
+    applied: settings.thg_promo_applied,
+    icon: 'tag',
+    tone: tone
+  -%}
+{%- endif -%}

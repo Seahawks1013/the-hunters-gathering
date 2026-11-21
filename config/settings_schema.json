@@ -2297,5 +2297,73 @@
         "info": "People who tick the updates box are added to this list."
       }
     ]
+  },
+  {
+    "name": "Limited-time promo",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "A one-tap discount button (next to the veteran discount) and an optional banner at the top of every page. Both switch off automatically after the end date. First create the code in Shopify → Discounts with Purchase type set to Both, so it works with the deposit option."
+      },
+      {
+        "type": "text",
+        "id": "thg_promo_code",
+        "label": "Discount code",
+        "info": "Exactly as created in Shopify → Discounts. Leave empty to turn the promo off."
+      },
+      {
+        "type": "text",
+        "id": "thg_promo_ends",
+        "label": "Last day of the promo",
+        "default": "2026-12-01",
+        "info": "Format YYYY-MM-DD. Shows through the end of this day (store time zone), then hides. Set the same end date on the discount in Shopify."
+      },
+      {
+        "type": "text",
+        "id": "thg_promo_label",
+        "label": "Button message",
+        "default": "Limited time: $200 off your registration"
+      },
+      {
+        "type": "text",
+        "id": "thg_promo_button",
+        "label": "Button label",
+        "default": "Apply $200 off"
+      },
+      {
+        "type": "text",
+        "id": "thg_promo_applied",
+        "label": "Message after applying",
+        "default": "$200 off applied! You'll see it at checkout."
+      },
+      {
+        "type": "header",
+        "content": "Top banner"
+      },
+      {
+        "type": "checkbox",
+        "id": "thg_promo_bar",
+        "label": "Show banner at the top of every page",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "thg_promo_bar_text",
+        "label": "Banner text",
+        "default": "Limited time: $200 off your seat · Ends Dec 1"
+      },
+      {
+        "type": "color",
+        "id": "thg_promo_bar_bg",
+        "label": "Banner background",
+        "default": "#DAA520"
+      },
+      {
+        "type": "color",
+        "id": "thg_promo_bar_color",
+        "label": "Banner text",
+        "default": "#111111"
+      }
+    ]
   }
 ]

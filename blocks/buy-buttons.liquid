@@ -68,6 +68,7 @@
         >
         {%- render 'thg-selling-plans', product: product -%}
         {%- if settings.thg_event_product == blank or settings.thg_event_product.id == product.id -%}
+          {%- render 'thg-promo-button' -%}
           {%- render 'thg-veteran-discount' -%}
         {%- endif -%}
         {%- if block_settings.gift_card_form and product.gift_card? -%}

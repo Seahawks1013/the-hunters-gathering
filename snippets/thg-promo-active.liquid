@@ -1,0 +1,21 @@
+{%- comment -%}
+  The Hunter's Gathering: is the limited-time promo running right now?
+  Outputs "yes" while a promo code is set and today (store time zone) is on
+  or before the end date in Theme settings → Limited-time promo.
+  Usage: {% capture promo_on %}{% render 'thg-promo-active' %}{% endcapture %}
+{%- endcomment -%}
+{%- liquid
+  assign p_code = settings.thg_promo_code | strip
+  assign p_ends = settings.thg_promo_ends | strip
+  if p_code != blank
+    if p_ends == blank
+      echo 'yes'
+    else
+      assign today = 'now' | date: '%Y%m%d' | plus: 0
+      assign last_day = p_ends | date: '%Y%m%d' | plus: 0
+      if last_day == 0 or today <= last_day
+        echo 'yes'
+      endif
+    endif
+  endif
+-%}
