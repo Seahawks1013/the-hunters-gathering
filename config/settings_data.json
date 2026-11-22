@@ -115,7 +115,9 @@
       "color3": "#DFDFDF"
     },
     "thg_promo_code": "BLACKFRIDAY200",
-    "thg_promo_ends": "2026-12-01"
+    "thg_promo_ends": "2026-12-01",
+    "thg_promo_label": "Black Friday Deal: $200 off your registration",
+    "thg_promo_bar_text": "Black Friday Deal: $200 off your seat · Ends Dec 1"
   },
   "presets": {
     "Default": {
